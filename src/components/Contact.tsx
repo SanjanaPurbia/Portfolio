@@ -1,27 +1,21 @@
-import { useState, type ReactNode } from 'react'
-import { ArrowUpRight, Check, Copy, DownloadSimple, EnvelopeSimple, LinkedinLogo, Phone } from '@phosphor-icons/react'
-import { motion, useReducedMotion } from 'motion/react'
-import { profile, type Hue } from '../data/portfolio'
-import { fill } from '../lib/hue'
+import { useState } from 'react'
+import { ArrowRight, Check, Copy, EnvelopeSimple } from '@phosphor-icons/react'
+import { profile } from '../data/portfolio'
 
-// Closing section, bookending the hero: big headline on the left, four tilted colour cards on
-// the right. Here the cards are the actions themselves (email, call, LinkedIn, resume).
-type Card = {
-  key: string
-  hue: Hue
-  span: string
-  label: string
-  value: string
-  href: string
-  icon: ReactNode
-  external?: boolean
-  download?: boolean
-}
+// Closing panel: one calm deep-ink surface with two quiet glows, a light-weight headline,
+// and the contact details set as a four-column strip between hairlines. Still, no gimmicks.
+// Per-cell layout and hairlines for the three breakpoints (see the comment on the <dl>).
+const cell = [
+  'sm:col-span-3 lg:col-span-1 lg:pr-6',
+  'border-t sm:pr-6 lg:border-t-0 lg:border-l lg:px-6',
+  'border-t sm:border-l sm:px-6 lg:border-t-0',
+  'border-t sm:border-l sm:pl-6 lg:border-t-0',
+]
 
-const tilt = [-1.5, 2, 1.5, -1]
+const link =
+  'bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-[length:100%_1px] focus-visible:bg-[length:100%_1px]'
 
 export function Contact() {
-  const reduce = useReducedMotion()
   const [copied, setCopied] = useState<'idle' | 'copied' | 'failed'>('idle')
 
   const copy = async () => {
@@ -34,116 +28,80 @@ export function Contact() {
     setTimeout(() => setCopied('idle'), 2000)
   }
 
-  const cards: Card[] = [
-    {
-      key: 'email',
-      hue: 'cobalt',
-      span: 'sm:col-span-2',
-      label: 'Email me',
-      value: profile.email,
-      href: `mailto:${profile.email}`,
-      icon: <EnvelopeSimple size={22} weight="bold" />,
-    },
-    {
-      key: 'phone',
-      hue: 'mint',
-      span: '',
-      label: 'Call me',
-      value: profile.phone.display,
-      href: `tel:${profile.phone.tel}`,
-      icon: <Phone size={22} weight="bold" />,
-    },
-    {
-      key: 'linkedin',
-      hue: 'sun',
-      span: '',
-      label: 'LinkedIn',
-      value: 'sanjana-purbia',
-      href: profile.socials.linkedin,
-      icon: <LinkedinLogo size={22} weight="bold" />,
-      external: true,
-    },
-    {
-      key: 'resume',
-      hue: 'rose',
-      span: 'sm:col-span-2',
-      label: 'Download resume',
-      value: 'SanjanaPurbia_Resume.pdf',
-      href: profile.resumeUrl,
-      icon: <DownloadSimple size={22} weight="bold" />,
-      download: true,
-    },
+  const details = [
+    { label: 'Email', value: profile.email, href: `mailto:${profile.email}`, copy: true },
+    { label: 'Phone', value: profile.phone.display, href: `tel:${profile.phone.tel}` },
+    { label: 'LinkedIn', value: 'sanjana-purbia', href: profile.socials.linkedin, external: true },
+    { label: 'Resume', value: 'Download resume', href: profile.resumeUrl, download: true },
   ]
 
   return (
-    <section id="contact" className="mx-auto max-w-[1200px] px-4 py-24 md:px-6 md:py-32">
-      <div className="grid items-center gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <h2 className="halo text-[clamp(44px,6vw,80px)] leading-[0.95] font-semibold tracking-[-0.04em]">
-            Looking for a DevOps engineer?
-          </h2>
-          <p className="halo mt-6 max-w-[38ch] text-[19px] leading-relaxed text-graphite md:text-[21px]">
-            I'm open to DevOps and cloud roles with more scope. Email or call, whichever suits you.
+    <section id="contact" className="mx-auto max-w-[1200px] px-4 py-20 md:px-6 md:py-28">
+      <div className="inkwell-glow overflow-hidden rounded-tile border border-on-inkwell/10 px-6 py-14 text-on-inkwell md:px-14 md:py-20 lg:px-20">
+        <h2 className="max-w-[14ch] text-[clamp(44px,6.4vw,92px)] leading-[1.02] font-light tracking-[-0.035em]">
+          Looking for a DevOps engineer?
+        </h2>
+        <p className="mt-7 max-w-[46ch] text-[18px] leading-relaxed text-on-inkwell/70 md:text-[20px]">
+          I'm open to DevOps and cloud roles with more scope. Email or call, whichever suits you.
+        </p>
+
+        {/* Phones: one column. Tablet: email gets its own row, then three columns. Desktop: four
+            columns with the widest for the email. Hairlines follow each layout. */}
+        <dl className="mt-16 grid border-y border-on-inkwell/15 sm:grid-cols-3 lg:grid-cols-[1.7fr_1fr_1fr_1fr]">
+          {details.map((d, i) => (
+            <div key={d.label} className={`border-on-inkwell/15 py-7 lg:py-9 ${cell[i]}`}>
+              <dt className="text-[14px] font-medium text-on-inkwell/55">{d.label}</dt>
+              <dd className="mt-2.5 flex items-center gap-3">
+                <a
+                  href={d.href}
+                  {...(d.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                  {...(d.download ? { download: true } : {})}
+                  className={`font-display text-[19px] font-normal tracking-tight ${link}`}
+                >
+                  {/* If the email must wrap, it breaks before the @, never mid-word. */}
+                  {d.copy ? (
+                    <>
+                      {d.value.split('@')[0]}
+                      <wbr />@{d.value.split('@')[1]}
+                    </>
+                  ) : (
+                    d.value
+                  )}
+                </a>
+                {d.copy && (
+                  <button
+                    type="button"
+                    onClick={copy}
+                    aria-label="Copy email address"
+                    className="grid size-9 shrink-0 cursor-pointer place-items-center rounded-full text-on-inkwell/70 transition-colors hover:bg-on-inkwell/10 hover:text-on-inkwell"
+                  >
+                    {copied === 'copied' ? <Check size={16} weight="bold" /> : <Copy size={16} />}
+                  </button>
+                )}
+              </dd>
+              {d.copy && (
+                <p role="status" className="mt-1 h-5 text-[13px] text-on-inkwell/55">
+                  {copied === 'copied' ? 'Email copied' : copied === 'failed' ? 'Copy failed. Select the address instead.' : ''}
+                </p>
+              )}
+            </div>
+          ))}
+        </dl>
+
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-6">
+          <a
+            href={`mailto:${profile.email}`}
+            className="group btn bg-on-inkwell pr-4 text-inkwell hover:bg-on-inkwell/90"
+          >
+            <EnvelopeSimple size={18} weight="bold" /> Email me
+            <span className="ml-1 grid size-8 place-items-center rounded-full bg-inkwell text-on-inkwell transition-transform duration-300 group-hover:translate-x-0.5">
+              <ArrowRight size={15} weight="bold" />
+            </span>
+          </a>
+          <p className="text-[15px] text-on-inkwell/55">
+            {profile.name}, {profile.role}
           </p>
         </div>
-
-        <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-7" aria-label="Ways to reach me">
-          {cards.map((c, i) => (
-            <motion.li
-              key={c.key}
-              className={c.span}
-              initial={reduce ? false : { opacity: 0, y: 32, rotate: 0 }}
-              whileInView={{ opacity: 1, y: 0, rotate: tilt[i] }}
-              whileHover={reduce ? undefined : { rotate: 0, y: -6, scale: 1.02 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 16, delay: reduce ? 0 : i * 0.08 }}
-            >
-              <div
-                className={`relative flex min-h-[150px] flex-col justify-between gap-8 rounded-tile p-6 focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-link sm:min-h-[176px] md:p-7 ${fill[c.hue]}`}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  {/* The whole card is the link (stretched ::after); the copy button sits above it. */}
-                  <a
-                    href={c.href}
-                    {...(c.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                    {...(c.download ? { download: true } : {})}
-                    className="font-display text-[19px] font-semibold tracking-tight outline-none after:absolute after:inset-0 after:rounded-tile"
-                  >
-                    {c.label}
-                  </a>
-                  <span aria-hidden="true" className="flex items-center gap-2">
-                    {c.icon}
-                    <ArrowUpRight size={20} weight="bold" />
-                  </span>
-                </div>
-
-                <div className="flex flex-wrap items-end justify-between gap-3">
-                  {/* Only the long email may wrap (at any point); numbers and handles stay on one line. */}
-                  <p
-                    className={`font-display text-[clamp(20px,2.3vw,28px)] leading-tight font-medium tracking-tight ${c.key === 'email' ? '[overflow-wrap:anywhere]' : 'whitespace-nowrap'}`}
-                  >
-                    {c.value}
-                  </p>
-                  {c.key === 'email' && (
-                    <span className="relative z-10 flex items-center gap-3">
-                      <span role="status" className="text-[14px] font-medium">
-                        {copied === 'copied' ? 'Email copied' : copied === 'failed' ? 'Copy failed' : ''}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={copy}
-                        aria-label="Copy email address"
-                        className="grid size-11 cursor-pointer place-items-center rounded-full bg-on-cobalt/15 transition-colors hover:bg-on-cobalt/25"
-                      >
-                        {copied === 'copied' ? <Check size={18} weight="bold" /> : <Copy size={18} weight="bold" />}
-                      </button>
-                    </span>
-                  )}
-                </div>
-              </div>
-            </motion.li>
-          ))}
-        </ul>
       </div>
     </section>
   )

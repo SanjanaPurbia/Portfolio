@@ -2,6 +2,16 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.9.0] - 2026-10-02
+### Changed
+- **Contact section** redesigned as an elegant closing panel (owner disliked the card pattern):
+  - deep ink surface with soft cobalt and violet glows
+  - light-weight Outfit headline
+  - a hairline details strip (Email with copy, Phone, LinkedIn, Resume) with draw-in underlines
+  - one "Email me" pill and a signature line
+  
+  The email never breaks mid-word.
+
 ## [2.8.0] - 2026-10-02
 ### Changed
 - **Contact section** rebuilt in the site's own design language (owner feedback: the night scene didn't match the template). It's a bookend to the hero: big headline plus four tilted colour action cards (Email me with copy, Call me, LinkedIn, Download resume). Whole-card links; values never break mid-word.

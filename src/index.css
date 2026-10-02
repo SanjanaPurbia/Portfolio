@@ -11,6 +11,8 @@
   --link: #2a40c9;
   /* Large display text only (≥3:1, WCAG large-text minimum): the grey word in the manifesto. */
   --hush: #888b97;
+  /* Closing contact panel: deep ink in light mode, a lifted night tone in dark mode. */
+  --inkwell: #15161d;
   color-scheme: light;
 }
 
@@ -23,6 +25,7 @@
     --rule: #272a36;
     --link: #9aaaff;
     --hush: #5e616d;
+    --inkwell: #1a1c27;
     color-scheme: dark;
   }
 }
@@ -35,6 +38,7 @@
   --rule: #272a36;
   --link: #9aaaff;
   --hush: #5e616d;
+  --inkwell: #1a1c27;
   color-scheme: dark;
 }
 
@@ -46,6 +50,8 @@
   --color-rule: var(--rule);
   --color-link: var(--link);
   --color-hush: var(--hush);
+  --color-inkwell: var(--inkwell);
+  --color-on-inkwell: #eeeff5;
 
   /* Status-board hues: identical in both themes. Text on them is fixed, not theme-flipped:
      cobalt takes light text, every other hue takes dark ink (all ≥4.8:1). */
@@ -128,6 +134,14 @@
   .btn-quiet {
     @apply border border-rule text-ink hover:border-graphite;
   }
+}
+
+/* Contact panel: two quiet glows from the palette on the ink surface. Text stays ≥5.3:1. */
+@utility inkwell-glow {
+  background:
+    radial-gradient(60% 85% at 100% 0%, color-mix(in oklab, var(--color-cobalt) 38%, transparent), transparent 70%),
+    radial-gradient(45% 60% at 0% 100%, color-mix(in oklab, var(--color-violet) 16%, transparent), transparent 70%),
+    var(--inkwell);
 }
 
 /* Text that sits directly on the cluster field gets a soft page-colour halo, which clears

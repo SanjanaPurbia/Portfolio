@@ -18,10 +18,13 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 | Work (`#work`) | `Projects.tsx` | accordion rows |
 | Skills | `Skills.tsx` | definition list |
 | Credentials | `Credentials.tsx` | inline two-tile strip |
-| Contact | `Contact.tsx` | headline + colour action-card grid (bookends the hero) |
+| Contact | `Contact.tsx` | elegant ink panel: light headline + hairline details strip |
 | (page background) | `ClusterField.tsx` | fixed canvas behind all sections |
 
 ## Done
+### v2.9.0 (2026-10-02): step 5b, elegant last page
+- [x] Contact rebuilt as a calm ink panel with a light headline and hairline details strip (owner rejected the cards); wrapping verified 360-1440
+
 ### v2.8.0 (2026-10-02): step 5, last page matches the site
 - [x] Contact rebuilt as hero-style colour action cards; night scene removed; copy, focus and whole-card clicks verified
 
@@ -81,6 +84,7 @@ The owner is sharing changes **one at a time**. Finish each step, verify it, com
 
 ## Change log
 <!-- newest first: YYYY-MM-DD: what changed (files) -->
+- 2026-10-02: v2.9.0 elegant ink-panel contact (Contact.tsx, index.css --inkwell + inkwell-glow).
 - 2026-10-02: v2.8.0 contact action cards; night scene + mono font removed (Contact.tsx, index.css, main.tsx).
 - 2026-10-02: v2.7.0 three-word stack becomes the hero headline; Manifesto band removed (Hero.tsx, data/portfolio.ts, index.html).
 - 2026-10-02: v2.6.0 Build. Automate. Scale. manifesto (Manifesto.tsx, index.css --hush, App.tsx).

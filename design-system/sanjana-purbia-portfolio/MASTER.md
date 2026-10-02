@@ -68,20 +68,19 @@ The owner wanted the three-word stack from their reference **on the first screen
 - **Motion:** the words rise in one by one as part of the hero load sequence; instant under reduced motion.
 - **Fit:** the CTAs stay above the fold at every tested size.
 
-## Contact: action cards (v2.8)
-The v2.5 cinematic night scene was rejected by the owner because it didn't match the rest of the site. It's replaced by a section in the page's own language, a **bookend to the hero**: a big headline on the left and four tilted colour cards on the right. Here **the cards are the actions themselves**.
+## Contact: elegant ink panel (v2.9)
+The owner rejected both the cinematic night scene (v2.5, didn't match the site) and the tilted action cards (v2.8), and asked for an **elegant** close. The rule for this section is restraint: one calm surface, refined type, no tilt or gimmicks, and no motion.
 
-| Card | Hue | Width | Action |
-|---|---|---|---|
-| Email me | cobalt | full row | mailto, plus a copy button with "Email copied" / "Copy failed" status |
-| Call me | mint | half | tel: +91 95216 18221 |
-| LinkedIn | sun | half | opens linkedin.com/in/sanjana-purbia in a new tab |
-| Download resume | rose | full row | downloads the PDF |
-
-- **Same system as the hero:** `fill[hue]`, `rounded-tile`, Outfit labels, small tilts (±2°) that straighten on hover, and a once-only rise on scroll.
-- **Whole-card links:** a stretched `::after` makes the full card clickable; the copy button sits above it. A focus ring appears on the card when its link is focused.
-- **Wrapping:** numbers and handles stay on one line; only the email may wrap.
-- **Removed:** the night-scene tokens, `.prism*` CSS and the IBM Plex Mono font.
+- **Surface:** one `rounded-tile` panel in `--inkwell` (`#15161D` light, `#1A1C27` dark), with a hairline `on-inkwell/10` border for edge definition in dark mode. Two quiet glows from the palette: cobalt from the top-right, faint violet from the bottom-left (`inkwell-glow` utility).
+- **Headline:** Outfit **light (300)**, `clamp(44px, 6.4vw, 92px)`. Same family as the site; the light weight is the deliberate refinement for the closing.
+- **Details strip:** Email (with copy), Phone, LinkedIn and Resume as label-over-value pairs between hairlines.
+  - 1 column on phones.
+  - Tablet: email gets its own row, then 3 columns.
+  - Desktop: 4 columns, with the email column widest (1.7fr).
+  - The email only ever wraps before the "@".
+- **Links:** an underline draws in from the left on hover or focus.
+- **Footer row:** one light "Email me" pill (the hero's label) with an arrow chip, and the signature "Sanjana Purbia, DevOps Engineer".
+- **Contrast** (checked over the glows): main text ≥10:1, secondary text at 70% ≥5.7:1, labels at 55% ≥5.3:1.
 
 ## Type
 - **Outfit Variable** for display and headings: weight 600, tracking -0.035em at display sizes, -0.02em at h2/h3.
