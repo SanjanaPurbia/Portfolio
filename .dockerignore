@@ -1,0 +1,15 @@
+# Keep the build context small and free of secrets/state.
+node_modules
+dist
+.git
+.github
+.claude
+infra
+docs
+*.md
+.env*
+*.log
+.DS_Store
+Dockerfile
+docker-compose.yml
+Makefile

@@ -1,0 +1,58 @@
+.contact {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  padding: clamp(28px, 6vw, 56px);
+}
+.contact::after {
+  content: '';
+  position: absolute;
+  right: -120px;
+  top: -120px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-dim), transparent 70%);
+  pointer-events: none;
+}
+.contact__title {
+  font-size: clamp(28px, 5vw, 44px);
+  max-width: 640px;
+}
+.contact__lede {
+  color: var(--text-dim);
+  font-size: 17px;
+  max-width: 600px;
+}
+.contact__email {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.contact__address {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(14px, 2.4vw, 17px);
+  color: var(--accent);
+  word-break: break-all;
+}
+.contact__address:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.contact__copied {
+  font-size: 13px;
+  color: var(--text-faint);
+}
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
