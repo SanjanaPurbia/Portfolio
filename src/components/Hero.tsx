@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from 'motion/react'
 import { profile } from '../data/portfolio'
 import { HeroCards } from './HeroCards'
 
-// Headline, subtext and CTAs rise in; the fact cards then drop in beside them.
+// The three words rise in one by one, then subtext and CTAs; the fact cards drop in beside them.
 export function Hero() {
   const reduce = useReducedMotion()
   const enter = (delay: number) =>
@@ -22,7 +22,8 @@ export function Hero() {
       className="mx-auto flex max-w-[1200px] items-center px-4 pt-8 pb-14 md:px-6 md:py-16 lg:min-h-[calc(100dvh-72px-112px)] lg:py-12"
     >
       <div className="grid w-full items-center gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-7">
+        {/* Container query: the headline is sized to this column, so "Automate." always fills it exactly. */}
+        <div className="@container lg:col-span-7">
           <motion.p
             {...enter(0)}
             className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-rule bg-raised px-4 py-1.5 text-[14px] font-medium"
@@ -34,16 +35,26 @@ export function Hero() {
             </span>
             {profile.availability}
           </motion.p>
-          <motion.h1
-            {...enter(0.06)}
-            className="halo text-[clamp(44px,7.4vw,84px)] leading-[0.98] font-semibold tracking-[-0.035em]"
+          <h1
+            aria-label={profile.headline.join(' ')}
+            className="halo text-[min(21.5cqw,236px)] leading-[0.86] font-semibold tracking-[-0.05em]"
           >
-            {profile.headline}
-          </motion.h1>
-          <motion.p {...enter(0.14)} className="halo mt-6 max-w-[34ch] text-[19px] leading-relaxed text-graphite md:text-[21px]">
+            {profile.headline.map((word, i) => (
+              <motion.span
+                key={word}
+                aria-hidden="true"
+                {...enter(0.06 + i * 0.1)}
+                // Owner's reference: dark, grey, dark. --hush meets WCAG's large-text contrast.
+                className={`block ${i === 1 ? 'text-hush' : 'text-ink'}`}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
+          <motion.p {...enter(0.36)} className="halo mt-7 max-w-[34ch] text-[19px] leading-relaxed text-graphite md:text-[21px]">
             {profile.subtext}
           </motion.p>
-          <motion.div {...enter(0.22)} className="mt-9 flex flex-wrap gap-3">
+          <motion.div {...enter(0.44)} className="mt-8 flex flex-wrap gap-3">
             <a href={`mailto:${profile.email}`} className="btn btn-primary">
               <EnvelopeSimple size={18} weight="bold" /> Email me
             </a>

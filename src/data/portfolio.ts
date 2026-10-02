@@ -5,8 +5,9 @@
 export const profile = {
   name: 'Sanjana Purbia',
   role: 'DevOps Engineer',
-  // Hero: headline ≤ 2 lines, subtext ≤ 20 words (taste-skill §4.7).
-  headline: 'I make releases boring.',
+  // Hero: subtext ≤ 20 words (taste-skill §4.7).
+  // Three stacked words (owner's reference); the middle one renders in grey.
+  headline: ['Build.', 'Automate.', 'Scale.'],
   subtext:
     "I'm Sanjana Purbia, a DevOps engineer. I automate AWS infrastructure and CI/CD, cutting manual deployment time by 70%.",
   availability: 'Open to DevOps and cloud roles',

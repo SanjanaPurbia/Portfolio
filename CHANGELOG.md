@@ -2,6 +2,16 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.7.0] - 2026-10-02
+### Changed
+- **"Build. Automate. Scale." moved onto the first screen** as the hero headline, at the owner's request. It replaces "I make releases boring."
+  - Left-aligned to match the subtext and buttons; sized by container query to fill the text column at every width.
+  - The words rise in one by one on load.
+- **Updated:** the page's share description.
+
+### Removed
+- The separate statement band below the logo strip (`Manifesto.tsx`), added in v2.6.0.
+
 ## [2.6.0] - 2026-10-02
 ### Added
 - **"Build. Automate. Scale." statement band** after the hero and logo strip, matching the owner's reference: centred, very large, tightly stacked, with the middle word in grey.

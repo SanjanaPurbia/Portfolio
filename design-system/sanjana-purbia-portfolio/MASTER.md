@@ -58,17 +58,15 @@ The owner found the coloured background (rainbow pointer lens, multi-hue pods) u
 - **Reduced motion:** a single static frame.
 - **Performance:** paused in hidden tabs; device pixel ratio capped at 2; no React state per frame.
 
-## Manifesto: "Build. Automate. Scale." (v2.6)
-This is the owner's reference: three words stacked, centred, very large, with the middle word in grey. It sits as its own band right after the logo strip, so the approved first screen is unchanged.
+## Hero headline: "Build. Automate. Scale." (v2.7)
+The owner wanted the three-word stack from their reference **on the first screen**. In v2.6 it was a band below the hero, which they rejected. It's now the hero `h1` and replaces "I make releases boring.", because one headline beats two competing ones.
 
-- **Type:** Outfit semibold (the page's display face, so nothing clashes), `clamp(60px, 19vw, 236px)`, line-height 0.86, tracking -0.05em, centred. The words have no descenders, so the tight leading doesn't clip.
-- **Colour:**
-  - Build and Scale use `--ink`.
-  - Automate uses `--hush`: `#888B97` light, `#5E616D` dark, the lightest greys that still meet WCAG's 3:1 large-text minimum.
-  - The reference's paler grey would fail that minimum.
-- **Fit:** checked from 360px to 1920px. "Automate." is the widest word and always fits.
-- **Motion:** the words rise in once, in reading order (storytelling); instant under reduced motion.
-- **Layout family:** centred typographic manifesto, used only here.
+- **Type:** Outfit semibold, line-height 0.86, tracking -0.05em, **left-aligned** to match the subtext and CTAs under it (a centred headline over left-aligned text would clash).
+- **Size:** `min(21.5cqw, 236px)` using a container query on the hero text column, so "Automate.", the widest word, always fills the column (for example 615px in a 652px column at 1440). Checked at 360-1920px.
+- **Colour:** Build and Scale use `--ink`. Automate uses `--hush` (`#888B97` light, `#5E616D` dark), which meets WCAG's 3:1 large-text minimum.
+- **Accessibility:** `aria-label` gives the whole phrase; the visual spans are `aria-hidden`.
+- **Motion:** the words rise in one by one as part of the hero load sequence; instant under reduced motion.
+- **Fit:** the CTAs stay above the fold at every tested size.
 
 ## Contact "night scene" (v2.5): documented exception
 The owner supplied a reference: a dark cinematic hero with a glass object refracting a sunset, thin uppercase type with a glow, mono body copy, and square buttons. Their brief overrides the page defaults (frontend-design and taste-skill: "the brief's own words always win"), **for this one section only**:
@@ -101,7 +99,7 @@ Left-aligned on a 1200px container with a 24px gutter (16px on mobile). Every mu
 ```
 Nav    [SP Sanjana Purbia]              Work  Experience  Skills  Contact  (◐)
 Hero   ┌─────────────────────────────────┬──────────────┐
-       │ I make releases boring.         │  4 tilted    │  asymmetric split, 7/5
+       │ Build. / Automate. / Scale.     │  4 tilted    │  asymmetric split, 7/5
        │ subtext ≤ 20 words              │  colour fact │
        │ (Email me) (Download resume)    │   cards)     │
        └─────────────────────────────────┴──────────────┘
@@ -118,7 +116,7 @@ Creds  AWS Certified Cloud Practitioner   B.Tech CS       inline strip
 Contact  sanjanapurbia3112@gmail.com (display size)      manifesto close
 ```
 
-Nine sections and nine different layout families. One eyebrow on the page (limit 3): the hero's availability pill. Its mint dot shows a real state, which taste-skill allows.
+Eight sections and eight different layout families. One eyebrow on the page (limit 3): the hero's availability pill. Its mint dot shows a real state, which taste-skill allows.
 
 **Hero framing (v2.3):**
 - **From 1024px up:** the nav, hero and logo strip fill exactly one screen (`min-h: 100dvh - nav - strip`), and the hero content is vertically centred.
@@ -127,7 +125,7 @@ Nine sections and nine different layout families. One eyebrow on the page (limit
 - **Phone number:** in the contact block and the footer, not the hero (taste-skill hero stack discipline).
 
 ## Principles
-1. **Boldness lives in the hero:** large Outfit headline next to the tilted colour fact cards. The irony of "I make releases boring." next to a colourful page is the point.
+1. **Boldness lives in the hero:** the giant "Build. Automate. Scale." stack next to the tilted colour fact cards.
 2. **The background is professional and quiet:** monochrome, with colour only on the content.
 3. **Real data only.** Every number comes from the resume. No count-up animations or invented precision.
 4. **Motion is motivated.**

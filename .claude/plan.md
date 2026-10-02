@@ -11,9 +11,8 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 ## Information architecture
 | Section | Component | Layout family |
 |---|---|---|
-| Hero | `Hero.tsx` + `HeroCards.tsx` | asymmetric split, 7/5, with tilted colour fact cards |
+| Hero | `Hero.tsx` + `HeroCards.tsx` | asymmetric split, 7/5: giant "Build. Automate. Scale." stack + tilted colour fact cards |
 | Tools | `ToolMarquee.tsx` | logo marquee (the only one) |
-| Manifesto | `Manifesto.tsx` | centred three-word statement |
 | Impact | `Impact.tsx` | 4-cell bento |
 | Experience | `Experience.tsx` | sticky heading + sequence |
 | Work (`#work`) | `Projects.tsx` | accordion rows |
@@ -23,6 +22,9 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 | (page background) | `ClusterField.tsx` | fixed canvas behind all sections |
 
 ## Done
+### v2.7.0 (2026-10-02): step 4b, three words on the first screen
+- [x] "Build. Automate. Scale." is now the hero h1 (owner rejected the band below the fold); fit and CTA-above-fold verified 360-1920px
+
 ### v2.6.0 (2026-10-02): step 4, three-word statement
 - [x] Manifesto band "Build. Automate. Scale." after the logo strip; fit verified 360-1920px; accessible grey
 
@@ -76,6 +78,7 @@ The owner is sharing changes **one at a time**. Finish each step, verify it, com
 
 ## Change log
 <!-- newest first: YYYY-MM-DD: what changed (files) -->
+- 2026-10-02: v2.7.0 three-word stack becomes the hero headline; Manifesto band removed (Hero.tsx, data/portfolio.ts, index.html).
 - 2026-10-02: v2.6.0 Build. Automate. Scale. manifesto (Manifesto.tsx, index.css --hush, App.tsx).
 - 2026-10-02: v2.5.0 contact night scene (Contact.tsx, index.css, main.tsx, @fontsource/ibm-plex-mono).
 - 2026-10-02: v2.4.0 monochrome professional background (ClusterField.tsx).
