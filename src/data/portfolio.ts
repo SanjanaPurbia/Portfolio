@@ -5,37 +5,56 @@
 export const profile = {
   name: 'Sanjana Purbia',
   role: 'DevOps Engineer',
-  tagline: 'I automate the path from commit to production.',
-  summary:
-    'DevOps Engineer with 2 years of hands-on experience automating cloud infrastructure, building CI/CD pipelines and running containerized microservices on AWS. I have cut deployment time by 70%+ and manual operations by 80% across AgriTech, eCommerce and EV-charging platforms. AWS Certified Cloud Practitioner, working across AWS, GCP and Azure and driving infrastructure-as-code adoption.',
-  location: 'Udaipur, Rajasthan, India',
+  // Hero: headline ≤ 2 lines, subtext ≤ 20 words (taste-skill §4.7).
+  headline: 'I make releases boring.',
+  subtext:
+    'DevOps engineer at Spark Eighteen. I automate AWS infrastructure and CI/CD, cutting manual deployment time by 70%.',
   email: 'sanjanapurbia3112@gmail.com',
   resumeUrl: '/SanjanaPurbia_Resume.pdf',
-  openToWork: true,
+  // Drop a photo in public/ (e.g. portrait.jpg, 4:5) and set '/portrait.jpg'.
+  photo: '',
   socials: {
     linkedin: 'https://www.linkedin.com/in/sanjanapurbia',
-    github: '', // add your GitHub profile URL to show the icon
+    github: '', // add your GitHub profile URL to show the link
   },
 }
 
-export type Metric = { value: number; suffix: string; label: string }
+// Simple Icons export names. AWS and Azure marks were removed from Simple Icons for
+// trademark reasons, so they appear in the skills list only.
+export const tools = [
+  { name: 'Terraform', icon: 'siTerraform' },
+  { name: 'Docker', icon: 'siDocker' },
+  { name: 'Kubernetes', icon: 'siKubernetes' },
+  { name: 'Jenkins', icon: 'siJenkins' },
+  { name: 'GitHub Actions', icon: 'siGithubactions' },
+  { name: 'Argo CD', icon: 'siArgo' },
+  { name: 'Google Cloud', icon: 'siGooglecloud' },
+  { name: 'Ansible', icon: 'siAnsible' },
+  { name: 'Rancher', icon: 'siRancher' },
+  { name: 'PagerDuty', icon: 'siPagerduty' },
+  { name: 'PostgreSQL', icon: 'siPostgresql' },
+  { name: 'Python', icon: 'siPython' },
+  { name: 'Bash', icon: 'siGnubash' },
+  { name: 'Ubuntu', icon: 'siUbuntu' },
+] as const
 
-export const metrics: Metric[] = [
-  { value: 70, suffix: '%', label: 'less manual deployment time' },
-  { value: 80, suffix: '%', label: 'less manual release intervention' },
-  { value: 15, suffix: '+', label: 'reusable Terraform modules' },
-  { value: 10, suffix: '+', label: 'containerized apps deployed' },
+// Exactly four impact tiles (bento cell count rule). All figures from the resume.
+export const impact = [
+  { value: '70%', label: 'less manual deployment time', context: 'Multi-service AWS deployments for 5+ client projects. Release cycles went from days to hours.' },
+  { value: '80%', label: 'less manual release work', context: 'Jenkins Shared Libraries pipelines for the Uncompromised AgriTech platform.' },
+  { value: '60%', label: 'fewer environment issues', context: 'Containerized microservices with Docker.' },
+  { value: '15+', label: 'reusable Terraform modules', context: 'Cut infrastructure setup time by about 40%.' },
 ]
 
-export type SkillGroup = { id: string; title: string; items: string[] }
+export type SkillGroup = { title: string; items: string[] }
 
 export const skills: SkillGroup[] = [
-  { id: 'cloud', title: 'Cloud & IaC', items: ['AWS', 'EC2', 'S3', 'CloudFront', 'RDS', 'IAM', 'ALB', 'VPC', 'GCP', 'Azure', 'Terraform', 'Ansible'] },
-  { id: 'containers', title: 'Containers', items: ['Docker', 'Docker Swarm', 'Kubernetes', 'Rancher', 'Portainer'] },
-  { id: 'cicd', title: 'CI/CD & GitOps', items: ['Jenkins', 'Shared Libraries', 'GitHub Actions', 'ArgoCD', 'Git'] },
-  { id: 'scripting', title: 'Scripting', items: ['Python', 'Bash', 'PowerShell', 'YAML'] },
-  { id: 'observability', title: 'Monitoring', items: ['CloudWatch', 'Uptime Kuma', 'PagerDuty'] },
-  { id: 'data', title: 'Databases & OS', items: ['PostgreSQL', 'MySQL', 'DynamoDB', 'Linux (Ubuntu)'] },
+  { title: 'Cloud & IaC', items: ['AWS', 'EC2', 'S3', 'CloudFront', 'RDS', 'IAM', 'ALB', 'VPC', 'GCP', 'Azure', 'Terraform', 'Ansible'] },
+  { title: 'Containers', items: ['Docker', 'Docker Swarm', 'Kubernetes', 'Rancher', 'Portainer'] },
+  { title: 'CI/CD & GitOps', items: ['Jenkins', 'Shared Libraries', 'GitHub Actions', 'ArgoCD', 'Git'] },
+  { title: 'Scripting', items: ['Python', 'Bash', 'PowerShell', 'YAML'] },
+  { title: 'Monitoring', items: ['CloudWatch', 'Uptime Kuma', 'PagerDuty'] },
+  { title: 'Databases & OS', items: ['PostgreSQL', 'MySQL', 'DynamoDB', 'Linux (Ubuntu)'] },
 ]
 
 export type Role = {
@@ -50,7 +69,7 @@ export const experience: Role[] = [
   {
     title: 'DevOps Engineer',
     company: 'Spark Eighteen',
-    period: 'Jan 2025 — Present',
+    period: 'Jan 2025 - Present',
     current: true,
     highlights: [
       'Automated builds and deployments across dev, staging and production for 5+ client projects with CI/CD pipelines on Jenkins Shared Libraries.',
@@ -63,7 +82,7 @@ export const experience: Role[] = [
   {
     title: 'DevOps Intern',
     company: 'Spark Eighteen',
-    period: 'Jul 2024 — Jan 2025',
+    period: 'Jul 2024 - Jan 2025',
     highlights: [
       'Deployed 10+ containerized applications with Docker and Docker Swarm across multi-container environments.',
       'Cut infrastructure setup time by ~40% by building 15+ reusable Terraform modules for AWS resources.',
@@ -146,16 +165,5 @@ export const certifications = [
 export const education = {
   degree: 'B.Tech in Computer Science',
   school: 'Techno India NJR Institute of Technology, Udaipur, Rajasthan',
-  period: '2019 — 2023',
+  period: '2019 - 2023',
 }
-
-// The pipeline that ships this very site (see .github/workflows).
-export const sitePipeline = [
-  { id: 'commit', label: 'git push', detail: 'main branch' },
-  { id: 'lint', label: 'lint + typecheck', detail: 'oxlint · tsc' },
-  { id: 'build', label: 'build', detail: 'vite · docker' },
-  { id: 'scan', label: 'scan', detail: 'trivy CRITICAL/HIGH' },
-  { id: 'auth', label: 'OIDC auth', detail: 'no static keys' },
-  { id: 'deploy', label: 'deploy', detail: 'S3 sync' },
-  { id: 'cdn', label: 'invalidate', detail: 'CloudFront' },
-]

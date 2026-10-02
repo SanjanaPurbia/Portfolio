@@ -1,41 +1,34 @@
 import { experience } from '../data/portfolio'
-import { Reveal } from './Reveal'
-import { SectionHead } from './SectionHead'
-import './Experience.css'
 
+// Sticky heading column on desktop; roles read top to bottom (a real sequence, newest first).
 export function Experience() {
   return (
-    <section id="experience" className="section">
-      <div className="container">
-        <SectionHead
-          eyebrow="02 · git log --career"
-          title="Experience"
-          lede="From intern to DevOps Engineer in six months, now running CI/CD for 5+ client projects."
-        />
-        <ol className="timeline">
-          {experience.map((role, i) => (
-            <Reveal key={role.title} delay={i * 0.08} className="timeline__item">
-              <li>
-                <div className={`timeline__node ${role.current ? 'timeline__node--current' : ''}`} aria-hidden="true" />
-                <div className="timeline__card card">
-                  <header className="timeline__head">
-                    <div>
-                      <h3 className="timeline__title">{role.title}</h3>
-                      <p className="timeline__company">{role.company}</p>
-                    </div>
-                    <span className="timeline__period mono">
-                      {role.current && <span className="status-dot" />}
-                      {role.period}
-                    </span>
-                  </header>
-                  <ul className="timeline__list">
-                    {role.highlights.map((h) => (
-                      <li key={h}>{h}</li>
-                    ))}
-                  </ul>
-                </div>
-              </li>
-            </Reveal>
+    <section id="experience" className="mx-auto max-w-[1200px] px-4 py-20 md:px-6 md:py-28">
+      <div className="grid gap-10 md:grid-cols-12 md:gap-12">
+        <div className="md:col-span-4">
+          <div className="md:sticky md:top-28">
+            <h2 className="text-[clamp(32px,4.4vw,52px)] leading-[1.05] font-semibold tracking-[-0.03em]">Experience</h2>
+            <p className="mt-4 max-w-[30ch] text-graphite">
+              Intern to DevOps Engineer in six months at Spark Eighteen, now running CI/CD for 5+ client projects.
+            </p>
+          </div>
+        </div>
+        <ol className="space-y-14 md:col-span-8">
+          {experience.map((role) => (
+            <li key={role.title}>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                <h3 className="text-[26px] font-semibold tracking-[-0.02em]">{role.title}</h3>
+                <p className="text-[15px] text-graphite">{role.period}</p>
+              </div>
+              <p className="mt-1 font-medium text-cobalt">{role.company}</p>
+              <ul className="mt-6 space-y-3">
+                {role.highlights.map((h) => (
+                  <li key={h} className="relative max-w-[65ch] pl-5 text-graphite before:absolute before:top-[0.7em] before:left-0 before:h-px before:w-2.5 before:bg-graphite">
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </li>
           ))}
         </ol>
       </div>

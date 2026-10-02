@@ -1,22 +1,21 @@
 # CLAUDE.md
 
-Portfolio site for Sanjana Purbia (DevOps Engineer). React 19 + TypeScript + Vite, deployed to S3 + CloudFront via GitHub Actions and Terraform.
+Portfolio for Sanjana Purbia (DevOps Engineer). React 19 + TypeScript + Vite + Tailwind v4 + Motion.
 
 ## Commands
 - `npm run dev` · `npm run build` (runs `tsc -b` first) · `npm run lint` (oxlint)
-- `make help` lists Docker and Terraform targets
-- Build and lint must both pass with **zero warnings** before any change is considered done.
+- Visual QA: `npx vite preview --port 4173`, then `node .qa/shot.mjs`, `node .qa/interact.mjs` and `node .qa/preflight.mjs`. These are local and gitignored; reinstall with `cd .qa && npm i puppeteer-core`.
+- A change is done only when lint shows zero warnings, the build passes, and the QA scripts report no overflow, no errors and zero em dashes.
 
-## Conventions
-- **Content lives only in `src/data/portfolio.ts`.** Never hard-code resume facts in components. Use `/update-content`.
-- One section = `src/components/<Name>.tsx` + `<Name>.css`, rendered from `src/App.tsx`. Use `/add-section`.
-- Styling is plain CSS with tokens in `src/index.css`. Use `var(--token)` and never raw hex in components. Any new color token needs dark and light values in **both** light-mode blocks.
-- Sections use `<SectionHead eyebrow="NN · shell-command" ...>` and `<Reveal>` for entry animation. Eyebrows are numbered in page order.
-- Every animation must respect `prefers-reduced-motion` (framer's `useReducedMotion`, or the global CSS rule).
-- Icons come from `lucide-react`. Brand marks (GitHub, LinkedIn) are in `BrandIcons.tsx` because lucide v1 removed them.
-- Mobile first: check at 390px wide with no horizontal scroll.
-- No inline `<script>`: the CSP (`nginx/default.conf` and the CloudFront headers policy in `infra/terraform/main.tf`) only allows `script-src 'self'`. A new external origin (fonts, analytics) must be added to **both** CSPs.
-- Content claims must be traceable to the resume. Don't invent metrics.
+## Design rules (source: design-system/sanjana-purbia-portfolio/MASTER.md)
+- Read `MASTER.md` before any visual change. For UI work, use the skills in `.claude/skills/`: `frontend-design`, `taste-skill` and `ui-ux-pro-max`.
+- **Content:** lives only in `src/data/portfolio.ts`, and every claim must trace to the resume.
+- **Color:** tokens only (`bg-paper`, `text-ink`, `text-graphite`, `border-rule`, `text-cobalt`, `bg-feature`). No raw hex in components. A new token needs light and dark values in all three blocks of `src/index.css`.
+- **Shape:** interactive elements are `rounded-full`, containers are `rounded-tile` (20px). Nothing else is rounded.
+- **Type:** headings use `font-display` (Outfit), body uses Work Sans. Sentence case. No eyebrows, all-caps labels or monospace labels.
+- **Copy:** no em or en dashes anywhere visible. At most one `·` per line. One CTA label per intent: "Email me", "Download resume".
+- **Motion:** only the hero load, the tool marquee and the accordion move. Use `motion/react`, never `window` scroll listeners, and everything must respect `prefers-reduced-motion`.
+- **Icons and logos:** Phosphor for icons. Tool logos come from `simple-icons` via named imports only, because `import *` adds about 5 MB.
 
 ## Tracking
-- Update `.claude/plan.md` (move items between Backlog / In progress / Done) and `CHANGELOG.md` with every meaningful change.
+Update `.claude/plan.md` (Backlog / Done / change log) and `CHANGELOG.md` with every meaningful change.

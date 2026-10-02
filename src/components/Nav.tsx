@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Download, Menu, Moon, Sun, X } from 'lucide-react'
+import { List, Moon, Sun, X } from '@phosphor-icons/react'
+import { useMotionValueEvent, useScroll } from 'motion/react'
 import { profile } from '../data/portfolio'
 import type { Theme } from '../hooks/useTheme'
-import './Nav.css'
 
 const links = [
-  { href: '#skills', label: 'Skills' },
+  { href: '#work', label: 'Work' },
   { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#pipeline', label: 'Pipeline' },
+  { href: '#skills', label: 'Skills' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -17,13 +16,8 @@ type Props = { theme: Theme; onToggleTheme: () => void }
 export function Nav({ theme, onToggleTheme }: Props) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const { scrollY } = useScroll()
+  useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 8))
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
@@ -32,43 +26,65 @@ export function Nav({ theme, onToggleTheme }: Props) {
   }, [])
 
   return (
-    <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
-      <div className="container nav__inner">
-        <a href="#top" className="nav__brand mono" aria-label="Back to top">
-          <span className="nav__prompt">~/</span>sanjana
-          <span className="nav__cursor" aria-hidden="true" />
+    <header
+      className={`sticky top-0 z-40 transition-colors duration-300 ${
+        scrolled || open ? 'border-b border-rule bg-paper/90 backdrop-blur-md' : 'border-b border-transparent'
+      }`}
+    >
+      <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-6 px-4 md:h-[72px] md:px-6">
+        <a href="#top" className="flex items-center gap-3 font-display text-[17px] font-semibold tracking-tight">
+          <span
+            aria-hidden="true"
+            className="grid size-8 place-items-center rounded-full bg-cobalt text-[13px] text-on-cobalt"
+          >
+            SP
+          </span>
+          {profile.name}
         </a>
 
-        <nav id="primary-nav" className={`nav__links ${open ? 'nav__links--open' : ''}`} aria-label="Primary">
+        <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+            <a key={l.href} href={l.href} className="text-[15px] text-graphite transition-colors hover:text-ink">
               {l.label}
             </a>
           ))}
-          <a className="btn btn-primary nav__resume" href={profile.resumeUrl} download>
-            <Download size={16} /> Resume
-          </a>
         </nav>
 
-        <div className="nav__actions">
+        <div className="flex items-center gap-2">
           <button
-            className="icon-btn"
+            type="button"
             onClick={onToggleTheme}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+            className="grid size-11 cursor-pointer place-items-center rounded-full text-graphite transition-colors hover:text-ink"
           >
-            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
           </button>
           <button
-            className="icon-btn nav__menu"
+            type="button"
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
-            aria-controls="primary-nav"
+            aria-controls="mobile-nav"
+            className="grid size-11 cursor-pointer place-items-center rounded-full text-ink md:hidden"
           >
-            {open ? <X size={18} /> : <Menu size={18} />}
+            {open ? <X size={22} /> : <List size={22} />}
           </button>
         </div>
       </div>
+
+      {/* `hidden` removes the closed menu from the tab order. */}
+      <nav id="mobile-nav" aria-label="Mobile" hidden={!open} className="border-t border-rule px-4 pt-2 pb-5 md:hidden">
+        {links.map((l) => (
+          <a
+            key={l.href}
+            href={l.href}
+            onClick={() => setOpen(false)}
+            className="flex min-h-12 items-center font-display text-[21px] font-medium"
+          >
+            {l.label}
+          </a>
+        ))}
+      </nav>
     </header>
   )
 }

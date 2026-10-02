@@ -1,297 +1,132 @@
-/* Design tokens. Dark is the default; light is opt-in via data-theme or OS preference. */
+@import 'tailwindcss';
+
+/* Tokens: see design-system/sanjana-purbia-portfolio/MASTER.md.
+   Components use these through Tailwind utilities (bg-paper, text-ink...), never raw hex. */
 :root {
-  --bg: #0a0d0c;
-  --bg-elev: #111614;
-  --bg-sunken: #070908;
-  --line: #1f2825;
-  --line-strong: #2c3834;
-  --text: #e6ece9;
-  --text-dim: #9aa8a2;
-  --text-faint: #7f8d87;
-  --accent: #3ddc97;
-  --accent-dim: rgba(61, 220, 151, 0.12);
-  --accent-ink: #04120b;
-  --warn: #f5b84a;
-  --info: #6cb6ff;
-  --grid: rgba(255, 255, 255, 0.035);
-
-  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-
-  --radius: 14px;
-  --radius-sm: 8px;
-  --maxw: 1120px;
-  --gutter: clamp(16px, 4vw, 32px);
-
-  color-scheme: dark;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme='dark']) {
-    --bg: #f6f8f7;
-    --bg-elev: #ffffff;
-    --bg-sunken: #edf1ef;
-    --line: #dde4e1;
-    --line-strong: #c7d1cd;
-    --text: #0f1714;
-    --text-dim: #4a5853;
-    --text-faint: #5f6d67;
-    --accent: #0a7a4e;
-    --accent-dim: rgba(10, 122, 78, 0.1);
-    --accent-ink: #ffffff;
-    --warn: #b27309;
-    --info: #1f6fd1;
-    --grid: rgba(0, 0, 0, 0.04);
-    color-scheme: light;
-  }
-}
-
-:root[data-theme='light'] {
-  --bg: #f6f8f7;
-  --bg-elev: #ffffff;
-  --bg-sunken: #edf1ef;
-  --line: #dde4e1;
-  --line-strong: #c7d1cd;
-  --text: #0f1714;
-  --text-dim: #4a5853;
-  --text-faint: #5f6d67;
-  --accent: #0a7a4e;
-  --accent-dim: rgba(10, 122, 78, 0.1);
-  --accent-ink: #ffffff;
-  --warn: #b27309;
-  --info: #1f6fd1;
-  --grid: rgba(0, 0, 0, 0.04);
+  --paper: #f3f4f6;
+  --raised: #fafafb;
+  --ink: #16171b;
+  --graphite: #52555e;
+  --rule: #dcdee3;
+  --cobalt: #2444c2;
+  --on-cobalt: #f5f6ff;
+  /* Large accent surfaces (portrait, lead tile). Deeper in dark mode so they don't glare. */
+  --feature: #2444c2;
+  --on-feature: #f5f6ff;
   color-scheme: light;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
-  pointer-events: none;
-}
-
-h1,
-h2,
-h3 {
-  font-family: var(--font-display);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin: 0;
-  text-wrap: balance;
-}
-
-p {
-  margin: 0;
-  text-wrap: pretty;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-::selection {
-  background: var(--accent);
-  color: var(--accent-ink);
-}
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-
-.skip-link {
-  position: absolute;
-  left: -9999px;
-  top: 8px;
-  z-index: 100;
-  padding: 8px 14px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  border-radius: var(--radius-sm);
-}
-.skip-link:focus {
-  left: 8px;
-}
-
-.container {
-  width: 100%;
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-}
-
-.section {
-  padding: clamp(64px, 10vw, 112px) 0;
-}
-
-.section-head {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: clamp(32px, 5vw, 48px);
-  max-width: 640px;
-}
-
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--accent);
-  letter-spacing: 0.02em;
-}
-
-.section-title {
-  font-size: clamp(28px, 4.5vw, 40px);
-}
-
-.section-lede {
-  color: var(--text-dim);
-  font-size: 17px;
-}
-
-.mono {
-  font-family: var(--font-mono);
-}
-
-.card {
-  background: var(--bg-elev);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 10px;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  color: var(--text-dim);
-  background: var(--bg-sunken);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 18px;
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 500;
-  border-radius: 10px;
-  border: 1px solid var(--line-strong);
-  background: transparent;
-  color: var(--text);
-  cursor: pointer;
-  transition:
-    background 0.2s,
-    border-color 0.2s,
-    transform 0.2s;
-}
-.btn:hover {
-  border-color: var(--text-faint);
-  transform: translateY(-1px);
-}
-.btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-ink);
-}
-.btn-primary:hover {
-  border-color: var(--accent);
-  filter: brightness(1.08);
-}
-
-.icon-btn {
-  display: inline-grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--text-dim);
-  cursor: pointer;
-  transition:
-    color 0.2s,
-    border-color 0.2s;
-}
-.icon-btn:hover {
-  color: var(--text);
-  border-color: var(--line-strong);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 0 var(--accent);
-  animation: pulse 2.4s infinite;
-  flex: none;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent);
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #111217;
+    --raised: #191a20;
+    --ink: #ecedf1;
+    --graphite: #a3a6b0;
+    --rule: #2a2c33;
+    --cobalt: #8fa3ff;
+    --on-cobalt: #0e1330;
+    --feature: #23317a;
+    --on-feature: #f2f4ff;
+    color-scheme: dark;
   }
-  70% {
-    box-shadow: 0 0 0 8px transparent;
+}
+
+:root[data-theme='dark'] {
+  --paper: #111217;
+  --raised: #191a20;
+  --ink: #ecedf1;
+  --graphite: #a3a6b0;
+  --rule: #2a2c33;
+  --cobalt: #8fa3ff;
+  --on-cobalt: #0e1330;
+  --feature: #23317a;
+  --on-feature: #f2f4ff;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-graphite: var(--graphite);
+  --color-rule: var(--rule);
+  --color-cobalt: var(--cobalt);
+  --color-on-cobalt: var(--on-cobalt);
+  --color-feature: var(--feature);
+  --color-on-feature: var(--on-feature);
+
+  --font-display: 'Outfit Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Work Sans Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Shape rule: interactive = pill, containers = tile. */
+  --radius-tile: 20px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+    -webkit-text-size-adjust: 100%;
   }
-  100% {
-    box-shadow: 0 0 0 0 transparent;
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-size: 17px;
+    line-height: 1.6;
   }
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--cobalt);
+    color: var(--on-cobalt);
+  }
+  :focus-visible {
+    outline: 2px solid var(--cobalt);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-11 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full px-5 text-[15px] font-medium transition-[transform,background-color,border-color] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.98];
+  }
+  .btn-primary {
+    @apply bg-cobalt text-on-cobalt hover:brightness-110;
+  }
+  .btn-quiet {
+    @apply border border-rule text-ink hover:border-graphite;
+  }
+}
+
+/* The one marquee on the page. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+  .marquee-track {
+    animation: none;
+  }
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

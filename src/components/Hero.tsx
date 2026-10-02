@@ -1,53 +1,44 @@
-import { ArrowUpRight, Download, MapPin } from 'lucide-react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { DownloadSimple, EnvelopeSimple } from '@phosphor-icons/react'
+import { motion, useReducedMotion } from 'motion/react'
 import { profile } from '../data/portfolio'
-import { Terminal } from './Terminal'
-import './Hero.css'
+import { Portrait } from './Portrait'
 
+// The page's single orchestrated moment: headline, then subtext, CTAs and portrait.
 export function Hero() {
   const reduce = useReducedMotion()
-  const fade = (delay: number) =>
+  const enter = (delay: number) =>
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 16 },
+          initial: { opacity: 0, y: 24 },
           animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] as const },
+          transition: { type: 'spring' as const, stiffness: 100, damping: 20, delay },
         }
 
   return (
-    <section id="top" className="hero">
-      <div className="container hero__grid">
-        <div className="hero__copy">
-          {profile.openToWork && (
-            <motion.div className="hero__status mono" {...fade(0)}>
-              <span className="status-dot" /> open to new DevOps roles
-            </motion.div>
-          )}
-          <motion.h1 className="hero__name" {...fade(0.05)}>
-            {profile.name}
+    <section id="top" className="mx-auto max-w-[1200px] px-4 pt-10 pb-16 md:px-6 md:pt-16 md:pb-24">
+      <div className="grid items-center gap-10 md:grid-cols-12 md:gap-12">
+        <div className="md:col-span-7">
+          <motion.h1
+            {...enter(0)}
+            className="text-[clamp(44px,7.4vw,84px)] leading-[0.98] font-semibold tracking-[-0.035em]"
+          >
+            {profile.headline}
           </motion.h1>
-          <motion.p className="hero__role" {...fade(0.1)}>
-            {profile.role} <span className="hero__sep">/</span> AWS Certified Cloud Practitioner
+          <motion.p {...enter(0.12)} className="mt-6 max-w-[34ch] text-[19px] leading-relaxed text-graphite md:text-[21px]">
+            {profile.subtext}
           </motion.p>
-          <motion.p className="hero__tagline" {...fade(0.15)}>
-            {profile.tagline} Terraform for the infrastructure, Jenkins and GitHub Actions for delivery, Docker and
-            ArgoCD to run it, and CloudWatch, Uptime Kuma and PagerDuty monitoring that cuts time to resolution.
-          </motion.p>
-          <motion.div className="hero__cta" {...fade(0.2)}>
-            <a href="#projects" className="btn btn-primary">
-              See my work <ArrowUpRight size={16} />
+          <motion.div {...enter(0.22)} className="mt-9 flex flex-wrap gap-3">
+            <a href={`mailto:${profile.email}`} className="btn btn-primary">
+              <EnvelopeSimple size={18} weight="bold" /> Email me
             </a>
-            <a href={profile.resumeUrl} className="btn" download>
-              <Download size={16} /> Download resume
+            <a href={profile.resumeUrl} download className="btn btn-quiet">
+              <DownloadSimple size={18} weight="bold" /> Download resume
             </a>
           </motion.div>
-          <motion.p className="hero__loc" {...fade(0.25)}>
-            <MapPin size={14} /> {profile.location}
-          </motion.p>
         </div>
-        <motion.div className="hero__term" {...fade(0.2)}>
-          <Terminal />
+        <motion.div {...enter(0.3)} className="mx-auto w-full max-w-[420px] md:col-span-5 md:max-w-none">
+          <Portrait />
         </motion.div>
       </div>
     </section>

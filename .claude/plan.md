@@ -1,62 +1,52 @@
 # Portfolio Plan & Tracker
 
-Living tracker for the portfolio. Move items between sections as work progresses and add a dated line to the log at the bottom.
-Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` blocked (needs input from Sanjana)
+Living tracker. Move items between sections and add a dated line to the change log.
+Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input from Sanjana
 
 ## Goals
-1. Get recruiters and hiring managers to the key facts (role, impact, stack, contact) within 10 seconds.
-2. Make the repo itself evidence of DevOps skill: IaC, CI/CD, containers, security, docs.
-3. Keep content edits trivial: one data file, no JSX.
+1. A recruiter learns role, impact, stack and how to make contact within 10 seconds.
+2. A distinct, non-template design. Rules live in `design-system/sanjana-purbia-portfolio/MASTER.md`.
+3. Content edits touch one file: `src/data/portfolio.ts`.
 
 ## Information architecture
-| # | Section | Component | Purpose |
-|---|---------|-----------|---------|
-| 0 | Hero | `Hero.tsx` + `Terminal.tsx` | Name, role, pitch, CTAs, animated terraform/argocd/kubectl session |
-| – | Metrics | `Metrics.tsx` | 70% / 80% / 15+ / 10+ count-up tiles |
-| 01 | Skills | `Skills.tsx` | Six toolchain groups |
-| 02 | Experience | `Experience.tsx` | Timeline, current role highlighted |
-| 03 | Projects | `Projects.tsx` + `ArchDiagram.tsx` | YoCharge featured with architecture; Uncompromised, Dnatur |
-| 04 | Pipeline | `Pipeline.tsx` | How this site ships (meta-showcase) |
-| 05 | Credentials | `Credentials.tsx` | AWS CCP, B.Tech |
-| 06 | Contact | `Contact.tsx` | Email (copy), LinkedIn, resume |
+| Section | Component | Layout family |
+|---|---|---|
+| Hero | `Hero.tsx` + `Portrait.tsx` | asymmetric split, 7/5 |
+| Tools | `ToolMarquee.tsx` | logo marquee (the only one) |
+| Impact | `Impact.tsx` | 4-cell bento |
+| Experience | `Experience.tsx` | sticky heading + sequence |
+| Work (`#work`) | `Projects.tsx` | accordion rows |
+| Skills | `Skills.tsx` | definition list |
+| Credentials | `Credentials.tsx` | inline two-tile strip |
+| Contact | `Contact.tsx` | manifesto close |
 
-## Done (v1.0.0, 2026-10-02)
-- [x] Vite + React 19 + TS scaffold, oxlint clean, strict typecheck
-- [x] Design tokens, dark/light themes, reduced motion, mobile layout (verified at 390/1440 with puppeteer, no overflow, no console errors)
-- [x] All sections above, content from resume (Sep 2026)
-- [x] Dockerfile + nginx + compose
-- [x] CI (lint/build/Trivy/terraform validate) + CD (OIDC → S3 → CloudFront)
-- [x] Terraform: S3 + OAC + CloudFront + OIDC role (`terraform validate` passes)
-- [x] README, CLAUDE.md, CHANGELOG, docs/DEPLOYMENT.md, skills, agents
+## Done
+### v2.0.0 (2026-10-02): skill-driven redesign
+- [x] Deleted all DevOps scaffolding, as requested
+- [x] Vendored the `frontend-design`, `taste-skill` and `ui-ux-pro-max` skills into `.claude/skills/`
+- [x] Generated the design system with ui-ux-pro-max: rejected the off-brief result, retried, and recorded the reasons in MASTER.md
+- [x] Rebuilt on Tailwind v4, Motion, Phosphor, Simple Icons and self-hosted fonts
+- [x] QA at 390 / 768 / 1440 in light and dark: no overflow, no console errors, interactions verified
+- [x] taste-skill pre-flight passed: 0 em dashes, 0 eyebrows, single CTA labels, 17-word hero subtext, 72px nav
 
-## Done (v1.0.1, 2026-10-02): agent review pass
-- [x] `content-editor`: copy audited against resume, unsupported claims removed
-- [x] `infra-reviewer`: 9 findings fixed (Trivy SHA, OIDC scope, CI-gated deploy + rollback input, CloudFront SPA function, headers, IAM, images, Dependabot TF, lockfile)
-- [x] `ui-qa`: mobile/tablet/desktop × dark/light pass; nav focus trap + WCAG AA contrast fixed
+### v1.0.x (2026-10-02)
+- [x] First build: React portfolio plus DevOps infra (since removed)
 
 ## Backlog
 ### Needs input from Sanjana
-- [!] GitHub profile URL → `profile.socials.github` in `src/data/portfolio.ts`
-- [!] Custom domain? (e.g. sanjanapurbia.dev) → ACM in us-east-1 + Route 53 alias (see comment in `infra/terraform/main.tf`)
-- [!] Professional photo / avatar (optional)
-- [!] Credly badge URL for AWS CCP to link the certification
-- [!] Create the GitHub repo, then `terraform apply` and set the repo vars (docs/DEPLOYMENT.md)
+- [!] **Portrait photo:** add `public/portrait.jpg` (4:5) and set `profile.photo`. taste-skill expects a real image in the hero; the SP monogram is a stand-in.
+- [!] **GitHub URL:** set `profile.socials.github`.
+- [!] **Credly badge URL** for the AWS certification.
+- [!] **Hosting:** choose where to host it (Vercel, Netlify or GitHub Pages all work with `npm run build`).
 
 ### Enhancements
-- [ ] OG share image (1200×630) at `public/og.png` and `og:image` meta
-- [ ] `sitemap.xml` + canonical URL once the domain is known
-- [ ] Open-source showcase repos (Terraform modules, Jenkins shared library sample) with links from project cards
-- [ ] Blog / write-ups section (e.g. "Azure → GCP migration lessons")
-- [ ] Lighthouse CI job in `ci.yml` (budget: perf ≥ 95, a11y = 100)
-- [ ] Code-split framer-motion, or replace it with CSS to cut the JS bundle (~120 kB gzip today)
-- [ ] Self-host fonts to drop the Google Fonts CSP exceptions
-- [ ] Uptime check (Uptime Kuma / CloudWatch Synthetics) on the live URL, a nice nod to monitoring skills
-- [ ] Pin Docker base images by digest (Docker Hub API unavailable during v1.0.1)
-- [ ] Verify `docker build` + `/healthz` locally (Docker daemon was down during v1.0.1)
-- [ ] Flip Trivy to `exit-code: 1` once the base image scans clean
-- [ ] Remote Terraform state (S3 backend + lockfile) once the account is set up
+- [ ] OG share image (1200×630) and `og:image`
+- [ ] Code-split Motion or lazy-load below-the-fold sections (JS is about 141 kB gzipped)
+- [ ] Lighthouse pass (target perf ≥ 95, a11y 100)
+- [ ] Case-study pages per project, if write-ups become available
 
 ## Change log
 <!-- newest first: YYYY-MM-DD: what changed (files) -->
-- 2026-10-02: v1.0.1 agent review pass. Copy accuracy, a11y/contrast, infra hardening (src/, index.css, .github/, infra/, Dockerfile, docs/).
-- 2026-10-02: v1.0.0 initial build. React app, infra, CI/CD, docs, .claude setup.
+- 2026-10-02: v2.0.0 removed DevOps infra; redesigned with frontend-design, taste-skill and ui-ux-pro-max (src/, design-system/, .claude/skills/).
+- 2026-10-02: v1.0.1 agent review pass (copy accuracy, accessibility, infra hardening).
+- 2026-10-02: v1.0.0 initial build.

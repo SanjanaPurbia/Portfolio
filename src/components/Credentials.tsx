@@ -1,31 +1,28 @@
-import { Award, GraduationCap } from 'lucide-react'
+import { Certificate, GraduationCap } from '@phosphor-icons/react'
 import { certifications, education } from '../data/portfolio'
-import { Reveal } from './Reveal'
-import { SectionHead } from './SectionHead'
-import './Credentials.css'
 
 export function Credentials() {
+  const cert = certifications[0]
   return (
-    <section id="credentials" className="section section--tight">
-      <div className="container">
-        <SectionHead eyebrow="05 · credentials" title="Certifications & education" />
-        <div className="creds">
-          {certifications.map((c) => (
-            <Reveal key={c.name} className="cred card">
-              <span className="cred__icon"><Award size={20} /></span>
-              <div>
-                <h3 className="cred__title">{c.name}</h3>
-                <p className="cred__sub">{c.issuer} · {c.year}</p>
-              </div>
-            </Reveal>
-          ))}
-          <Reveal delay={0.06} className="cred card">
-            <span className="cred__icon"><GraduationCap size={20} /></span>
-            <div>
-              <h3 className="cred__title">{education.degree}</h3>
-              <p className="cred__sub">{education.school} · {education.period}</p>
-            </div>
-          </Reveal>
+    <section aria-label="Certification and education" className="mx-auto max-w-[1200px] px-4 md:px-6">
+      <div className="grid gap-4 md:grid-cols-[3fr_2fr]">
+        <div className="flex items-start gap-5 rounded-tile bg-raised p-7">
+          <Certificate size={32} className="shrink-0 text-cobalt" />
+          <div>
+            <p className="font-display text-[21px] font-semibold tracking-tight">{cert.name}</p>
+            <p className="mt-1 text-[15px] text-graphite">
+              {cert.issuer}, {cert.year}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-start gap-5 rounded-tile bg-raised p-7">
+          <GraduationCap size={32} className="shrink-0 text-cobalt" />
+          <div>
+            <p className="font-display text-[21px] font-semibold tracking-tight">{education.degree}</p>
+            <p className="mt-1 text-[15px] text-graphite">
+              {education.school}, {education.period}
+            </p>
+          </div>
         </div>
       </div>
     </section>

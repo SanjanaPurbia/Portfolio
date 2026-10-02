@@ -2,6 +2,27 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.0.0] - 2026-10-02
+### Removed
+- All DevOps scaffolding (Dockerfile, nginx, docker-compose, GitHub Actions, Terraform, Makefile, docs/DEPLOYMENT.md, `infra-reviewer` agent, `ship-release` skill) at the owner's request. It can be recovered from commit `7c372cc`.
+- The v1 design: near-black and acid green, monospace eyebrows, the fake terminal and the pipeline section.
+
+### Added
+- Rebuilt with the `frontend-design`, `taste-skill` and `ui-ux-pro-max` skills (vendored in `.claude/skills/`).
+- Design system: `design-system/sanjana-purbia-portfolio/MASTER.md`.
+- Tailwind v4 tokens: cool paper and cobalt, with a deep feature surface in dark mode. All pairs pass WCAG AA, most AAA.
+- Self-hosted Outfit and Work Sans, Phosphor icons, and real tool logos from Simple Icons.
+- Sections, each a different layout:
+  - asymmetric hero
+  - tool marquee
+  - impact bento
+  - sticky experience column
+  - projects accordion
+  - skills definition list
+  - credentials strip
+  - contact close
+- Local visual QA scripts in `.qa/` (gitignored).
+
 ## [1.0.1] - 2026-10-02
 ### Fixed
 - Copy audited against the resume by the `content-editor` agent: removed unsupported claims (fictional service names, production Kubernetes, private subnets, "rolling deploy", "under two years").

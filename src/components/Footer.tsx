@@ -1,16 +1,17 @@
 import { profile } from '../data/portfolio'
-import './Footer.css'
 
 const YEAR = new Date().getFullYear()
 
 export function Footer() {
   return (
-    <footer className="footer">
-      <div className="container footer__inner mono">
-        <span>© {YEAR} {profile.name}</span>
-        <span className="footer__build">
-          built with React · shipped via GitHub Actions → S3 + CloudFront
-        </span>
+    <footer className="border-t border-rule">
+      <div className="mx-auto flex max-w-[1200px] flex-wrap justify-between gap-2 px-4 py-8 text-[15px] text-graphite md:px-6">
+        <p>
+          © {YEAR} {profile.name}
+        </p>
+        <a href="#top" className="hover:text-ink">
+          Back to top
+        </a>
       </div>
     </footer>
   )

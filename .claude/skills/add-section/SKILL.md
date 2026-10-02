@@ -6,18 +6,11 @@ description: Add a new section to the portfolio page (e.g. blog, testimonials, o
 # Add a portfolio section
 
 ## Steps
-1. **Data first:** add a typed export to `src/data/portfolio.ts` (export the type too).
-2. **Component:** create `src/components/<Name>.tsx` and `<Name>.css`. Skeleton:
-   ```tsx
-   <section id="<anchor>" className="section">
-     <div className="container">
-       <SectionHead eyebrow="NN · <shell-flavoured command>" title="..." lede="..." />
-       {/* items wrapped in <Reveal delay={i * 0.05}> */}
-     </div>
-   </section>
-   ```
-3. **Styling:** use tokens from `src/index.css` (`--bg-elev`, `--line`, `--accent`, `--text-dim` …) and reuse `.card`, `.chip` and `.btn`. Prefix classes with the component name (`.blog__item`). Add a breakpoint at ≤720px.
-4. **Wire up:** render it in `src/App.tsx` in page order, renumber the following eyebrows, and add a link to `links` in `Nav.tsx` if it's a top-level destination.
-5. **Motion:** any custom animation checks `useReducedMotion()`.
-6. **Verify:** lint + build clean, with no horizontal overflow at 390px. Use the `ui-qa` agent for screenshots.
-7. **Track:** update the information-architecture table and change log in `.claude/plan.md`, plus `CHANGELOG.md` (minor bump).
+1. **Design rules first:** read `design-system/sanjana-purbia-portfolio/MASTER.md`. Load the `frontend-design` and `taste-skill` skills.
+2. **Pick an unused layout family.** Each family appears once per page (see the plan's IA table). No eyebrow label above the heading.
+3. **Data:** add a typed export to `src/data/portfolio.ts`. Facts must trace to the resume.
+4. **Component:** create `src/components/<Name>.tsx` with Tailwind token utilities (`bg-paper`, `text-graphite`, `rounded-tile`...). Use the section wrapper `mx-auto max-w-[1200px] px-4 py-20 md:px-6 md:py-28` and an h2 at `text-[clamp(32px,4.4vw,52px)] font-semibold tracking-[-0.03em]`. Declare the collapse below 768px explicitly.
+5. **Motion:** only if it communicates something (taste-skill §5). Use `motion/react` and respect `useReducedMotion()`.
+6. **Wire up:** render it in `src/App.tsx`. Add a nav link in `Nav.tsx` only if it's a top-level destination (the nav must stay on one line).
+7. **Verify:** lint and build clean, then the `.qa` scripts: no overflow, 0 em dashes, pre-flight green.
+8. **Track:** update the IA table and change log in `.claude/plan.md`, plus `CHANGELOG.md` (minor bump).
