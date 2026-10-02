@@ -2,6 +2,11 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.4.0] - 2026-10-02
+### Changed
+- **Professional background:** the cluster field is now monochrome. Neutral dots fade out from the top of the screen, the cursor effect is a subtle darkening, and a single soft brand-blue rollout sweeps every 15 seconds.
+- **Removed:** the rainbow cursor lens and the multi-colour pods. Rendering is now about 2× faster.
+
 ## [2.3.0] - 2026-10-02
 ### Changed
 - **Front page:**

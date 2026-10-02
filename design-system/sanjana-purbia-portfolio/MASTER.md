@@ -41,21 +41,22 @@ The owner asked for a colourful site, and the brief's own words override taste-s
 - Soft surfaces use `tint-<hue>`, which is `color-mix` of the hue at 16% into `--paper`. That gives light tints in light mode and deep tints in dark mode, with ink and graphite text at ≥5:1.
 - Tool logos use their real brand colours from Simple Icons, on a light `--color-chip` circle in both themes.
 
-## Background: live cluster map (v2.2)
-The owner asked for an innovative background, then for it to be calmer and more understated (v2.2.1). It's grounded in the subject: DevOps work happens on clusters, so the page sits on a living grid of nodes (`src/components/ClusterField.tsx`, one fixed canvas).
+## Background: quiet cluster map (v2.4)
+The owner found the coloured background (rainbow pointer lens, multi-hue pods) unprofessional. The rule now: **colour lives on the content; the background is monochrome with one restrained accent.**
 
 | Layer | What it shows | Motion rule |
 |---|---|---|
-| Nodes | 34px grid (28px on mobile), 1.2px nodes in `--graphite` at 18% (22% in dark) | static |
-| Pods | 3% of nodes softly lit in the status hues (max 55% opacity), fading in and out over 3-6.5s | slow, calm (ui-ux-pro-max: continuous decorative motion must not distract) |
-| Rolling deployment | a soft diagonal band (max 45% opacity) sweeps the grid in 3.2s every 12s, one hue per rollout. The first sweep plays with the hero entrance. | storytelling: a rollout across the cluster |
-| Pointer lens | nodes within 150px of the mouse grow and take a hue by angle (colour wheel) | feedback; mouse only, none on touch |
+| Nodes | 32px grid (28px on mobile), 1.1px nodes in `--graphite` at 16% (20% in dark) | static |
+| Fade | CSS radial mask from the top of the viewport, so the grid reads as a texture and fades out lower down | static |
+| Rolling deployment | one soft cobalt band (max 35% opacity) sweeps the grid in 3.6s every 15s. The first sweep plays with the hero entrance. | storytelling, rare |
+| Pointer | nodes within 140px of the mouse darken toward `--ink` (max 30%) and grow slightly. No hues. | feedback; mouse only |
 
-**Guardrails:**
-- **Readability:** text sitting directly on the field gets the `halo` utility, a page-colour `text-shadow` that clears nearby nodes so text contrast stays at the token values (≥4.5:1).
-- **Reduced motion:** a single static frame. The lens still redraws on pointer move, because it's user-triggered.
-- **Performance:** paused while the tab is hidden; device pixel ratio capped at 2; no React state per frame; no scroll listeners.
-- **Theme:** colours come from the CSS variables, and the canvas redraws on theme changes. The hue hex values are mirrored in `src/lib/hue.ts` (`hueHex`), because a canvas can't read Tailwind utilities.
+**Removed:** multi-hue pods and the colour-wheel lens.
+
+**Guardrails (unchanged):**
+- **Readability:** text on the field keeps the `halo` utility.
+- **Reduced motion:** a single static frame.
+- **Performance:** paused in hidden tabs; device pixel ratio capped at 2; no React state per frame.
 
 ## Type
 - **Outfit Variable** for display and headings: weight 600, tracking -0.035em at display sizes, -0.02em at h2/h3.
@@ -100,7 +101,7 @@ Eight sections and eight different layout families. One eyebrow on the page (lim
 
 ## Principles
 1. **Boldness lives in the hero:** large Outfit headline next to the tilted colour fact cards. The irony of "I make releases boring." next to a colourful page is the point.
-2. **The background is alive but quiet:** content always wins, and the field never competes with the colour tiles.
+2. **The background is professional and quiet:** monochrome, with colour only on the content.
 3. **Real data only.** Every number comes from the resume. No count-up animations or invented precision.
 4. **Motion is motivated.**
    - One orchestrated hero load sequence: text rises, fact cards drop in and tilt (hierarchy). Cards straighten on hover (feedback).

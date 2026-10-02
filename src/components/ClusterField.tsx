@@ -2,17 +2,15 @@ import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'motion/react'
 import { hueHex } from '../lib/hue'
 
-// Page background: a live "cluster map". A grid of nodes where pods light up and fade in the
-// status hues, a rolling-deployment wave sweeps across every few seconds, and nodes near the
-// pointer brighten. Drawn on one fixed canvas; never touches React state per frame.
-const HUES = Object.values(hueHex)
-const WAVE_EVERY = 12000 // ms between rollouts
-const WAVE_DURATION = 3200
-const FIRST_WAVE_AT = 500 // the first rollout plays with the hero entrance
-const POD_SHARE = 0.03 // fraction of nodes lit at any time
-const LENS_RADIUS = 150
-
-type Pod = { i: number; hue: string; born: number; life: number }
+// Page background: a quiet, monochrome "cluster map". A neutral grid of nodes that fades
+// away from the top of the screen; nodes near the pointer darken slightly, and a soft
+// brand-blue rollout sweeps across now and then. Colour stays on the content, not here.
+// Drawn on one fixed canvas; never touches React state per frame.
+const WAVE_COLOR = hueHex.cobalt
+const WAVE_EVERY = 15000 // ms between rollouts
+const WAVE_DURATION = 3600
+const FIRST_WAVE_AT = 600 // the first rollout plays with the hero entrance
+const LENS_RADIUS = 140
 
 export function ClusterField() {
   const ref = useRef<HTMLCanvasElement>(null)
@@ -25,34 +23,28 @@ export function ClusterField() {
 
     let w = 0
     let h = 0
-    let gap = 30
+    let gap = 32
     let cols = 0
     let rows = 0
-    let pods: Pod[] = []
-    let baseColor = '' // read from --graphite in readTheme()
-    let baseAlpha = 0.22
+    let dotColor = '' // read from --graphite in readTheme()
+    let lensColor = '' // read from --ink in readTheme()
+    let baseAlpha = 0.16
     let frame = 0
     let start = performance.now()
     const pointer = { x: -9999, y: -9999, active: false }
 
     const readTheme = () => {
       const css = getComputedStyle(document.documentElement)
-      baseColor = css.getPropertyValue('--graphite').trim() || baseColor
-      baseAlpha = css.colorScheme === 'dark' ? 0.22 : 0.18
+      dotColor = css.getPropertyValue('--graphite').trim()
+      lensColor = css.getPropertyValue('--ink').trim()
+      baseAlpha = css.colorScheme === 'dark' ? 0.2 : 0.16
     }
-
-    const newPod = (now: number): Pod => ({
-      i: Math.floor(Math.random() * cols * rows),
-      hue: HUES[Math.floor(Math.random() * HUES.length)],
-      born: now - Math.random() * 4000,
-      life: 3000 + Math.random() * 3500,
-    })
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
       w = window.innerWidth
       h = window.innerHeight
-      gap = w < 768 ? 28 : 34
+      gap = w < 768 ? 28 : 32
       canvas.width = Math.round(w * dpr)
       canvas.height = Math.round(h * dpr)
       canvas.style.width = `${w}px`
@@ -60,8 +52,6 @@ export function ClusterField() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       cols = Math.ceil(w / gap) + 1
       rows = Math.ceil(h / gap) + 1
-      const now = performance.now()
-      pods = Array.from({ length: Math.round(cols * rows * POD_SHARE) }, () => newPod(now))
     }
 
     const dot = (x: number, y: number, r: number, color: string, alpha: number) => {
@@ -77,42 +67,26 @@ export function ClusterField() {
       const ox = (w - (cols - 1) * gap) / 2
       const oy = (h - (rows - 1) * gap) / 2
 
-      // Every node, in one path.
+      // Neutral grid. The fade (CSS mask on the canvas) keeps it a texture, not wallpaper.
       ctx.globalAlpha = baseAlpha
-      ctx.fillStyle = baseColor
+      ctx.fillStyle = dotColor
       ctx.beginPath()
       for (let r = 0; r < rows; r++)
         for (let c = 0; c < cols; c++) {
           const x = ox + c * gap
           const y = oy + r * gap
-          ctx.moveTo(x + 1.2, y)
-          ctx.arc(x, y, 1.2, 0, Math.PI * 2)
+          ctx.moveTo(x + 1.1, y)
+          ctx.arc(x, y, 1.1, 0, Math.PI * 2)
         }
       ctx.fill()
 
-      // Pods: fade in and out like services coming up and down.
-      for (let p = 0; p < pods.length; p++) {
-        const pod = pods[p]
-        const age = (now - pod.born) / pod.life
-        if (age >= 1) {
-          pods[p] = { ...newPod(now), born: now }
-          continue
-        }
-        if (age < 0) continue
-        const k = Math.sin(Math.PI * age)
-        dot(ox + (pod.i % cols) * gap, oy + Math.floor(pod.i / cols) * gap, 1.4 + k * 1.2, pod.hue, 0.15 + k * 0.4)
-      }
-
-      // Rolling deployment: a diagonal band sweeps the grid, one hue per rollout.
+      // Rolling deployment: one soft brand-blue band crosses the grid, rarely.
       const t = now - start - FIRST_WAVE_AT
       if (!reduce && t >= 0) {
-        const cycle = Math.floor(t / WAVE_EVERY)
         const progress = (t % WAVE_EVERY) / WAVE_DURATION
         if (progress <= 1) {
-          const band = 160
-          const span = w + h * 0.6
-          const center = -band + progress * (span + band * 2)
-          const hue = HUES[cycle % HUES.length]
+          const band = 170
+          const center = -band + progress * (w + h * 0.6 + band * 2)
           for (let r = 0; r < rows; r++)
             for (let c = 0; c < cols; c++) {
               const x = ox + c * gap
@@ -120,13 +94,13 @@ export function ClusterField() {
               const d = Math.abs(x + y * 0.6 - center)
               if (d < band) {
                 const k = 1 - d / band
-                dot(x, y, 1.2 + k * 1.4, hue, k * 0.45)
+                dot(x, y, 1.1 + k * 0.9, WAVE_COLOR, k * 0.35)
               }
             }
         }
       }
 
-      // Pointer lens: nearby nodes grow and pick up a hue by angle, like a colour wheel.
+      // Pointer: nearby nodes darken and grow a little. Monochrome, no colour wheel.
       if (pointer.active) {
         const c0 = Math.max(0, Math.floor((pointer.x - ox - LENS_RADIUS) / gap))
         const c1 = Math.min(cols - 1, Math.ceil((pointer.x - ox + LENS_RADIUS) / gap))
@@ -139,8 +113,7 @@ export function ClusterField() {
             const dist = Math.hypot(x - pointer.x, y - pointer.y)
             if (dist < LENS_RADIUS) {
               const k = 1 - dist / LENS_RADIUS
-              const angle = (Math.atan2(y - pointer.y, x - pointer.x) + Math.PI) / (Math.PI * 2)
-              dot(x, y, 1.2 + k * 2, HUES[Math.floor(angle * HUES.length) % HUES.length], 0.1 + k * 0.45)
+              dot(x, y, 1.1 + k * 1.1, lensColor, k * 0.3)
             }
           }
       }
@@ -202,5 +175,11 @@ export function ClusterField() {
     }
   }, [reduce])
 
-  return <canvas ref={ref} aria-hidden="true" className="pointer-events-none fixed inset-0 z-0" />
+  return (
+    <canvas
+      ref={ref}
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-0 [mask-image:radial-gradient(ellipse_120%_90%_at_50%_0%,#000_30%,transparent_85%)]"
+    />
+  )
 }

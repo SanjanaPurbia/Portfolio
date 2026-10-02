@@ -22,6 +22,9 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 | (page background) | `ClusterField.tsx` | fixed canvas behind all sections |
 
 ## Done
+### v2.4.0 (2026-10-02): step 2, professional background
+- [x] Monochrome background with a top fade; single-colour rollout; no rainbow lens or pods (owner feedback: too colourful, not professional)
+
 ### v2.3.0 (2026-10-02): step 1, front page
 - [x] Availability pill, name in the subtext, first-screen framing at 1024px and up, stacked hero below 1024px
 - [x] Phone added to the contact block and footer (owner request)
@@ -66,6 +69,7 @@ The owner is sharing changes **one at a time**. Finish each step, verify it, com
 
 ## Change log
 <!-- newest first: YYYY-MM-DD: what changed (files) -->
+- 2026-10-02: v2.4.0 monochrome professional background (ClusterField.tsx).
 - 2026-10-02: v2.3.0 front-page polish + phone (Hero.tsx, HeroCards.tsx, Contact.tsx, Footer.tsx, data/portfolio.ts).
 - 2026-10-02: v2.2.1 calmer background; LinkedIn URL fixed (ClusterField.tsx, data/portfolio.ts).
 - 2026-10-02: v2.2.0 cluster-map background + text halos (ClusterField.tsx, lib/hue.ts, index.css, App.tsx).
