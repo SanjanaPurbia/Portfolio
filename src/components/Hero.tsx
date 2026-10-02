@@ -21,11 +21,11 @@ export function Hero() {
         <div className="md:col-span-7">
           <motion.h1
             {...enter(0)}
-            className="text-[clamp(44px,7.4vw,84px)] leading-[0.98] font-semibold tracking-[-0.035em]"
+            className="halo text-[clamp(44px,7.4vw,84px)] leading-[0.98] font-semibold tracking-[-0.035em]"
           >
             {profile.headline}
           </motion.h1>
-          <motion.p {...enter(0.12)} className="mt-6 max-w-[34ch] text-[19px] leading-relaxed text-graphite md:text-[21px]">
+          <motion.p {...enter(0.12)} className="halo mt-6 max-w-[34ch] text-[19px] leading-relaxed text-graphite md:text-[21px]">
             {profile.subtext}
           </motion.p>
           <motion.div {...enter(0.22)} className="mt-9 flex flex-wrap gap-3">

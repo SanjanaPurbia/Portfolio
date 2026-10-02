@@ -9,8 +9,8 @@ export function Projects() {
 
   return (
     <section id="work" className="mx-auto max-w-[1200px] px-4 py-20 md:px-6 md:py-28">
-      <h2 className="text-[clamp(32px,4.4vw,52px)] leading-[1.05] font-semibold tracking-[-0.03em]">Selected work</h2>
-      <p className="mt-4 max-w-[52ch] text-graphite">
+      <h2 className="halo text-[clamp(32px,4.4vw,52px)] leading-[1.05] font-semibold tracking-[-0.03em]">Selected work</h2>
+      <p className="halo mt-4 max-w-[52ch] text-graphite">
         Production platforms for EV charging, AgriTech and eCommerce clients.
       </p>
 

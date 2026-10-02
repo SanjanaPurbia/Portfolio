@@ -18,3 +18,14 @@ export const tint: Record<Hue, string> = {
   rose: 'tint-rose',
   violet: 'tint-violet',
 }
+
+// Canvas can't read Tailwind utilities, so the background field uses these.
+// Keep in sync with the --color-* hues in src/index.css.
+export const hueHex: Record<Hue, string> = {
+  cobalt: '#3651f0',
+  tangerine: '#ff7a2f',
+  mint: '#1fc79a',
+  sun: '#ffcb2e',
+  rose: '#ff5c8d',
+  violet: '#8b6cff',
+}

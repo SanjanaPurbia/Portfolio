@@ -125,6 +125,15 @@
   }
 }
 
+/* Text that sits directly on the cluster field gets a soft page-colour halo, which clears
+   nearby nodes so contrast stays at the token values (ui-ux-pro-max: contrast first). */
+@utility halo {
+  text-shadow:
+    0 0 2px var(--paper),
+    0 0 8px var(--paper),
+    0 0 16px var(--paper);
+}
+
 /* The one marquee on the page. */
 @keyframes marquee {
   to {

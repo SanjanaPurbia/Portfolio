@@ -41,6 +41,22 @@ The owner asked for a colourful site, and the brief's own words override taste-s
 - Soft surfaces use `tint-<hue>`, which is `color-mix` of the hue at 16% into `--paper`. That gives light tints in light mode and deep tints in dark mode, with ink and graphite text at ≥5:1.
 - Tool logos use their real brand colours from Simple Icons, on a light `--color-chip` circle in both themes.
 
+## Background: live cluster map (v2.2)
+The owner asked for a more visible, more innovative background. It's grounded in the subject: DevOps work happens on clusters, so the page sits on a living grid of nodes (`src/components/ClusterField.tsx`, one fixed canvas).
+
+| Layer | What it shows | Motion rule |
+|---|---|---|
+| Nodes | 30px grid (26px on mobile) in `--graphite` at 32% (38% in dark) | static |
+| Pods | 8% of nodes lit in the status hues, fading in and out over 3-6.5s | slow, calm (ui-ux-pro-max: continuous decorative motion must not distract) |
+| Rolling deployment | a diagonal band sweeps the grid in 2.6s every 9s, one hue per rollout. The first sweep plays with the hero entrance. | storytelling: a rollout across the cluster |
+| Pointer lens | nodes within 210px of the mouse grow and take a hue by angle (colour wheel) | feedback; mouse only, none on touch |
+
+**Guardrails:**
+- **Readability:** text sitting directly on the field gets the `halo` utility, a page-colour `text-shadow` that clears nearby nodes so text contrast stays at the token values (≥4.5:1).
+- **Reduced motion:** a single static frame. The lens still redraws on pointer move, because it's user-triggered.
+- **Performance:** paused while the tab is hidden; device pixel ratio capped at 2; no React state per frame; no scroll listeners.
+- **Theme:** colours come from the CSS variables, and the canvas redraws on theme changes. The hue hex values are mirrored in `src/lib/hue.ts` (`hueHex`), because a canvas can't read Tailwind utilities.
+
 ## Type
 - **Outfit Variable** for display and headings: weight 600, tracking -0.035em at display sizes, -0.02em at h2/h3.
 - **Work Sans Variable** for body: 17px / 1.6, max 65ch, weight 400; 500 for UI labels.
@@ -78,14 +94,15 @@ Eight sections and eight different layout families. Zero eyebrows (the limit for
 
 ## Principles
 1. **Boldness lives in the hero:** large Outfit headline next to the tilted colour fact cards. The irony of "I make releases boring." next to a colourful page is the point.
-2. **Real data only.** Every number comes from the resume. No count-up animations or invented precision.
-3. **Motion is motivated.**
+2. **The background is alive but quiet:** the cluster field moves slowly, and its one loud moment is the rollout wave.
+3. **Real data only.** Every number comes from the resume. No count-up animations or invented precision.
+4. **Motion is motivated.**
    - One orchestrated hero load sequence: text rises, fact cards drop in and tilt (hierarchy). Cards straighten on hover (feedback).
    - The tool marquee (breadth), paused on hover and under reduced motion.
    - Accordion expand (feedback).
    - Nothing fades in on every section.
-4. **One label per intent.** "Email me" (contact) and "Download resume" (resume) are used identically everywhere.
-5. **Copy:** plain verbs, outcome first. No em dashes, at most one middle dot per line.
+5. **One label per intent.** "Email me" (contact) and "Download resume" (resume) are used identically everywhere.
+6. **Copy:** plain verbs, outcome first. No em dashes, at most one middle dot per line.
 
 ## Generic-default review (frontend-design pass 2)
 - *v1 used near-black + acid green + monospace eyebrows + a fake terminal.* That's frontend-design defaults #2 and #5 and taste-skill's #1 tell. All of it is retired.

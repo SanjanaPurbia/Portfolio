@@ -32,7 +32,7 @@ export function Nav({ theme, onToggleTheme }: Props) {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-6 px-4 md:h-[72px] md:px-6">
-        <a href="#top" className="flex items-center gap-3 font-display text-[17px] font-semibold tracking-tight">
+        <a href="#top" className="halo flex items-center gap-3 font-display text-[17px] font-semibold tracking-tight">
           <span
             aria-hidden="true"
             className="grid size-8 place-items-center rounded-full bg-cobalt text-[13px] text-on-cobalt"
@@ -44,7 +44,7 @@ export function Nav({ theme, onToggleTheme }: Props) {
 
         <nav aria-label="Primary" className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="text-[15px] text-graphite transition-colors hover:text-ink">
+            <a key={l.href} href={l.href} className="halo text-[15px] text-graphite transition-colors hover:text-ink">
               {l.label}
             </a>
           ))}

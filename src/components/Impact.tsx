@@ -7,7 +7,7 @@ const span = ['md:col-span-4', 'md:col-span-2', 'md:col-span-2', 'md:col-span-4'
 export function Impact() {
   return (
     <section aria-labelledby="impact-title" className="mx-auto max-w-[1200px] px-4 py-20 md:px-6 md:py-28">
-      <h2 id="impact-title" className="max-w-[18ch] text-[clamp(32px,4.4vw,52px)] leading-[1.05] font-semibold tracking-[-0.03em]">
+      <h2 id="impact-title" className="halo max-w-[18ch] text-[clamp(32px,4.4vw,52px)] leading-[1.05] font-semibold tracking-[-0.03em]">
         What changed once it was automated
       </h2>
       <div className="mt-12 grid gap-4 md:grid-cols-6">

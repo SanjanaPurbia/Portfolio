@@ -19,8 +19,14 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 | Skills | `Skills.tsx` | definition list |
 | Credentials | `Credentials.tsx` | inline two-tile strip |
 | Contact | `Contact.tsx` | manifesto close |
+| (page background) | `ClusterField.tsx` | fixed canvas behind all sections |
 
 ## Done
+### v2.2.0 (2026-10-02): innovative background
+- [x] Live cluster-map canvas: pods, rolling-deployment wave, pointer lens. Grounded in DevOps, uses the six hues.
+- [x] Text halos keep contrast over the field; reduced-motion, hidden-tab and touch fallbacks
+- [x] QA in light and dark at 390 / 768 / 1440; motion frames checked (wave, lens); no errors
+
 ### v2.1.0 (2026-10-02): colourful redesign
 - [x] Six-hue status-board palette, each colour tied to a meaning (MASTER.md). Every pair contrast-checked.
 - [x] Photo removed. The hero uses colour fact cards with a load and hover animation.
@@ -52,6 +58,7 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 
 ## Change log
 <!-- newest first: YYYY-MM-DD: what changed (files) -->
+- 2026-10-02: v2.2.0 cluster-map background + text halos (ClusterField.tsx, lib/hue.ts, index.css, App.tsx).
 - 2026-10-02: v2.1.0 colourful redesign, photo removed (src/index.css, src/lib/hue.ts, src/components/*, design-system/).
 - 2026-10-02: v2.0.0 removed DevOps infra; redesigned with frontend-design, taste-skill and ui-ux-pro-max (src/, design-system/, .claude/skills/).
 - 2026-10-02: v1.0.1 agent review pass (copy accuracy, accessibility, infra hardening).

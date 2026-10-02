@@ -10,8 +10,8 @@ export function Experience() {
       <div className="grid gap-10 md:grid-cols-12 md:gap-12">
         <div className="md:col-span-4">
           <div className="md:sticky md:top-28">
-            <h2 className="text-[clamp(32px,4.4vw,52px)] leading-[1.05] font-semibold tracking-[-0.03em]">Experience</h2>
-            <p className="mt-4 max-w-[30ch] text-graphite">
+            <h2 className="halo text-[clamp(32px,4.4vw,52px)] leading-[1.05] font-semibold tracking-[-0.03em]">Experience</h2>
+            <p className="halo mt-4 max-w-[30ch] text-graphite">
               Intern to DevOps Engineer in six months at Spark Eighteen, now running CI/CD for 5+ client projects.
             </p>
           </div>

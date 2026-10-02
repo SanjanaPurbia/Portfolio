@@ -2,6 +2,15 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.2.0] - 2026-10-02
+### Added
+- **Live "cluster map" background** (`ClusterField.tsx`): a full-page canvas grid of nodes.
+  - Pods light up and fade in the six status colours.
+  - A rolling-deployment wave sweeps the page every 9 seconds.
+  - Nodes near the mouse form a colour-wheel lens.
+  - Pauses in hidden tabs; static under reduced motion.
+- **`halo` utility:** a soft page-colour glow behind text on the background, so it stays readable over the field.
+
 ## [2.1.0] - 2026-10-02
 ### Changed
 - **Colour:** the page is now colourful, as requested. It uses a six-hue status-board palette (cobalt, tangerine, mint, sun, rose, violet); each hue marks one thing consistently. All text pairs pass WCAG AA.
