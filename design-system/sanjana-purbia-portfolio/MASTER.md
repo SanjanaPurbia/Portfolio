@@ -68,20 +68,20 @@ The owner wanted the three-word stack from their reference **on the first screen
 - **Motion:** the words rise in one by one as part of the hero load sequence; instant under reduced motion.
 - **Fit:** the CTAs stay above the fold at every tested size.
 
-## Contact "night scene" (v2.5): documented exception
-The owner supplied a reference: a dark cinematic hero with a glass object refracting a sunset, thin uppercase type with a glow, mono body copy, and square buttons. Their brief overrides the page defaults (frontend-design and taste-skill: "the brief's own words always win"), **for this one section only**:
+## Contact: action cards (v2.8)
+The v2.5 cinematic night scene was rejected by the owner because it didn't match the rest of the site. It's replaced by a section in the page's own language, a **bookend to the hero**: a big headline on the left and four tilted colour cards on the right. Here **the cards are the actions themselves**.
 
-| Rule elsewhere | In the contact section |
-|---|---|
-| Sentence case, no all-caps | Headline and button labels uppercase (`font-light`, glow) |
-| No monospace labels | Body, details and buttons in IBM Plex Mono (self-hosted, 400 only) |
-| Pills and 24px tiles | Square buttons; primary is a label square plus an arrow square, one link |
-| One theme per page | Fixed dark scene in both themes. It's a closing block, like the earlier cobalt block. |
+| Card | Hue | Width | Action |
+|---|---|---|---|
+| Email me | cobalt | full row | mailto, plus a copy button with "Email copied" / "Copy failed" status |
+| Call me | mint | half | tel: +91 95216 18221 |
+| LinkedIn | sun | half | opens linkedin.com/in/sanjana-purbia in a new tab |
+| Download resume | rose | full row | downloads the PDF |
 
-- **Scene tokens:** `--color-night #161D1C`, `--color-night-glow #34433F`, `--color-mist #F2F2F0`, `--color-ember #FF8A3D`. Mist on night is ≥14:1.
-- **Visual:** the glass prism is pure CSS (`.prism`, `.prism-beam`, `.prism-float` in `index.css`); no imagery is copied from the reference.
-- **Motion:** a 9s float, off under reduced motion. The prism fades to 40% on phones, where it sits behind the text.
-- **Content:** identical to before: headline, message, email with copy, phone, Email me, Download resume, LinkedIn.
+- **Same system as the hero:** `fill[hue]`, `rounded-tile`, Outfit labels, small tilts (±2°) that straighten on hover, and a once-only rise on scroll.
+- **Whole-card links:** a stretched `::after` makes the full card clickable; the copy button sits above it. A focus ring appears on the card when its link is focused.
+- **Wrapping:** numbers and handles stay on one line; only the email may wrap.
+- **Removed:** the night-scene tokens, `.prism*` CSS and the IBM Plex Mono font.
 
 ## Type
 - **Outfit Variable** for display and headings: weight 600, tracking -0.035em at display sizes, -0.02em at h2/h3.

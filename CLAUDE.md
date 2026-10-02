@@ -12,7 +12,7 @@ Portfolio for Sanjana Purbia (DevOps Engineer). React 19 + TypeScript + Vite + T
 - **Content:** lives only in `src/data/portfolio.ts`, and every claim must trace to the resume.
 - **Color:** tokens only. Theme: `bg-paper`, `text-ink`, `text-graphite`, `border-rule`, `text-link`. Status hues: `cobalt`, `tangerine`, `mint`, `sun`, `rose`, `violet`, applied through `fill[hue]` / `tint[hue]` from `src/lib/hue.ts`, which pair each fill with its fixed text colour. A hue keeps its meaning across the page (see the MASTER.md table). No raw hex in components and no gradients.
 - **Shape:** interactive elements and labels are `rounded-full`, containers are `rounded-tile` (24px). Nothing else is rounded.
-- **Type:** headings use `font-display` (Outfit), body uses Work Sans. Sentence case. No eyebrows, all-caps labels or monospace labels. **Exception:** the contact night scene (uppercase, IBM Plex Mono, square buttons) at the owner's request; see MASTER.md. Don't spread that style to other sections.
+- **Type:** headings use `font-display` (Outfit), body uses Work Sans. Sentence case. No eyebrows, all-caps labels or monospace labels.
 - **Copy:** no em or en dashes anywhere visible. At most one `·` per line. One CTA label per intent: "Email me", "Download resume".
 - **Motion:** only the hero load, the tool marquee, the accordion and the cluster-field background move. Add the `halo` utility to any new text that sits directly on the page background, not inside a tile. Use `motion/react`, never `window` scroll listeners, and everything must respect `prefers-reduced-motion`.
 - **Icons and logos:** Phosphor for icons. Tool logos come from `simple-icons` via named imports only, because `import *` adds about 5 MB.

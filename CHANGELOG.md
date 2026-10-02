@@ -2,6 +2,13 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.8.0] - 2026-10-02
+### Changed
+- **Contact section** rebuilt in the site's own design language (owner feedback: the night scene didn't match the template). It's a bookend to the hero: big headline plus four tilted colour action cards (Email me with copy, Call me, LinkedIn, Download resume). Whole-card links; values never break mid-word.
+
+### Removed
+- The night-scene styles, tokens and the IBM Plex Mono font.
+
 ## [2.7.0] - 2026-10-02
 ### Changed
 - **"Build. Automate. Scale." moved onto the first screen** as the hero headline, at the owner's request. It replaces "I make releases boring."

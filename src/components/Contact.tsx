@@ -1,11 +1,27 @@
-import { useState } from 'react'
-import { ArrowRight, Check, Copy, DownloadSimple, GithubLogo, LinkedinLogo, Phone } from '@phosphor-icons/react'
-import { profile } from '../data/portfolio'
+import { useState, type ReactNode } from 'react'
+import { ArrowUpRight, Check, Copy, DownloadSimple, EnvelopeSimple, LinkedinLogo, Phone } from '@phosphor-icons/react'
+import { motion, useReducedMotion } from 'motion/react'
+import { profile, type Hue } from '../data/portfolio'
+import { fill } from '../lib/hue'
 
-// Closing "night scene", styled after the owner's reference: dark cinematic field, a glass
-// prism catching a sunset beam, thin uppercase headline with a soft glow, mono body copy and
-// square buttons. Content is unchanged from the previous contact block.
+// Closing section, bookending the hero: big headline on the left, four tilted colour cards on
+// the right. Here the cards are the actions themselves (email, call, LinkedIn, resume).
+type Card = {
+  key: string
+  hue: Hue
+  span: string
+  label: string
+  value: string
+  href: string
+  icon: ReactNode
+  external?: boolean
+  download?: boolean
+}
+
+const tilt = [-1.5, 2, 1.5, -1]
+
 export function Contact() {
+  const reduce = useReducedMotion()
   const [copied, setCopied] = useState<'idle' | 'copied' | 'failed'>('idle')
 
   const copy = async () => {
@@ -18,103 +34,116 @@ export function Contact() {
     setTimeout(() => setCopied('idle'), 2000)
   }
 
-  const square = 'inline-flex min-h-14 items-center gap-2.5 font-mono text-[14px] tracking-[0.08em] uppercase transition-colors duration-200'
+  const cards: Card[] = [
+    {
+      key: 'email',
+      hue: 'cobalt',
+      span: 'sm:col-span-2',
+      label: 'Email me',
+      value: profile.email,
+      href: `mailto:${profile.email}`,
+      icon: <EnvelopeSimple size={22} weight="bold" />,
+    },
+    {
+      key: 'phone',
+      hue: 'mint',
+      span: '',
+      label: 'Call me',
+      value: profile.phone.display,
+      href: `tel:${profile.phone.tel}`,
+      icon: <Phone size={22} weight="bold" />,
+    },
+    {
+      key: 'linkedin',
+      hue: 'sun',
+      span: '',
+      label: 'LinkedIn',
+      value: 'sanjana-purbia',
+      href: profile.socials.linkedin,
+      icon: <LinkedinLogo size={22} weight="bold" />,
+      external: true,
+    },
+    {
+      key: 'resume',
+      hue: 'rose',
+      span: 'sm:col-span-2',
+      label: 'Download resume',
+      value: 'SanjanaPurbia_Resume.pdf',
+      href: profile.resumeUrl,
+      icon: <DownloadSimple size={22} weight="bold" />,
+      download: true,
+    },
+  ]
 
   return (
-    <section id="contact" className="night-scene relative isolate overflow-hidden text-mist">
-      {/* Glass prism in its light beam. Decorative only. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-[6%] right-[-18%] w-[78vw] max-w-[560px] opacity-40 sm:right-[-6%] sm:opacity-60 md:top-1/2 md:right-[6%] md:w-[38vw] md:-translate-y-1/2 md:opacity-100"
-      >
-        <div className="prism-beam" />
-        <div className="prism-float">
-          <div className="prism" />
-        </div>
-      </div>
-
-      <div className="relative mx-auto flex min-h-[88dvh] max-w-[1200px] items-center px-4 py-24 md:px-6 md:py-32">
-        <div className="max-w-[640px]">
-          <h2 className="glow-type font-display text-[clamp(40px,6.2vw,80px)] leading-[1.02] font-light tracking-[0.01em] uppercase">
+    <section id="contact" className="mx-auto max-w-[1200px] px-4 py-24 md:px-6 md:py-32">
+      <div className="grid items-center gap-12 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <h2 className="halo text-[clamp(44px,6vw,80px)] leading-[0.95] font-semibold tracking-[-0.04em]">
             Looking for a DevOps engineer?
           </h2>
-
-          <p className="mt-8 max-w-[52ch] font-mono text-[16px] leading-[1.7] text-mist/85 md:text-[17px]">
+          <p className="halo mt-6 max-w-[38ch] text-[19px] leading-relaxed text-graphite md:text-[21px]">
             I'm open to DevOps and cloud roles with more scope. Email or call, whichever suits you.
           </p>
-
-          <dl className="mt-8 space-y-2 font-mono text-[15px] md:text-[16px]">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-              <dt className="sr-only">Email</dt>
-              <dd>
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="break-all underline decoration-mist/35 underline-offset-[5px] hover:decoration-mist"
-                >
-                  {profile.email}
-                </a>
-              </dd>
-              <dd className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={copy}
-                  aria-label="Copy email address"
-                  className="grid size-11 cursor-pointer place-items-center border border-mist/30 text-mist transition-colors hover:bg-mist/10"
-                >
-                  {copied === 'copied' ? <Check size={16} weight="bold" /> : <Copy size={16} />}
-                </button>
-                <span role="status" className="text-[14px] text-mist/75">
-                  {copied === 'copied' ? 'Email copied' : copied === 'failed' ? 'Copy failed. Select the address instead.' : ''}
-                </span>
-              </dd>
-            </div>
-            <div>
-              <dt className="sr-only">Phone</dt>
-              <dd>
-                <a
-                  href={`tel:${profile.phone.tel}`}
-                  className="inline-flex items-center gap-2.5 underline decoration-mist/35 underline-offset-[5px] hover:decoration-mist"
-                >
-                  <Phone size={18} aria-hidden="true" />
-                  {profile.phone.display}
-                </a>
-              </dd>
-            </div>
-          </dl>
-
-          <div className="mt-12 flex flex-wrap gap-2">
-            {/* Primary: label + arrow as two joined squares, like the reference. One link, one target. */}
-            <a href={`mailto:${profile.email}`} className="group inline-flex gap-1.5 active:scale-[0.98]">
-              <span className={`${square} bg-mist px-8 text-night group-hover:bg-mist/90`}>Email me</span>
-              <span className={`${square} justify-center bg-mist px-6 text-night group-hover:bg-mist/90`} aria-hidden="true">
-                <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-0.5" />
-              </span>
-            </a>
-            <a href={profile.resumeUrl} download className={`${square} border border-mist/35 px-6 hover:bg-mist/10`}>
-              <DownloadSimple size={18} aria-hidden="true" /> Download resume
-            </a>
-            {profile.socials.linkedin && (
-              <a
-                href={profile.socials.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className={`${square} border border-mist/35 px-6 hover:bg-mist/10`}
-              >
-                <LinkedinLogo size={18} aria-hidden="true" /> LinkedIn
-              </a>
-            )}
-            {profile.socials.github && (
-              <a
-                href={profile.socials.github}
-                target="_blank"
-                rel="noreferrer"
-                className={`${square} border border-mist/35 px-6 hover:bg-mist/10`}
-              >
-                <GithubLogo size={18} aria-hidden="true" /> GitHub
-              </a>
-            )}
-          </div>
         </div>
+
+        <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-7" aria-label="Ways to reach me">
+          {cards.map((c, i) => (
+            <motion.li
+              key={c.key}
+              className={c.span}
+              initial={reduce ? false : { opacity: 0, y: 32, rotate: 0 }}
+              whileInView={{ opacity: 1, y: 0, rotate: tilt[i] }}
+              whileHover={reduce ? undefined : { rotate: 0, y: -6, scale: 1.02 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ type: 'spring', stiffness: 120, damping: 16, delay: reduce ? 0 : i * 0.08 }}
+            >
+              <div
+                className={`relative flex min-h-[150px] flex-col justify-between gap-8 rounded-tile p-6 focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-link sm:min-h-[176px] md:p-7 ${fill[c.hue]}`}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  {/* The whole card is the link (stretched ::after); the copy button sits above it. */}
+                  <a
+                    href={c.href}
+                    {...(c.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                    {...(c.download ? { download: true } : {})}
+                    className="font-display text-[19px] font-semibold tracking-tight outline-none after:absolute after:inset-0 after:rounded-tile"
+                  >
+                    {c.label}
+                  </a>
+                  <span aria-hidden="true" className="flex items-center gap-2">
+                    {c.icon}
+                    <ArrowUpRight size={20} weight="bold" />
+                  </span>
+                </div>
+
+                <div className="flex flex-wrap items-end justify-between gap-3">
+                  {/* Only the long email may wrap (at any point); numbers and handles stay on one line. */}
+                  <p
+                    className={`font-display text-[clamp(20px,2.3vw,28px)] leading-tight font-medium tracking-tight ${c.key === 'email' ? '[overflow-wrap:anywhere]' : 'whitespace-nowrap'}`}
+                  >
+                    {c.value}
+                  </p>
+                  {c.key === 'email' && (
+                    <span className="relative z-10 flex items-center gap-3">
+                      <span role="status" className="text-[14px] font-medium">
+                        {copied === 'copied' ? 'Email copied' : copied === 'failed' ? 'Copy failed' : ''}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={copy}
+                        aria-label="Copy email address"
+                        className="grid size-11 cursor-pointer place-items-center rounded-full bg-on-cobalt/15 transition-colors hover:bg-on-cobalt/25"
+                      >
+                        {copied === 'copied' ? <Check size={18} weight="bold" /> : <Copy size={18} weight="bold" />}
+                      </button>
+                    </span>
+                  )}
+                </div>
+              </div>
+            </motion.li>
+          ))}
+        </ul>
       </div>
     </section>
   )
