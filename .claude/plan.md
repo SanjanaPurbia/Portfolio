@@ -58,6 +58,7 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 
 ## Change log
 <!-- newest first: YYYY-MM-DD: what changed (files) -->
+- 2026-10-02: v2.2.1 calmer background; LinkedIn URL fixed (ClusterField.tsx, data/portfolio.ts).
 - 2026-10-02: v2.2.0 cluster-map background + text halos (ClusterField.tsx, lib/hue.ts, index.css, App.tsx).
 - 2026-10-02: v2.1.0 colourful redesign, photo removed (src/index.css, src/lib/hue.ts, src/components/*, design-system/).
 - 2026-10-02: v2.0.0 removed DevOps infra; redesigned with frontend-design, taste-skill and ui-ux-pro-max (src/, design-system/, .claude/skills/).

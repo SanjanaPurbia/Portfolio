@@ -2,6 +2,11 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.2.1] - 2026-10-02
+### Changed
+- **Calmer background:** smaller, fainter nodes on a wider grid; fewer pods; a softer and slower rollout wave (every 12s); a smaller cursor lens.
+- **LinkedIn link:** updated to https://www.linkedin.com/in/sanjana-purbia/.
+
 ## [2.2.0] - 2026-10-02
 ### Added
 - **Live "cluster map" background** (`ClusterField.tsx`): a full-page canvas grid of nodes.

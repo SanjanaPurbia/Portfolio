@@ -12,7 +12,7 @@ export const profile = {
   email: 'sanjanapurbia3112@gmail.com',
   resumeUrl: '/SanjanaPurbia_Resume.pdf',
   socials: {
-    linkedin: 'https://www.linkedin.com/in/sanjanapurbia',
+    linkedin: 'https://www.linkedin.com/in/sanjana-purbia/',
     github: '', // add your GitHub profile URL to show the link
   },
 }

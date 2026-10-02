@@ -42,14 +42,14 @@ The owner asked for a colourful site, and the brief's own words override taste-s
 - Tool logos use their real brand colours from Simple Icons, on a light `--color-chip` circle in both themes.
 
 ## Background: live cluster map (v2.2)
-The owner asked for a more visible, more innovative background. It's grounded in the subject: DevOps work happens on clusters, so the page sits on a living grid of nodes (`src/components/ClusterField.tsx`, one fixed canvas).
+The owner asked for an innovative background, then for it to be calmer and more understated (v2.2.1). It's grounded in the subject: DevOps work happens on clusters, so the page sits on a living grid of nodes (`src/components/ClusterField.tsx`, one fixed canvas).
 
 | Layer | What it shows | Motion rule |
 |---|---|---|
-| Nodes | 30px grid (26px on mobile) in `--graphite` at 32% (38% in dark) | static |
-| Pods | 8% of nodes lit in the status hues, fading in and out over 3-6.5s | slow, calm (ui-ux-pro-max: continuous decorative motion must not distract) |
-| Rolling deployment | a diagonal band sweeps the grid in 2.6s every 9s, one hue per rollout. The first sweep plays with the hero entrance. | storytelling: a rollout across the cluster |
-| Pointer lens | nodes within 210px of the mouse grow and take a hue by angle (colour wheel) | feedback; mouse only, none on touch |
+| Nodes | 34px grid (28px on mobile), 1.2px nodes in `--graphite` at 18% (22% in dark) | static |
+| Pods | 3% of nodes softly lit in the status hues (max 55% opacity), fading in and out over 3-6.5s | slow, calm (ui-ux-pro-max: continuous decorative motion must not distract) |
+| Rolling deployment | a soft diagonal band (max 45% opacity) sweeps the grid in 3.2s every 12s, one hue per rollout. The first sweep plays with the hero entrance. | storytelling: a rollout across the cluster |
+| Pointer lens | nodes within 150px of the mouse grow and take a hue by angle (colour wheel) | feedback; mouse only, none on touch |
 
 **Guardrails:**
 - **Readability:** text sitting directly on the field gets the `halo` utility, a page-colour `text-shadow` that clears nearby nodes so text contrast stays at the token values (≥4.5:1).
@@ -94,7 +94,7 @@ Eight sections and eight different layout families. Zero eyebrows (the limit for
 
 ## Principles
 1. **Boldness lives in the hero:** large Outfit headline next to the tilted colour fact cards. The irony of "I make releases boring." next to a colourful page is the point.
-2. **The background is alive but quiet:** the cluster field moves slowly, and its one loud moment is the rollout wave.
+2. **The background is alive but quiet:** content always wins, and the field never competes with the colour tiles.
 3. **Real data only.** Every number comes from the resume. No count-up animations or invented precision.
 4. **Motion is motivated.**
    - One orchestrated hero load sequence: text rises, fact cards drop in and tilt (hierarchy). Cards straighten on hover (feedback).

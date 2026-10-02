@@ -6,11 +6,11 @@ import { hueHex } from '../lib/hue'
 // status hues, a rolling-deployment wave sweeps across every few seconds, and nodes near the
 // pointer brighten. Drawn on one fixed canvas; never touches React state per frame.
 const HUES = Object.values(hueHex)
-const WAVE_EVERY = 9000 // ms between rollouts
-const WAVE_DURATION = 2600
+const WAVE_EVERY = 12000 // ms between rollouts
+const WAVE_DURATION = 3200
 const FIRST_WAVE_AT = 500 // the first rollout plays with the hero entrance
-const POD_SHARE = 0.08 // fraction of nodes lit at any time
-const LENS_RADIUS = 210
+const POD_SHARE = 0.03 // fraction of nodes lit at any time
+const LENS_RADIUS = 150
 
 type Pod = { i: number; hue: string; born: number; life: number }
 
@@ -38,7 +38,7 @@ export function ClusterField() {
     const readTheme = () => {
       const css = getComputedStyle(document.documentElement)
       baseColor = css.getPropertyValue('--graphite').trim() || baseColor
-      baseAlpha = css.colorScheme === 'dark' ? 0.38 : 0.32
+      baseAlpha = css.colorScheme === 'dark' ? 0.22 : 0.18
     }
 
     const newPod = (now: number): Pod => ({
@@ -52,7 +52,7 @@ export function ClusterField() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
       w = window.innerWidth
       h = window.innerHeight
-      gap = w < 768 ? 26 : 30
+      gap = w < 768 ? 28 : 34
       canvas.width = Math.round(w * dpr)
       canvas.height = Math.round(h * dpr)
       canvas.style.width = `${w}px`
@@ -85,8 +85,8 @@ export function ClusterField() {
         for (let c = 0; c < cols; c++) {
           const x = ox + c * gap
           const y = oy + r * gap
-          ctx.moveTo(x + 1.7, y)
-          ctx.arc(x, y, 1.7, 0, Math.PI * 2)
+          ctx.moveTo(x + 1.2, y)
+          ctx.arc(x, y, 1.2, 0, Math.PI * 2)
         }
       ctx.fill()
 
@@ -100,7 +100,7 @@ export function ClusterField() {
         }
         if (age < 0) continue
         const k = Math.sin(Math.PI * age)
-        dot(ox + (pod.i % cols) * gap, oy + Math.floor(pod.i / cols) * gap, 2 + k * 2.2, pod.hue, 0.3 + k * 0.65)
+        dot(ox + (pod.i % cols) * gap, oy + Math.floor(pod.i / cols) * gap, 1.4 + k * 1.2, pod.hue, 0.15 + k * 0.4)
       }
 
       // Rolling deployment: a diagonal band sweeps the grid, one hue per rollout.
@@ -109,7 +109,7 @@ export function ClusterField() {
         const cycle = Math.floor(t / WAVE_EVERY)
         const progress = (t % WAVE_EVERY) / WAVE_DURATION
         if (progress <= 1) {
-          const band = 190
+          const band = 160
           const span = w + h * 0.6
           const center = -band + progress * (span + band * 2)
           const hue = HUES[cycle % HUES.length]
@@ -120,7 +120,7 @@ export function ClusterField() {
               const d = Math.abs(x + y * 0.6 - center)
               if (d < band) {
                 const k = 1 - d / band
-                dot(x, y, 1.7 + k * 3, hue, 0.15 + k * 0.85)
+                dot(x, y, 1.2 + k * 1.4, hue, k * 0.45)
               }
             }
         }
@@ -140,7 +140,7 @@ export function ClusterField() {
             if (dist < LENS_RADIUS) {
               const k = 1 - dist / LENS_RADIUS
               const angle = (Math.atan2(y - pointer.y, x - pointer.x) + Math.PI) / (Math.PI * 2)
-              dot(x, y, 1.7 + k * 3.6, HUES[Math.floor(angle * HUES.length) % HUES.length], 0.2 + k * 0.75)
+              dot(x, y, 1.2 + k * 2, HUES[Math.floor(angle * HUES.length) % HUES.length], 0.1 + k * 0.45)
             }
           }
       }
