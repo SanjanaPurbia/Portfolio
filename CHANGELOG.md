@@ -2,6 +2,16 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.5.0] - 2026-10-02
+### Changed
+- **Contact section** rebuilt as a cinematic "night scene" after the owner's reference:
+  - dark teal-grey field with a CSS glass prism refracting a sunset beam, floating slowly
+  - thin uppercase glowing headline
+  - IBM Plex Mono body text
+  - square buttons (Email me + arrow, Download resume, LinkedIn)
+  
+  Content is unchanged. Recorded as a documented exception in MASTER.md.
+
 ## [2.4.0] - 2026-10-02
 ### Changed
 - **Professional background:** the cluster field is now monochrome. Neutral dots fade out from the top of the screen, the cursor effect is a subtle darkening, and a single soft brand-blue rollout sweeps every 15 seconds.

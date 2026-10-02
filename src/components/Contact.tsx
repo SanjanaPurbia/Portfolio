@@ -1,7 +1,10 @@
 import { useState } from 'react'
-import { Check, Copy, DownloadSimple, EnvelopeSimple, GithubLogo, LinkedinLogo, Phone } from '@phosphor-icons/react'
+import { ArrowRight, Check, Copy, DownloadSimple, GithubLogo, LinkedinLogo, Phone } from '@phosphor-icons/react'
 import { profile } from '../data/portfolio'
 
+// Closing "night scene", styled after the owner's reference: dark cinematic field, a glass
+// prism catching a sunset beam, thin uppercase headline with a soft glow, mono body copy and
+// square buttons. Content is unchanged from the previous contact block.
 export function Contact() {
   const [copied, setCopied] = useState<'idle' | 'copied' | 'failed'>('idle')
 
@@ -15,62 +18,102 @@ export function Contact() {
     setTimeout(() => setCopied('idle'), 2000)
   }
 
+  const square = 'inline-flex min-h-14 items-center gap-2.5 font-mono text-[14px] tracking-[0.08em] uppercase transition-colors duration-200'
+
   return (
-    <section id="contact" className="mx-auto max-w-[1200px] px-4 py-20 md:px-6 md:py-28">
-      {/* One colour block closes the page; text on cobalt is the fixed light token. */}
-      <div className="rounded-tile bg-cobalt px-6 py-14 text-on-cobalt md:px-14 md:py-20">
-        <h2 className="max-w-[16ch] text-[clamp(40px,6.4vw,80px)] leading-[1] font-semibold tracking-[-0.035em]">
-          Looking for a DevOps engineer?
-        </h2>
-        <p className="mt-6 max-w-[48ch] text-[19px]">
-          I'm open to DevOps and cloud roles with more scope. Email or call, whichever suits you.
-        </p>
-
-        <div className="mt-10 flex flex-wrap items-center gap-3">
-          <a
-            href={`mailto:${profile.email}`}
-            className="font-display text-[clamp(21px,3.4vw,38px)] font-medium tracking-tight break-all text-on-cobalt underline decoration-2 underline-offset-[6px] hover:decoration-4"
-          >
-            {profile.email}
-          </a>
-          <button
-            type="button"
-            onClick={copy}
-            aria-label="Copy email address"
-            className="grid size-11 cursor-pointer place-items-center rounded-full border border-on-cobalt/50 text-on-cobalt transition-colors hover:bg-on-cobalt/10"
-          >
-            {copied === 'copied' ? <Check size={18} weight="bold" /> : <Copy size={18} />}
-          </button>
-          <span role="status" className="text-[15px]">
-            {copied === 'copied' ? 'Email copied' : copied === 'failed' ? 'Copy failed. Select the address instead.' : ''}
-          </span>
+    <section id="contact" className="night-scene relative isolate overflow-hidden text-mist">
+      {/* Glass prism in its light beam. Decorative only. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-[6%] right-[-18%] w-[78vw] max-w-[560px] opacity-40 sm:right-[-6%] sm:opacity-60 md:top-1/2 md:right-[6%] md:w-[38vw] md:-translate-y-1/2 md:opacity-100"
+      >
+        <div className="prism-beam" />
+        <div className="prism-float">
+          <div className="prism" />
         </div>
+      </div>
 
-        <a
-          href={`tel:${profile.phone.tel}`}
-          className="mt-5 inline-flex items-center gap-3 font-display text-[clamp(19px,2.6vw,28px)] font-medium tracking-tight underline decoration-on-cobalt/40 decoration-2 underline-offset-[6px] hover:decoration-on-cobalt"
-        >
-          <Phone size={24} weight="bold" aria-hidden="true" />
-          {profile.phone.display}
-        </a>
+      <div className="relative mx-auto flex min-h-[88dvh] max-w-[1200px] items-center px-4 py-24 md:px-6 md:py-32">
+        <div className="max-w-[640px]">
+          <h2 className="glow-type font-display text-[clamp(40px,6.2vw,80px)] leading-[1.02] font-light tracking-[0.01em] uppercase">
+            Looking for a DevOps engineer?
+          </h2>
 
-        <div className="mt-10 flex flex-wrap gap-3">
-          <a href={`mailto:${profile.email}`} className="btn bg-sun text-on-hue hover:brightness-105">
-            <EnvelopeSimple size={18} weight="bold" /> Email me
-          </a>
-          <a href={profile.resumeUrl} download className="btn border border-on-cobalt/50 text-on-cobalt hover:bg-on-cobalt/10">
-            <DownloadSimple size={18} weight="bold" /> Download resume
-          </a>
-          {profile.socials.linkedin && (
-            <a href={profile.socials.linkedin} target="_blank" rel="noreferrer" className="btn border border-on-cobalt/50 text-on-cobalt hover:bg-on-cobalt/10">
-              <LinkedinLogo size={18} weight="bold" /> LinkedIn
+          <p className="mt-8 max-w-[52ch] font-mono text-[16px] leading-[1.7] text-mist/85 md:text-[17px]">
+            I'm open to DevOps and cloud roles with more scope. Email or call, whichever suits you.
+          </p>
+
+          <dl className="mt-8 space-y-2 font-mono text-[15px] md:text-[16px]">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              <dt className="sr-only">Email</dt>
+              <dd>
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="break-all underline decoration-mist/35 underline-offset-[5px] hover:decoration-mist"
+                >
+                  {profile.email}
+                </a>
+              </dd>
+              <dd className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={copy}
+                  aria-label="Copy email address"
+                  className="grid size-11 cursor-pointer place-items-center border border-mist/30 text-mist transition-colors hover:bg-mist/10"
+                >
+                  {copied === 'copied' ? <Check size={16} weight="bold" /> : <Copy size={16} />}
+                </button>
+                <span role="status" className="text-[14px] text-mist/75">
+                  {copied === 'copied' ? 'Email copied' : copied === 'failed' ? 'Copy failed. Select the address instead.' : ''}
+                </span>
+              </dd>
+            </div>
+            <div>
+              <dt className="sr-only">Phone</dt>
+              <dd>
+                <a
+                  href={`tel:${profile.phone.tel}`}
+                  className="inline-flex items-center gap-2.5 underline decoration-mist/35 underline-offset-[5px] hover:decoration-mist"
+                >
+                  <Phone size={18} aria-hidden="true" />
+                  {profile.phone.display}
+                </a>
+              </dd>
+            </div>
+          </dl>
+
+          <div className="mt-12 flex flex-wrap gap-2">
+            {/* Primary: label + arrow as two joined squares, like the reference. One link, one target. */}
+            <a href={`mailto:${profile.email}`} className="group inline-flex gap-1.5 active:scale-[0.98]">
+              <span className={`${square} bg-mist px-8 text-night group-hover:bg-mist/90`}>Email me</span>
+              <span className={`${square} justify-center bg-mist px-6 text-night group-hover:bg-mist/90`} aria-hidden="true">
+                <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+              </span>
             </a>
-          )}
-          {profile.socials.github && (
-            <a href={profile.socials.github} target="_blank" rel="noreferrer" className="btn border border-on-cobalt/50 text-on-cobalt hover:bg-on-cobalt/10">
-              <GithubLogo size={18} weight="bold" /> GitHub
+            <a href={profile.resumeUrl} download className={`${square} border border-mist/35 px-6 hover:bg-mist/10`}>
+              <DownloadSimple size={18} aria-hidden="true" /> Download resume
             </a>
-          )}
+            {profile.socials.linkedin && (
+              <a
+                href={profile.socials.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className={`${square} border border-mist/35 px-6 hover:bg-mist/10`}
+              >
+                <LinkedinLogo size={18} aria-hidden="true" /> LinkedIn
+              </a>
+            )}
+            {profile.socials.github && (
+              <a
+                href={profile.socials.github}
+                target="_blank"
+                rel="noreferrer"
+                className={`${square} border border-mist/35 px-6 hover:bg-mist/10`}
+              >
+                <GithubLogo size={18} aria-hidden="true" /> GitHub
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </section>

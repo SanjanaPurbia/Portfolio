@@ -18,10 +18,13 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 | Work (`#work`) | `Projects.tsx` | accordion rows |
 | Skills | `Skills.tsx` | definition list |
 | Credentials | `Credentials.tsx` | inline two-tile strip |
-| Contact | `Contact.tsx` | manifesto close |
+| Contact | `Contact.tsx` | full-bleed cinematic night scene (documented exception) |
 | (page background) | `ClusterField.tsx` | fixed canvas behind all sections |
 
 ## Done
+### v2.5.0 (2026-10-02): step 3, last page
+- [x] Contact section restyled after the owner's cinematic reference (CSS prism, glow type, mono, square buttons); same content
+
 ### v2.4.0 (2026-10-02): step 2, professional background
 - [x] Monochrome background with a top fade; single-colour rollout; no rainbow lens or pods (owner feedback: too colourful, not professional)
 
@@ -69,6 +72,7 @@ The owner is sharing changes **one at a time**. Finish each step, verify it, com
 
 ## Change log
 <!-- newest first: YYYY-MM-DD: what changed (files) -->
+- 2026-10-02: v2.5.0 contact night scene (Contact.tsx, index.css, main.tsx, @fontsource/ibm-plex-mono).
 - 2026-10-02: v2.4.0 monochrome professional background (ClusterField.tsx).
 - 2026-10-02: v2.3.0 front-page polish + phone (Hero.tsx, HeroCards.tsx, Contact.tsx, Footer.tsx, data/portfolio.ts).
 - 2026-10-02: v2.2.1 calmer background; LinkedIn URL fixed (ClusterField.tsx, data/portfolio.ts).

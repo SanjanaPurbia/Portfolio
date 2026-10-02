@@ -58,6 +58,21 @@ The owner found the coloured background (rainbow pointer lens, multi-hue pods) u
 - **Reduced motion:** a single static frame.
 - **Performance:** paused in hidden tabs; device pixel ratio capped at 2; no React state per frame.
 
+## Contact "night scene" (v2.5): documented exception
+The owner supplied a reference: a dark cinematic hero with a glass object refracting a sunset, thin uppercase type with a glow, mono body copy, and square buttons. Their brief overrides the page defaults (frontend-design and taste-skill: "the brief's own words always win"), **for this one section only**:
+
+| Rule elsewhere | In the contact section |
+|---|---|
+| Sentence case, no all-caps | Headline and button labels uppercase (`font-light`, glow) |
+| No monospace labels | Body, details and buttons in IBM Plex Mono (self-hosted, 400 only) |
+| Pills and 24px tiles | Square buttons; primary is a label square plus an arrow square, one link |
+| One theme per page | Fixed dark scene in both themes. It's a closing block, like the earlier cobalt block. |
+
+- **Scene tokens:** `--color-night #161D1C`, `--color-night-glow #34433F`, `--color-mist #F2F2F0`, `--color-ember #FF8A3D`. Mist on night is ≥14:1.
+- **Visual:** the glass prism is pure CSS (`.prism`, `.prism-beam`, `.prism-float` in `index.css`); no imagery is copied from the reference.
+- **Motion:** a 9s float, off under reduced motion. The prism fades to 40% on phones, where it sits behind the text.
+- **Content:** identical to before: headline, message, email with copy, phone, Email me, Download resume, LinkedIn.
+
 ## Type
 - **Outfit Variable** for display and headings: weight 600, tracking -0.035em at display sizes, -0.02em at h2/h3.
 - **Work Sans Variable** for body: 17px / 1.6, max 65ch, weight 400; 500 for UI labels.

@@ -55,7 +55,14 @@
   /* Logo chips stay light in both themes so every brand colour keeps its contrast. */
   --color-chip: #fbfbfe;
 
+  /* Contact "night scene" (fixed in both themes): deep teal-grey, mist text, ember light. */
+  --color-night: #161d1c;
+  --color-night-glow: #34433f;
+  --color-mist: #f2f2f0;
+  --color-ember: #ff8a3d;
+
   --font-display: 'Outfit Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --font-sans: 'Work Sans Variable', ui-sans-serif, system-ui, sans-serif;
 
   /* Shape rule: interactive = pill, containers = tile. */
@@ -134,6 +141,88 @@
     0 0 16px var(--paper);
 }
 
+/* Contact night scene. A documented exception to the page rules, at the owner's request
+   (reference: cinematic dark hero with refracted light, thin uppercase type, mono body,
+   square buttons). Everything here is CSS: no copied imagery. */
+@utility night-scene {
+  background:
+    radial-gradient(ellipse 55% 60% at 72% 42%, color-mix(in oklab, var(--color-night-glow) 90%, transparent), transparent 70%),
+    radial-gradient(ellipse 40% 12% at 62% 34%, color-mix(in oklab, var(--color-ember) 22%, transparent), transparent 70%),
+    linear-gradient(100deg, var(--color-night) 30%, color-mix(in oklab, var(--color-night-glow) 70%, var(--color-night)) 100%);
+}
+@utility glow-type {
+  text-shadow:
+    0 0 18px color-mix(in oklab, var(--color-mist) 45%, transparent),
+    0 0 2px color-mix(in oklab, var(--color-mist) 60%, transparent);
+}
+
+/* The glass prism: a tilted translucent block with a sunset horizon refracting through it. */
+.prism {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  transform: rotate(-24deg) skewX(-6deg);
+  border: 1.5px solid color-mix(in oklab, var(--color-mist) 55%, transparent);
+  background:
+    repeating-linear-gradient(180deg, transparent 0 7px, color-mix(in oklab, var(--color-mist) 6%, transparent) 7px 8px),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--color-mist) 10%, transparent) 0%,
+      color-mix(in oklab, var(--color-mist) 22%, transparent) 26%,
+      color-mix(in oklab, var(--color-ember) 75%, transparent) 33%,
+      color-mix(in oklab, var(--color-ember) 35%, transparent) 38%,
+      color-mix(in oklab, var(--color-night-glow) 60%, transparent) 46%,
+      color-mix(in oklab, var(--color-night) 55%, transparent) 100%
+    );
+  box-shadow:
+    0 0 40px color-mix(in oklab, var(--color-mist) 18%, transparent),
+    inset 0 0 30px color-mix(in oklab, var(--color-mist) 14%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--color-mist) 60%, transparent);
+  backdrop-filter: blur(2px);
+}
+/* Bright edge highlights, like light catching the glass. */
+.prism::before,
+.prism::after {
+  content: '';
+  position: absolute;
+  border-radius: 2px;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--color-mist) 85%, transparent), transparent);
+  filter: blur(1.5px);
+}
+.prism::before {
+  inset: -2px auto -2px -2px;
+  width: 4px;
+}
+.prism::after {
+  inset: -2px -2px auto -2px;
+  height: 4px;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--color-mist) 85%, transparent), transparent);
+}
+/* The light beam the prism sits in. */
+.prism-beam {
+  position: absolute;
+  left: -40%;
+  right: -30%;
+  top: 30%;
+  height: 14%;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--color-ember) 55%, transparent) 35%, color-mix(in oklab, var(--color-ember) 30%, transparent) 70%, transparent);
+  filter: blur(22px);
+}
+@keyframes prism-float {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  50% {
+    translate: 0 -14px;
+    rotate: 2deg;
+  }
+}
+.prism-float {
+  animation: prism-float 9s ease-in-out infinite;
+}
+
 /* The one marquee on the page. */
 @keyframes marquee {
   to {
@@ -151,7 +240,8 @@
   html {
     scroll-behavior: auto;
   }
-  .marquee-track {
+  .marquee-track,
+  .prism-float {
     animation: none;
   }
   *,
