@@ -2,6 +2,12 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.6.0] - 2026-10-02
+### Added
+- **"Build. Automate. Scale." statement band** after the hero and logo strip, matching the owner's reference: centred, very large, tightly stacked, with the middle word in grey.
+  - The grey meets WCAG large-text contrast in both themes.
+  - The words rise in once on scroll.
+
 ## [2.5.0] - 2026-10-02
 ### Changed
 - **Contact section** rebuilt as a cinematic "night scene" after the owner's reference:

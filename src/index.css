@@ -9,6 +9,8 @@
   --graphite: #555867;
   --rule: #dfe1ea;
   --link: #2a40c9;
+  /* Large display text only (≥3:1, WCAG large-text minimum): the grey word in the manifesto. */
+  --hush: #888b97;
   color-scheme: light;
 }
 
@@ -20,6 +22,7 @@
     --graphite: #a4a7b5;
     --rule: #272a36;
     --link: #9aaaff;
+    --hush: #5e616d;
     color-scheme: dark;
   }
 }
@@ -31,6 +34,7 @@
   --graphite: #a4a7b5;
   --rule: #272a36;
   --link: #9aaaff;
+  --hush: #5e616d;
   color-scheme: dark;
 }
 
@@ -41,6 +45,7 @@
   --color-graphite: var(--graphite);
   --color-rule: var(--rule);
   --color-link: var(--link);
+  --color-hush: var(--hush);
 
   /* Status-board hues: identical in both themes. Text on them is fixed, not theme-flipped:
      cobalt takes light text, every other hue takes dark ink (all ≥4.8:1). */

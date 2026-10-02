@@ -13,6 +13,7 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 |---|---|---|
 | Hero | `Hero.tsx` + `HeroCards.tsx` | asymmetric split, 7/5, with tilted colour fact cards |
 | Tools | `ToolMarquee.tsx` | logo marquee (the only one) |
+| Manifesto | `Manifesto.tsx` | centred three-word statement |
 | Impact | `Impact.tsx` | 4-cell bento |
 | Experience | `Experience.tsx` | sticky heading + sequence |
 | Work (`#work`) | `Projects.tsx` | accordion rows |
@@ -22,6 +23,9 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 | (page background) | `ClusterField.tsx` | fixed canvas behind all sections |
 
 ## Done
+### v2.6.0 (2026-10-02): step 4, three-word statement
+- [x] Manifesto band "Build. Automate. Scale." after the logo strip; fit verified 360-1920px; accessible grey
+
 ### v2.5.0 (2026-10-02): step 3, last page
 - [x] Contact section restyled after the owner's cinematic reference (CSS prism, glow type, mono, square buttons); same content
 
@@ -72,6 +76,7 @@ The owner is sharing changes **one at a time**. Finish each step, verify it, com
 
 ## Change log
 <!-- newest first: YYYY-MM-DD: what changed (files) -->
+- 2026-10-02: v2.6.0 Build. Automate. Scale. manifesto (Manifesto.tsx, index.css --hush, App.tsx).
 - 2026-10-02: v2.5.0 contact night scene (Contact.tsx, index.css, main.tsx, @fontsource/ibm-plex-mono).
 - 2026-10-02: v2.4.0 monochrome professional background (ClusterField.tsx).
 - 2026-10-02: v2.3.0 front-page polish + phone (Hero.tsx, HeroCards.tsx, Contact.tsx, Footer.tsx, data/portfolio.ts).
