@@ -11,7 +11,7 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 ## Information architecture
 | Section | Component | Layout family |
 |---|---|---|
-| Hero | `Hero.tsx` + `Portrait.tsx` | asymmetric split, 7/5 |
+| Hero | `Hero.tsx` + `HeroCards.tsx` | asymmetric split, 7/5, with tilted colour fact cards |
 | Tools | `ToolMarquee.tsx` | logo marquee (the only one) |
 | Impact | `Impact.tsx` | 4-cell bento |
 | Experience | `Experience.tsx` | sticky heading + sequence |
@@ -21,6 +21,12 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 | Contact | `Contact.tsx` | manifesto close |
 
 ## Done
+### v2.1.0 (2026-10-02): colourful redesign
+- [x] Six-hue status-board palette, each colour tied to a meaning (MASTER.md). Every pair contrast-checked.
+- [x] Photo removed. The hero uses colour fact cards with a load and hover animation.
+- [x] Logos in brand colour; tinted role cards and project rows; colour-coded skills; cobalt contact block
+- [x] QA in light and dark at 390 / 768 / 1440 passes; interactions and pre-flight green
+
 ### v2.0.0 (2026-10-02): skill-driven redesign
 - [x] Deleted all DevOps scaffolding, as requested
 - [x] Vendored the `frontend-design`, `taste-skill` and `ui-ux-pro-max` skills into `.claude/skills/`
@@ -34,7 +40,6 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 
 ## Backlog
 ### Needs input from Sanjana
-- [!] **Portrait photo:** add `public/portrait.jpg` (4:5) and set `profile.photo`. taste-skill expects a real image in the hero; the SP monogram is a stand-in.
 - [!] **GitHub URL:** set `profile.socials.github`.
 - [!] **Credly badge URL** for the AWS certification.
 - [!] **Hosting:** choose where to host it (Vercel, Netlify or GitHub Pages all work with `npm run build`).
@@ -47,6 +52,7 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 
 ## Change log
 <!-- newest first: YYYY-MM-DD: what changed (files) -->
+- 2026-10-02: v2.1.0 colourful redesign, photo removed (src/index.css, src/lib/hue.ts, src/components/*, design-system/).
 - 2026-10-02: v2.0.0 removed DevOps infra; redesigned with frontend-design, taste-skill and ui-ux-pro-max (src/, design-system/, .claude/skills/).
 - 2026-10-02: v1.0.1 agent review pass (copy accuracy, accessibility, infra hardening).
 - 2026-10-02: v1.0.0 initial build.

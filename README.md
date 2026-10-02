@@ -18,14 +18,14 @@ npm run lint     # oxlint
 src/data/portfolio.ts    all content (edit this when the resume changes)
 src/components/          one component per page section
 src/index.css            design tokens (light + dark) and Tailwind setup
-public/                  resume PDF, favicon, theme-init.js (add portrait.jpg here)
+public/                  resume PDF, favicon, theme-init.js
 design-system/           the design system (MASTER.md): palette, type, layout, rules
 .claude/                 plan, skills and agents used to build and maintain the site
 ```
 
 ## Common edits
 - **Content:** edit `src/data/portfolio.ts`, or run `/update-content` in Claude Code.
-- **Photo:** save a 4:5 photo as `public/portrait.jpg` and set `photo: '/portrait.jpg'` in `src/data/portfolio.ts`.
+- **Hero fact cards:** edit `heroFacts` in `src/data/portfolio.ts`. Each card takes one of the six hues.
 - **Resume:** replace `public/SanjanaPurbia_Resume.pdf` and keep the same filename.
 
 ## How it was designed

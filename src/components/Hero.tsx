@@ -1,9 +1,9 @@
 import { DownloadSimple, EnvelopeSimple } from '@phosphor-icons/react'
 import { motion, useReducedMotion } from 'motion/react'
 import { profile } from '../data/portfolio'
-import { Portrait } from './Portrait'
+import { HeroCards } from './HeroCards'
 
-// The page's single orchestrated moment: headline, then subtext, CTAs and portrait.
+// Headline, subtext and CTAs rise in; the fact cards then drop in beside them.
 export function Hero() {
   const reduce = useReducedMotion()
   const enter = (delay: number) =>
@@ -37,9 +37,9 @@ export function Hero() {
             </a>
           </motion.div>
         </div>
-        <motion.div {...enter(0.3)} className="mx-auto w-full max-w-[420px] md:col-span-5 md:max-w-none">
-          <Portrait />
-        </motion.div>
+        <div className="mx-auto w-full max-w-[460px] md:col-span-5 md:max-w-none">
+          <HeroCards />
+        </div>
       </div>
     </section>
   )

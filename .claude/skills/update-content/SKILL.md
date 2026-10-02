@@ -11,7 +11,7 @@ All content lives in `src/data/portfolio.ts`. Components never hold resume facts
 1. **Read the source.** If a resume is provided (PDF/DOCX), read it fully. Note anything new, changed or removed versus `src/data/portfolio.ts`.
 2. **Edit `src/data/portfolio.ts` only**, keeping existing shapes:
    - `profile`: name, role, tagline, summary, email, location, socials, `openToWork`
-   - `profile.headline` (2 lines max) and `profile.subtext` (20 words max)
+   - `profile.headline` (2 lines max), `profile.subtext` (20 words max) and `heroFacts` (exactly 4 cards, each with a hue)
    - `impact`: exactly 4 tiles (value, label, one-line context)
    - `tools`: Simple Icons export names; a new one also needs a named import in `ToolMarquee.tsx`
    - `skills`: `{ title, items }` groups

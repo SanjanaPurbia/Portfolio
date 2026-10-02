@@ -10,8 +10,8 @@ Portfolio for Sanjana Purbia (DevOps Engineer). React 19 + TypeScript + Vite + T
 ## Design rules (source: design-system/sanjana-purbia-portfolio/MASTER.md)
 - Read `MASTER.md` before any visual change. For UI work, use the skills in `.claude/skills/`: `frontend-design`, `taste-skill` and `ui-ux-pro-max`.
 - **Content:** lives only in `src/data/portfolio.ts`, and every claim must trace to the resume.
-- **Color:** tokens only (`bg-paper`, `text-ink`, `text-graphite`, `border-rule`, `text-cobalt`, `bg-feature`). No raw hex in components. A new token needs light and dark values in all three blocks of `src/index.css`.
-- **Shape:** interactive elements are `rounded-full`, containers are `rounded-tile` (20px). Nothing else is rounded.
+- **Color:** tokens only. Theme: `bg-paper`, `text-ink`, `text-graphite`, `border-rule`, `text-link`. Status hues: `cobalt`, `tangerine`, `mint`, `sun`, `rose`, `violet`, applied through `fill[hue]` / `tint[hue]` from `src/lib/hue.ts`, which pair each fill with its fixed text colour. A hue keeps its meaning across the page (see the MASTER.md table). No raw hex in components and no gradients.
+- **Shape:** interactive elements and labels are `rounded-full`, containers are `rounded-tile` (24px). Nothing else is rounded.
 - **Type:** headings use `font-display` (Outfit), body uses Work Sans. Sentence case. No eyebrows, all-caps labels or monospace labels.
 - **Copy:** no em or en dashes anywhere visible. At most one `·` per line. One CTA label per intent: "Email me", "Download resume".
 - **Motion:** only the hero load, the tool marquee and the accordion move. Use `motion/react`, never `window` scroll listeners, and everything must respect `prefers-reduced-motion`.

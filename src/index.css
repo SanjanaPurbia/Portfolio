@@ -3,44 +3,34 @@
 /* Tokens: see design-system/sanjana-purbia-portfolio/MASTER.md.
    Components use these through Tailwind utilities (bg-paper, text-ink...), never raw hex. */
 :root {
-  --paper: #f3f4f6;
-  --raised: #fafafb;
-  --ink: #16171b;
-  --graphite: #52555e;
-  --rule: #dcdee3;
-  --cobalt: #2444c2;
-  --on-cobalt: #f5f6ff;
-  /* Large accent surfaces (portrait, lead tile). Deeper in dark mode so they don't glare. */
-  --feature: #2444c2;
-  --on-feature: #f5f6ff;
+  --paper: #f4f5fa;
+  --raised: #fbfbfe;
+  --ink: #15161d;
+  --graphite: #555867;
+  --rule: #dfe1ea;
+  --link: #2a40c9;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --paper: #111217;
-    --raised: #191a20;
-    --ink: #ecedf1;
-    --graphite: #a3a6b0;
-    --rule: #2a2c33;
-    --cobalt: #8fa3ff;
-    --on-cobalt: #0e1330;
-    --feature: #23317a;
-    --on-feature: #f2f4ff;
+    --paper: #0f1017;
+    --raised: #181a23;
+    --ink: #eeeff5;
+    --graphite: #a4a7b5;
+    --rule: #272a36;
+    --link: #9aaaff;
     color-scheme: dark;
   }
 }
 
 :root[data-theme='dark'] {
-  --paper: #111217;
-  --raised: #191a20;
-  --ink: #ecedf1;
-  --graphite: #a3a6b0;
-  --rule: #2a2c33;
-  --cobalt: #8fa3ff;
-  --on-cobalt: #0e1330;
-  --feature: #23317a;
-  --on-feature: #f2f4ff;
+  --paper: #0f1017;
+  --raised: #181a23;
+  --ink: #eeeff5;
+  --graphite: #a4a7b5;
+  --rule: #272a36;
+  --link: #9aaaff;
   color-scheme: dark;
 }
 
@@ -50,16 +40,47 @@
   --color-ink: var(--ink);
   --color-graphite: var(--graphite);
   --color-rule: var(--rule);
-  --color-cobalt: var(--cobalt);
-  --color-on-cobalt: var(--on-cobalt);
-  --color-feature: var(--feature);
-  --color-on-feature: var(--on-feature);
+  --color-link: var(--link);
+
+  /* Status-board hues: identical in both themes. Text on them is fixed, not theme-flipped:
+     cobalt takes light text, every other hue takes dark ink (all ≥4.8:1). */
+  --color-cobalt: #3651f0;
+  --color-tangerine: #ff7a2f;
+  --color-mint: #1fc79a;
+  --color-sun: #ffcb2e;
+  --color-rose: #ff5c8d;
+  --color-violet: #8b6cff;
+  --color-on-cobalt: #fbfbfe;
+  --color-on-hue: #15161d;
+  /* Logo chips stay light in both themes so every brand colour keeps its contrast. */
+  --color-chip: #fbfbfe;
 
   --font-display: 'Outfit Variable', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Work Sans Variable', ui-sans-serif, system-ui, sans-serif;
 
   /* Shape rule: interactive = pill, containers = tile. */
-  --radius-tile: 20px;
+  --radius-tile: 24px;
+}
+
+/* Soft tints: the hue mixed into the page colour, so they go light in light mode and
+   deep in dark mode while --ink / --graphite text stays readable (≥5:1). */
+@utility tint-cobalt {
+  background-color: color-mix(in oklab, var(--color-cobalt) 16%, var(--paper));
+}
+@utility tint-tangerine {
+  background-color: color-mix(in oklab, var(--color-tangerine) 16%, var(--paper));
+}
+@utility tint-mint {
+  background-color: color-mix(in oklab, var(--color-mint) 16%, var(--paper));
+}
+@utility tint-sun {
+  background-color: color-mix(in oklab, var(--color-sun) 16%, var(--paper));
+}
+@utility tint-rose {
+  background-color: color-mix(in oklab, var(--color-rose) 16%, var(--paper));
+}
+@utility tint-violet {
+  background-color: color-mix(in oklab, var(--color-violet) 16%, var(--paper));
 }
 
 @layer base {
@@ -82,11 +103,11 @@
     text-wrap: pretty;
   }
   ::selection {
-    background: var(--cobalt);
-    color: var(--on-cobalt);
+    background: var(--color-sun);
+    color: var(--color-on-hue);
   }
   :focus-visible {
-    outline: 2px solid var(--cobalt);
+    outline: 2px solid var(--link);
     outline-offset: 3px;
     border-radius: 6px;
   }

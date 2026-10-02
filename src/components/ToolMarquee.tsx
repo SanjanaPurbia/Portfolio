@@ -40,11 +40,14 @@ const icons = {
 function Logo({ tool }: { tool: Tool }) {
   const icon = icons[tool.icon]
   return (
-    <li className="flex shrink-0 items-center px-7 md:px-9">
-      <svg role="img" aria-label={tool.name} viewBox="0 0 24 24" className="size-8 fill-current md:size-9">
-        <title>{tool.name}</title>
-        <path d={icon.path} />
-      </svg>
+    <li className="flex shrink-0 items-center px-2.5 md:px-3">
+      <span className="grid size-16 place-items-center rounded-full bg-chip md:size-[72px]">
+        {/* Brand colour from Simple Icons; the chip stays light so it reads in both themes. */}
+        <svg role="img" aria-label={tool.name} viewBox="0 0 24 24" className="size-8 md:size-9" fill={`#${icon.hex}`}>
+          <title>{tool.name}</title>
+          <path d={icon.path} />
+        </svg>
+      </span>
     </li>
   )
 }
@@ -53,9 +56,9 @@ function Logo({ tool }: { tool: Tool }) {
 export function ToolMarquee() {
   const reduce = useReducedMotion()
   return (
-    <section aria-label="Tools I work with" className="border-y border-rule py-8 text-graphite">
+    <section aria-label="Tools I work with" className="py-6">
       {reduce ? (
-        <ul className="mx-auto flex max-w-[1200px] flex-wrap justify-center gap-y-6 px-4">
+        <ul className="mx-auto flex max-w-[1200px] flex-wrap justify-center gap-y-4 px-4">
           {tools.map((t) => (
             <Logo key={t.name} tool={t} />
           ))}

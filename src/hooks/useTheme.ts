@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 export type Theme = 'light' | 'dark'
 
 const STORAGE_KEY = 'theme'
-const THEME_COLOR: Record<Theme, string> = { dark: '#111217', light: '#f3f4f6' }
+const THEME_COLOR: Record<Theme, string> = { dark: '#0f1017', light: '#f4f5fa' }
 
 function readInitialTheme(): Theme {
   try {

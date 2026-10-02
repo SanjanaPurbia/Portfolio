@@ -38,3 +38,6 @@ tfplan
 .qa/
 __pycache__/
 *.pyc
+
+# Personal Claude Code settings
+.claude/settings.local.json

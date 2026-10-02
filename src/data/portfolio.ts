@@ -11,13 +11,22 @@ export const profile = {
     'DevOps engineer at Spark Eighteen. I automate AWS infrastructure and CI/CD, cutting manual deployment time by 70%.',
   email: 'sanjanapurbia3112@gmail.com',
   resumeUrl: '/SanjanaPurbia_Resume.pdf',
-  // Drop a photo in public/ (e.g. portrait.jpg, 4:5) and set '/portrait.jpg'.
-  photo: '',
   socials: {
     linkedin: 'https://www.linkedin.com/in/sanjanapurbia',
     github: '', // add your GitHub profile URL to show the link
   },
 }
+
+// Palette roles (see design-system MASTER.md): colour encodes meaning, like a status board.
+export type Hue = 'cobalt' | 'tangerine' | 'mint' | 'sun' | 'rose' | 'violet'
+
+// Hero fact cards (no photo). Facts only, none repeated in the Impact section.
+export const heroFacts: { hue: Hue; value: string; label: string }[] = [
+  { hue: 'cobalt', value: 'AWS', label: 'Certified Cloud Practitioner' },
+  { hue: 'sun', value: '2 yrs', label: 'hands-on DevOps' },
+  { hue: 'mint', value: '5+', label: 'client projects shipped' },
+  { hue: 'rose', value: '3', label: 'clouds: AWS, GCP and Azure' },
+]
 
 // Simple Icons export names. AWS and Azure marks were removed from Simple Icons for
 // trademark reasons, so they appear in the skills list only.
@@ -39,22 +48,22 @@ export const tools = [
 ] as const
 
 // Exactly four impact tiles (bento cell count rule). All figures from the resume.
-export const impact = [
-  { value: '70%', label: 'less manual deployment time', context: 'Multi-service AWS deployments for 5+ client projects. Release cycles went from days to hours.' },
-  { value: '80%', label: 'less manual release work', context: 'Jenkins Shared Libraries pipelines for the Uncompromised AgriTech platform.' },
-  { value: '60%', label: 'fewer environment issues', context: 'Containerized microservices with Docker.' },
-  { value: '15+', label: 'reusable Terraform modules', context: 'Cut infrastructure setup time by about 40%.' },
+export const impact: { hue: Hue; value: string; label: string; context: string }[] = [
+  { hue: 'cobalt', value: '70%', label: 'less manual deployment time', context: 'Multi-service AWS deployments for 5+ client projects. Release cycles went from days to hours.' },
+  { hue: 'tangerine', value: '80%', label: 'less manual release work', context: 'Jenkins Shared Libraries pipelines for the Uncompromised AgriTech platform.' },
+  { hue: 'mint', value: '60%', label: 'fewer environment issues', context: 'Containerized microservices with Docker.' },
+  { hue: 'sun', value: '15+', label: 'reusable Terraform modules', context: 'Cut infrastructure setup time by about 40%.' },
 ]
 
-export type SkillGroup = { title: string; items: string[] }
+export type SkillGroup = { hue: Hue; title: string; items: string[] }
 
 export const skills: SkillGroup[] = [
-  { title: 'Cloud & IaC', items: ['AWS', 'EC2', 'S3', 'CloudFront', 'RDS', 'IAM', 'ALB', 'VPC', 'GCP', 'Azure', 'Terraform', 'Ansible'] },
-  { title: 'Containers', items: ['Docker', 'Docker Swarm', 'Kubernetes', 'Rancher', 'Portainer'] },
-  { title: 'CI/CD & GitOps', items: ['Jenkins', 'Shared Libraries', 'GitHub Actions', 'ArgoCD', 'Git'] },
-  { title: 'Scripting', items: ['Python', 'Bash', 'PowerShell', 'YAML'] },
-  { title: 'Monitoring', items: ['CloudWatch', 'Uptime Kuma', 'PagerDuty'] },
-  { title: 'Databases & OS', items: ['PostgreSQL', 'MySQL', 'DynamoDB', 'Linux (Ubuntu)'] },
+  { hue: 'cobalt', title: 'Cloud & IaC', items: ['AWS', 'EC2', 'S3', 'CloudFront', 'RDS', 'IAM', 'ALB', 'VPC', 'GCP', 'Azure', 'Terraform', 'Ansible'] },
+  { hue: 'mint', title: 'Containers', items: ['Docker', 'Docker Swarm', 'Kubernetes', 'Rancher', 'Portainer'] },
+  { hue: 'tangerine', title: 'CI/CD & GitOps', items: ['Jenkins', 'Shared Libraries', 'GitHub Actions', 'ArgoCD', 'Git'] },
+  { hue: 'sun', title: 'Scripting', items: ['Python', 'Bash', 'PowerShell', 'YAML'] },
+  { hue: 'rose', title: 'Monitoring', items: ['CloudWatch', 'Uptime Kuma', 'PagerDuty'] },
+  { hue: 'violet', title: 'Databases & OS', items: ['PostgreSQL', 'MySQL', 'DynamoDB', 'Linux (Ubuntu)'] },
 ]
 
 export type Role = {
@@ -98,6 +107,7 @@ export type Project = {
   client: string
   domain: string
   year: string
+  hue: Hue
   impact: { value: string; label: string }
   summary: string
   highlights: string[]
@@ -108,6 +118,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: 'yocharge',
+    hue: 'mint',
     name: 'EV Charging Platform',
     client: 'YoCharge',
     domain: 'EV / Energy',
@@ -126,6 +137,7 @@ export const projects: Project[] = [
   },
   {
     id: 'uncompromised',
+    hue: 'sun',
     name: 'AgriTech Platform',
     client: 'Uncompromised',
     domain: 'AgriTech',
@@ -142,6 +154,7 @@ export const projects: Project[] = [
   },
   {
     id: 'dnatur',
+    hue: 'rose',
     name: 'eCommerce Platform',
     client: 'Dnatur',
     domain: 'eCommerce',

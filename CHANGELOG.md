@@ -2,6 +2,23 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.1.0] - 2026-10-02
+### Changed
+- **Colour:** the page is now colourful, as requested. It uses a six-hue status-board palette (cobalt, tangerine, mint, sun, rose, violet); each hue marks one thing consistently. All text pairs pass WCAG AA.
+- **Hero:** the photo slot is gone (the owner doesn't want a photo). In its place are four tilted fact cards in colour that drop in on load and straighten on hover.
+- **Tool logos:** now in their real brand colours on light chips.
+- **Sections in colour:**
+  - impact tiles: solid colour fills
+  - experience: role cards with a "Current" status pill
+  - projects: each row has its own colour, tinted when open
+  - skills: colour-coded tags
+  - credentials: tinted
+  - contact: closes the page with a cobalt block
+- **Shapes:** container radius goes from 20px to 24px.
+
+### Removed
+- `Portrait.tsx` and `profile.photo`.
+
 ## [2.0.0] - 2026-10-02
 ### Removed
 - All DevOps scaffolding (Dockerfile, nginx, docker-compose, GitHub Actions, Terraform, Makefile, docs/DEPLOYMENT.md, `infra-reviewer` agent, `ship-release` skill) at the owner's request. It can be recovered from commit `7c372cc`.

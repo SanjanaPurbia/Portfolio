@@ -1,12 +1,8 @@
 import { impact } from '../data/portfolio'
+import { fill } from '../lib/hue'
 
-// Uneven 4-cell bento: wide cobalt lead tile, then tiles that vary in width and surface.
-const cells = [
-  'md:col-span-4 bg-feature text-on-feature',
-  'md:col-span-2 bg-raised',
-  'md:col-span-2 bg-raised',
-  'md:col-span-4 bg-raised bg-[repeating-linear-gradient(135deg,var(--rule)_0_1px,transparent_1px_14px)]',
-]
+// Uneven 4-cell bento, one solid hue per result. Widths: wide, narrow / narrow, wide.
+const span = ['md:col-span-4', 'md:col-span-2', 'md:col-span-2', 'md:col-span-4']
 
 export function Impact() {
   return (
@@ -15,22 +11,17 @@ export function Impact() {
         What changed once it was automated
       </h2>
       <div className="mt-12 grid gap-4 md:grid-cols-6">
-        {impact.map((item, i) => {
-          const lead = i === 0
-          return (
-            <div key={item.label} className={`flex min-h-[220px] flex-col justify-between rounded-tile p-7 md:p-8 ${cells[i]}`}>
-              <p className={`font-display font-semibold tracking-[-0.04em] leading-none ${lead ? 'text-[clamp(72px,9vw,120px)]' : 'text-[clamp(56px,6vw,76px)]'}`}>
-                {item.value}
-              </p>
-              <div className="mt-8">
-                <p className="font-display text-[21px] font-medium tracking-tight">{item.label}</p>
-                <p className={`mt-2 max-w-[44ch] text-[15px] leading-relaxed ${lead ? 'text-on-feature/85' : 'text-graphite'}`}>
-                  {item.context}
-                </p>
-              </div>
+        {impact.map((item, i) => (
+          <div key={item.label} className={`flex min-h-[230px] flex-col justify-between rounded-tile p-7 md:p-9 ${span[i]} ${fill[item.hue]}`}>
+            <p className={`font-display leading-none font-semibold tracking-[-0.045em] ${i === 0 ? 'text-[clamp(80px,10vw,132px)]' : 'text-[clamp(60px,6.4vw,84px)]'}`}>
+              {item.value}
+            </p>
+            <div className="mt-8">
+              <p className="font-display text-[22px] font-semibold tracking-tight">{item.label}</p>
+              <p className="mt-2 max-w-[44ch] text-[15px] leading-relaxed">{item.context}</p>
             </div>
-          )
-        })}
+          </div>
+        ))}
       </div>
     </section>
   )
