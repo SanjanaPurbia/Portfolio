@@ -36,3 +36,5 @@ tfplan
 
 # Local visual QA tooling and screenshots
 .qa/
+__pycache__/
+*.pyc
