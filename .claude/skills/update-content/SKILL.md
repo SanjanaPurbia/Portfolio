@@ -19,6 +19,6 @@ All content lives in `src/data/portfolio.ts`. Components never hold resume facts
    - `projects`: `featured: true` on at most one (it opens by default). Impact as `{ value, label }`.
    - `certifications`, `education`
 3. **Resume PDF:** copy the new file to `public/SanjanaPurbia_Resume.pdf` (same name, so links keep working).
-4. **Writing rules:** lead with the outcome and a number, never invent metrics, and leave out the phone number (privacy). **No em or en dashes** (taste-skill §9.G); write date ranges as `Jan 2025 - Present`.
+4. **Writing rules:** lead with the outcome and a number, never invent metrics. Email and phone (`profile.email`, `profile.phone`) are shown by the owner's choice. **No em or en dashes** (taste-skill §9.G); write date ranges as `Jan 2025 - Present`.
 5. **Verify:** `npm run lint && npm run build` with zero warnings. If copy got longer, check the layout at 390px.
 6. **Track:** add a line to the `.claude/plan.md` change log and a `CHANGELOG.md` entry (patch bump for copy, minor for new sections).

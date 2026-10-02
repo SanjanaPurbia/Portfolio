@@ -2,6 +2,17 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [2.3.0] - 2026-10-02
+### Changed
+- **Front page:**
+  - Availability pill ("Open to DevOps and cloud roles") with a live mint status dot.
+  - Subtext now opens with her name.
+  - From 1024px up, the nav, hero and logo strip fill exactly one screen.
+  - Below 1024px the hero stacks (cards in a row of 4 on tablet), fixing cramped card text at 768px.
+
+### Added
+- **Phone number** (+91 95216 18221) as a tap-to-call link in the contact block and the footer. The footer also shows the email.
+
 ## [2.2.1] - 2026-10-02
 ### Changed
 - **Calmer background:** smaller, fainter nodes on a wider grid; fewer pods; a softer and slower rollout wave (every 12s); a smaller cursor lens.

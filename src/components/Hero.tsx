@@ -16,16 +16,31 @@ export function Hero() {
         }
 
   return (
-    <section id="top" className="mx-auto max-w-[1200px] px-4 pt-10 pb-16 md:px-6 md:pt-16 md:pb-24">
-      <div className="grid items-center gap-10 md:grid-cols-12 md:gap-12">
-        <div className="md:col-span-7">
-          <motion.h1
+    // From 1024px the nav, hero and logo strip fill exactly one screen; below that the hero stacks.
+    <section
+      id="top"
+      className="mx-auto flex max-w-[1200px] items-center px-4 pt-8 pb-14 md:px-6 md:py-16 lg:min-h-[calc(100dvh-72px-112px)] lg:py-12"
+    >
+      <div className="grid w-full items-center gap-10 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-7">
+          <motion.p
             {...enter(0)}
+            className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-rule bg-raised px-4 py-1.5 text-[14px] font-medium"
+          >
+            {/* Real state, not decoration: she is available. */}
+            <span className="relative flex size-2.5" aria-hidden="true">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-mint opacity-60 motion-reduce:animate-none" />
+              <span className="relative inline-flex size-2.5 rounded-full bg-mint" />
+            </span>
+            {profile.availability}
+          </motion.p>
+          <motion.h1
+            {...enter(0.06)}
             className="halo text-[clamp(44px,7.4vw,84px)] leading-[0.98] font-semibold tracking-[-0.035em]"
           >
             {profile.headline}
           </motion.h1>
-          <motion.p {...enter(0.12)} className="halo mt-6 max-w-[34ch] text-[19px] leading-relaxed text-graphite md:text-[21px]">
+          <motion.p {...enter(0.14)} className="halo mt-6 max-w-[34ch] text-[19px] leading-relaxed text-graphite md:text-[21px]">
             {profile.subtext}
           </motion.p>
           <motion.div {...enter(0.22)} className="mt-9 flex flex-wrap gap-3">
@@ -37,7 +52,7 @@ export function Hero() {
             </a>
           </motion.div>
         </div>
-        <div className="mx-auto w-full max-w-[460px] md:col-span-5 md:max-w-none">
+        <div className="mx-auto w-full max-w-[460px] md:max-w-none lg:col-span-5">
           <HeroCards />
         </div>
       </div>

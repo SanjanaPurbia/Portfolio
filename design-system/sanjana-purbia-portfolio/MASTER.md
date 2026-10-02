@@ -90,7 +90,13 @@ Creds  AWS Certified Cloud Practitioner   B.Tech CS       inline strip
 Contact  sanjanapurbia3112@gmail.com (display size)      manifesto close
 ```
 
-Eight sections and eight different layout families. Zero eyebrows (the limit for 8 sections is 3).
+Eight sections and eight different layout families. One eyebrow on the page (limit 3): the hero's availability pill. Its mint dot shows a real state, which taste-skill allows.
+
+**Hero framing (v2.3):**
+- **From 1024px up:** the nav, hero and logo strip fill exactly one screen (`min-h: 100dvh - nav - strip`), and the hero content is vertically centred.
+- **Below 1024px:** the hero stacks. The fact cards form a row of 4 at tablet width and a 2×2 grid on phones.
+- **Hero text:** availability pill, headline, subtext that starts with her name, then two CTAs.
+- **Phone number:** in the contact block and the footer, not the hero (taste-skill hero stack discipline).
 
 ## Principles
 1. **Boldness lives in the hero:** large Outfit headline next to the tilted colour fact cards. The irony of "I make releases boring." next to a colourful page is the point.

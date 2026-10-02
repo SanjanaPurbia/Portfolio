@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Check, Copy, DownloadSimple, EnvelopeSimple, GithubLogo, LinkedinLogo } from '@phosphor-icons/react'
+import { Check, Copy, DownloadSimple, EnvelopeSimple, GithubLogo, LinkedinLogo, Phone } from '@phosphor-icons/react'
 import { profile } from '../data/portfolio'
 
 export function Contact() {
@@ -23,7 +23,7 @@ export function Contact() {
           Looking for a DevOps engineer?
         </h2>
         <p className="mt-6 max-w-[48ch] text-[19px]">
-          I'm open to DevOps and cloud roles with more scope. Email is the fastest way to reach me.
+          I'm open to DevOps and cloud roles with more scope. Email or call, whichever suits you.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -45,6 +45,14 @@ export function Contact() {
             {copied === 'copied' ? 'Email copied' : copied === 'failed' ? 'Copy failed. Select the address instead.' : ''}
           </span>
         </div>
+
+        <a
+          href={`tel:${profile.phone.tel}`}
+          className="mt-5 inline-flex items-center gap-3 font-display text-[clamp(19px,2.6vw,28px)] font-medium tracking-tight underline decoration-on-cobalt/40 decoration-2 underline-offset-[6px] hover:decoration-on-cobalt"
+        >
+          <Phone size={24} weight="bold" aria-hidden="true" />
+          {profile.phone.display}
+        </a>
 
         <div className="mt-10 flex flex-wrap gap-3">
           <a href={`mailto:${profile.email}`} className="btn bg-sun text-on-hue hover:brightness-105">

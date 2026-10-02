@@ -8,8 +8,10 @@ export const profile = {
   // Hero: headline ≤ 2 lines, subtext ≤ 20 words (taste-skill §4.7).
   headline: 'I make releases boring.',
   subtext:
-    'DevOps engineer at Spark Eighteen. I automate AWS infrastructure and CI/CD, cutting manual deployment time by 70%.',
+    "I'm Sanjana Purbia, a DevOps engineer. I automate AWS infrastructure and CI/CD, cutting manual deployment time by 70%.",
+  availability: 'Open to DevOps and cloud roles',
   email: 'sanjanapurbia3112@gmail.com',
+  phone: { display: '+91 95216 18221', tel: '+919521618221' },
   resumeUrl: '/SanjanaPurbia_Resume.pdf',
   socials: {
     linkedin: 'https://www.linkedin.com/in/sanjana-purbia/',

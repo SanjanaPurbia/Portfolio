@@ -9,6 +9,14 @@ export function Footer() {
         <p>
           © {YEAR} {profile.name}
         </p>
+        <p className="flex flex-wrap gap-x-5 gap-y-1">
+          <a href={`mailto:${profile.email}`} className="hover:text-ink">
+            {profile.email}
+          </a>
+          <a href={`tel:${profile.phone.tel}`} className="hover:text-ink">
+            {profile.phone.display}
+          </a>
+        </p>
         <a href="#top" className="hover:text-ink">
           Back to top
         </a>

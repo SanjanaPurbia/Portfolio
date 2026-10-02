@@ -22,6 +22,11 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 | (page background) | `ClusterField.tsx` | fixed canvas behind all sections |
 
 ## Done
+### v2.3.0 (2026-10-02): step 1, front page
+- [x] Availability pill, name in the subtext, first-screen framing at 1024px and up, stacked hero below 1024px
+- [x] Phone added to the contact block and footer (owner request)
+- [x] Fold checked at 768, 1024, 1280 and 1440, plus mobile, in light and dark
+
 ### v2.2.0 (2026-10-02): innovative background
 - [x] Live cluster-map canvas: pods, rolling-deployment wave, pointer lens. Grounded in DevOps, uses the six hues.
 - [x] Text halos keep contrast over the field; reduced-motion, hidden-tab and touch fallbacks
@@ -44,6 +49,9 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 ### v1.0.x (2026-10-02)
 - [x] First build: React portfolio plus DevOps infra (since removed)
 
+## Working mode
+The owner is sharing changes **one at a time**. Finish each step, verify it, commit, then wait for the next request.
+
 ## Backlog
 ### Needs input from Sanjana
 - [!] **GitHub URL:** set `profile.socials.github`.
@@ -58,6 +66,7 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 
 ## Change log
 <!-- newest first: YYYY-MM-DD: what changed (files) -->
+- 2026-10-02: v2.3.0 front-page polish + phone (Hero.tsx, HeroCards.tsx, Contact.tsx, Footer.tsx, data/portfolio.ts).
 - 2026-10-02: v2.2.1 calmer background; LinkedIn URL fixed (ClusterField.tsx, data/portfolio.ts).
 - 2026-10-02: v2.2.0 cluster-map background + text halos (ClusterField.tsx, lib/hue.ts, index.css, App.tsx).
 - 2026-10-02: v2.1.0 colourful redesign, photo removed (src/index.css, src/lib/hue.ts, src/components/*, design-system/).

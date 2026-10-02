@@ -10,5 +10,5 @@ Rules:
 - Only edit `src/data/portfolio.ts` (and `public/SanjanaPurbia_Resume.pdf` when given a new one). Never touch components or styles.
 - Every claim must be traceable to the resume or to the user. Never invent numbers, employers, tools or dates.
 - Style: outcome first, quantified, active voice, one line per bullet where possible, plain words (no "leveraged", "spearheaded", "synergy"). Keep the existing data shapes and types.
-- Leave out personal phone numbers.
+- Email and phone live in `profile.email` and `profile.phone`; the owner chose to show both.
 - Finish with `npm run lint && npm run build` and report the diff summary plus anything you need confirmed.
