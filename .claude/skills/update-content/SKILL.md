@@ -10,13 +10,14 @@ All content lives in `src/data/portfolio.ts`. Components never hold resume facts
 ## Steps
 1. **Read the source.** If a resume is provided (PDF/DOCX), read it fully. Note anything new, changed or removed versus `src/data/portfolio.ts`.
 2. **Edit `src/data/portfolio.ts` only**, keeping existing shapes:
-   - `profile`: name, role, tagline, summary, email, location, socials, `openToWork`
-   - `profile.headline` (array of words, one per line, middle word renders grey), `profile.subtext` (20 words max) and `heroFacts` (exactly 4 cards, each with a hue)
-   - `impact`: exactly 4 tiles (value, label, one-line context)
-   - `tools`: Simple Icons export names; a new one also needs a named import in `ToolMarquee.tsx`
+   - `profile`: name, role, company, `subtext` (20 words max), availability, email, phone, `resumeUrl`, socials (`linkedin`/`github` as `{ url, handle }`)
+   - `heroFacts`: exactly 4 `{ value, label }`
+   - `pipeline`: the "How I ship" stages and jobs (every job must be a practice on the resume), environments, and a screen-reader description
+   - `impact`: exactly 4 status tiles; `after` is 100 minus the percentage, or `modules` for a count
    - `skills`: `{ title, items }` groups
-   - `experience`: newest first. Set `current: true` on exactly one role at most.
-   - `projects`: `featured: true` on at most one (it opens by default). Impact as `{ value, label }`.
+   - `experience`: newest first, with a `version` tag. Set `current: true` on exactly one role at most.
+   - `projects`: impact as `{ value, label, icon }`, plus a `diagram` drawn only from that project's listed services, with a caption that says it is an illustration
+   - `sections`: section titles and intros
    - `certifications`, `education`
 3. **Resume PDF:** copy the new file to `public/SanjanaPurbia_Resume.pdf` (same name, so links keep working).
 4. **Writing rules:** lead with the outcome and a number, never invent metrics. Email and phone (`profile.email`, `profile.phone`) are shown by the owner's choice. **No em or en dashes** (taste-skill §9.G); write date ranges as `Jan 2025 - Present`.

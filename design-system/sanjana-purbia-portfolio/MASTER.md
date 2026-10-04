@@ -1,146 +1,64 @@
-# Sanjana Purbia Portfolio: Design System (Master)
+# Sanjana Purbia portfolio: design system ("Pipeline", v3)
 
-Global source of truth for the visual system. Page-specific overrides go in `pages/<page>.md`.
+The owner compared seven prototypes on 2026-10-04 and chose **Pipeline**: a DevOps-native page where the design language is her craft. It should feel like a polished product UI, not a hacker gimmick. The page reads as **one scroll** with no section navigation, and there is **no photo**.
 Built with the `frontend-design`, `taste-skill` and `ui-ux-pro-max` skills in `.claude/skills/`.
 
-## Design read
-Developer portfolio for recruiters and engineering managers scanning a DevOps candidate, with a calm, precise, confident language, leaning toward React + Tailwind v4 + Motion + self-hosted Outfit / Work Sans.
+## Principles
+1. **Her work is the visual.** The hero shows how she ships (a CI/CD pipeline), experience reads as a release log, and projects come with architecture illustrations.
+2. **Calm, graphite surfaces.** There are no busy backgrounds. The only texture is a faint dot grid behind the hero and the diagrams.
+3. **Colour carries meaning, never decoration.** Green means success, passing, live or "after". Blue means running and focus. Everything else is neutral.
+4. **Readable for recruiters.** Every section has a plain sentence-case heading and normal prose. Technical framing (version tags, diagram labels) is small and secondary.
 
-Dials (taste-skill "Portfolio (Developer)" preset): `DESIGN_VARIANCE 6`, `MOTION_INTENSITY 5`, `VISUAL_DENSITY 4`.
+## Tokens (src/index.css)
+Use them through Tailwind utilities (`bg-surface`, `text-muted`, `border-line`...). Never put raw hex in components.
 
-## Sources
-- ui-ux-pro-max `--design-system "personal portfolio hiring resume"`: storytelling pattern (hook, problem, journey, solution, closing CTA) and monochrome + single-blue palette. The first query ("developer portfolio devops") returned a docs-landing pattern and dark + green palette, rejected as off-brief and as frontend-design AI-default #2.
-- ui-ux-pro-max `--domain typography`: "Geometric Modern" (Outfit + Work Sans, best for portfolios). Outfit is also on taste-skill's recommended list.
-- The handwritten typography from the design-system query (Caveat / Quicksand) was rejected as a mismatch for the audience.
-
-## Color (v2.1: colourful status board)
-The owner asked for a colourful site, and the brief's own words override taste-skill's single-accent default (§4.2 override path). Colour is kept disciplined by **meaning**: like a monitoring dashboard, each hue marks one thing and keeps it everywhere.
-
-**Theme tokens** (CSS variables in `src/index.css`):
-| Token | Light | Dark | Role |
+| Token | Light | Dark | Use |
 |---|---|---|---|
-| `--paper` | `#F4F5FA` | `#0F1017` | page background |
-| `--raised` | `#FBFBFE` | `#181A23` | closed project rows |
-| `--ink` | `#15161D` | `#EEEFF5` | primary text (16.5:1) |
-| `--graphite` | `#555867` | `#A4A7B5` | secondary text (≥5:1, even on tints) |
-| `--rule` | `#DFE1EA` | `#272A36` | hairlines (rare) |
-| `--link` | `#2A40C9` | `#9AAAFF` | focus rings, links (≥7:1) |
+| `page` | #F4F5F7 | #0D0F12 | page background |
+| `sunken` | #ECEEF1 | #0A0C0E | bar tracks, diagram wells |
+| `surface` / `surface-2` | #FFFFFF / #F6F7F9 | #14171B / #1A1E23 | cards / panel footers, chips |
+| `line` / `line-strong` | #E1E4E8 / #CBD0D6 | #23282E / #323840 | hairlines / outlined controls |
+| `ink` / `soft` / `muted` | #14171A / #343A41 / #555D67 | #E8EBEE / #C3C9D0 / #9BA3AC | text, in falling emphasis (all AA) |
+| `ok` + `ok-wash` + `on-ok` | #157F4C | #4CC38A | success, passing stages, "after" bars, live status |
+| `run` + `run-wash` | #2563D4 | #79AEFC | running state and focus ring only |
+| `edge` | #8A929B | #5D6670 | diagram connectors, hover borders |
+| `btn` / `on-btn` | ink / white | light / ink | primary button |
 
-**Status hues** (identical in both themes):
-| Hue | Hex | Text on it | Used for |
-|---|---|---|---|
-| cobalt | `#3651F0` | `on-cobalt #FBFBFE` (5.7:1) | primary CTA, AWS fact card, 70% tile, contact block, Cloud & IaC |
-| tangerine | `#FF7A2F` | `on-hue #15161D` (6.9:1) | 80% tile, CI/CD, certification |
-| mint | `#1FC79A` | `on-hue` (8.3:1) | current role (running), YoCharge (EV), 60% tile, Containers |
-| sun | `#FFCB2E` | `on-hue` (11.9:1) | 2 years card, Uncompromised (AgriTech), 15+ tile, Scripting, CTA inside the cobalt block |
-| rose | `#FF5C8D` | `on-hue` (6.2:1) | multi-cloud card, Dnatur (eCommerce), Monitoring |
-| violet | `#8B6CFF` | `on-hue` (4.9:1) | intern role, education, Databases & OS |
-
-**Rules:**
-- Fills are solid. No gradients, glows, or coloured text on paper.
-- Soft surfaces use `tint-<hue>`, which is `color-mix` of the hue at 16% into `--paper`. That gives light tints in light mode and deep tints in dark mode, with ink and graphite text at ≥5:1.
-- Tool logos use their real brand colours from Simple Icons, on a light `--color-chip` circle in both themes.
-
-## Background: quiet cluster map (v2.4)
-The owner found the coloured background (rainbow pointer lens, multi-hue pods) unprofessional. The rule now: **colour lives on the content; the background is monochrome with one restrained accent.**
-
-| Layer | What it shows | Motion rule |
-|---|---|---|
-| Nodes | 32px grid (28px on mobile), 1.1px nodes in `--graphite` at 16% (20% in dark) | static |
-| Fade | CSS radial mask from the top of the viewport, so the grid reads as a texture and fades out lower down | static |
-| Rolling deployment | one soft cobalt band (max 35% opacity) sweeps the grid in 3.6s every 15s. The first sweep plays with the hero entrance. | storytelling, rare |
-| Pointer | nodes within 140px of the mouse darken toward `--ink` (max 30%) and grow slightly. No hues. | feedback; mouse only |
-
-**Removed:** multi-hue pods and the colour-wheel lens.
-
-**Guardrails (unchanged):**
-- **Readability:** text on the field keeps the `halo` utility.
-- **Reduced motion:** a single static frame.
-- **Performance:** paused in hidden tabs; device pixel ratio capped at 2; no React state per frame.
-
-## Hero headline: "Build. Automate. Scale." (v2.7)
-The owner wanted the three-word stack from their reference **on the first screen**. In v2.6 it was a band below the hero, which they rejected. It's now the hero `h1` and replaces "I make releases boring.", because one headline beats two competing ones.
-
-- **Type:** Outfit semibold, line-height 0.86, tracking -0.05em, **left-aligned** to match the subtext and CTAs under it (a centred headline over left-aligned text would clash).
-- **Size:** `min(21.5cqw, 236px)` using a container query on the hero text column, so "Automate.", the widest word, always fills the column (for example 615px in a 652px column at 1440). Checked at 360-1920px.
-- **Colour:** Build and Scale use `--ink`. Automate uses `--hush` (`#888B97` light, `#5E616D` dark), which meets WCAG's 3:1 large-text minimum.
-- **Accessibility:** `aria-label` gives the whole phrase; the visual spans are `aria-hidden`.
-- **Motion:** the words rise in one by one as part of the hero load sequence; instant under reduced motion.
-- **Fit:** the CTAs stay above the fold at every tested size.
-
-## Contact: elegant ink panel (v2.9)
-The owner rejected both the cinematic night scene (v2.5, didn't match the site) and the tilted action cards (v2.8), and asked for an **elegant** close. The rule for this section is restraint: one calm surface, refined type, no tilt or gimmicks, and no motion.
-
-- **Surface:** one `rounded-tile` panel in `--inkwell` (`#15161D` light, `#1A1C27` dark), with a hairline `on-inkwell/10` border for edge definition in dark mode. Two quiet glows from the palette: cobalt from the top-right, faint violet from the bottom-left (`inkwell-glow` utility).
-- **Headline:** Outfit **light (300)**, `clamp(44px, 6.4vw, 92px)`. Same family as the site; the light weight is the deliberate refinement for the closing.
-- **Details strip:** Email (with copy), Phone, LinkedIn and Resume as label-over-value pairs between hairlines.
-  - 1 column on phones.
-  - Tablet: email gets its own row, then 3 columns.
-  - Desktop: 4 columns, with the email column widest (1.7fr).
-  - The email only ever wraps before the "@".
-- **Links:** an underline draws in from the left on hover or focus.
-- **Footer row:** one light "Email me" pill (the hero's label) with an arrow chip, and the signature "Sanjana Purbia, DevOps Engineer".
-- **Contrast** (checked over the glows): main text ≥10:1, secondary text at 70% ≥5.7:1, labels at 55% ≥5.3:1.
+Dark is designed first; light mirrors it. The theme follows the OS until the visitor toggles it (saved in `localStorage.theme`, applied before paint by `public/theme-init.js`).
 
 ## Type
-- **Outfit Variable** for display and headings: weight 600, tracking -0.035em at display sizes, -0.02em at h2/h3.
-- **Work Sans Variable** for body: 17px / 1.6, max 65ch, weight 400; 500 for UI labels.
-- Scale (×1.25): 14 · 17 · 21 · 26 · 33 · 41 · 52 · 72.
-- Sentence case everywhere. No all-caps labels, no eyebrows, no monospace labels.
+- **Geist Variable** for everything. Hero name `clamp(2.6rem, 6.4vw, 4.6rem)`/600/-0.04em, h2 `clamp(1.75rem, 3.4vw, 2.5rem)`/600/-0.03em, body 16px/1.6, ledes 17px in `muted`.
+- **JetBrains Mono Variable**, used sparingly for small technical labels only: version tags, counts, diagram sub-labels. Never for headings or prose.
+- Sentence case everywhere. No eyebrow or all-caps labels. Numerals use `tabular-nums`.
 
 ## Shape and depth
-- Interactive elements and labels (buttons, pills, skill tags, impact badges) are full pill. Containers (fact cards, bento tiles, role cards, project rows, contact block) are 24px. Nothing else is rounded.
-- No drop shadows. Elevation comes from the `--raised` surface only.
+- Interactive elements, labels and chips: `rounded-full`.
+- Cards and tiles: `rounded-tile` (16px). Big frames (pipeline, project cards): `rounded-panel` (20px). The contact panel uses 24px. Icon wells use 8 to 12px.
+- 1px `line` borders. Only the pipeline and the contact panel carry `shadow-panel`.
 
-## Layout
-Left-aligned on a 1200px container with a 24px gutter (16px on mobile). Every multi-column layout collapses to one column below 768px.
+## Page structure (one scroll)
+1. **Header:** the brand mark (a passing-build dot) with her name, and the theme toggle. No section links.
+2. **Hero:** availability pill, name, role, lede, "Email me" and "Download resume", then the **How I ship** pipeline (Build → Test → Deploy → Monitor, with environments) and a 2x2 facts grid. On phones the pipeline sits between the intro and the facts.
+3. **What changed once it was automated:** a status board of four tiles with before/after bars (or 15 module squares).
+4. **Experience:** a release log, newest first (v2.0 Live, v1.0 Completed) joined by "Promoted after six months". The version tags are design labels, not resume claims.
+5. **Selected work:** one architecture card per project: client, impact chip, summary, highlights, stack chips, and an SVG illustration drawn only from that project's listed services, captioned as an illustration.
+6. **Toolchain:** six skill groups in a hairline grid with mono counts.
+7. **Certification and education.**
+8. **Contact:** the ask and both CTAs, then Email, Phone, LinkedIn and GitHub rows. The email wraps only before the "@".
 
-```
-Nav    [SP Sanjana Purbia]              Work  Experience  Skills  Contact  (◐)
-Hero   ┌─────────────────────────────────┬──────────────┐
-       │ Build. / Automate. / Scale.     │  4 tilted    │  asymmetric split, 7/5
-       │ subtext ≤ 20 words              │  colour fact │
-       │ (Email me) (Download resume)    │   cards)     │
-       └─────────────────────────────────┴──────────────┘
-Tools  ─ Terraform  Docker  Kubernetes  Jenkins  ... ─   logo marquee (the only one)
-Impact ┌───────────────────┬──────────┐
-       │ 70% (cobalt tile) │ 80%      │                   bento, exactly 4 cells
-       ├─────────┬─────────┴──────────┤
-       │ 60%     │ 15+ (hatched tile) │
-       └─────────┴────────────────────┘
-Exp.   Experience (sticky) │ roles + highlights          sticky two-column
-Work   YoCharge ........ 50% faster deployments   (+)    accordion rows
-Skills Cloud & IaC        AWS, EC2, S3 ...                definition list
-Creds  AWS Certified Cloud Practitioner   B.Tech CS       inline strip
-Contact  sanjanapurbia3112@gmail.com (display size)      manifesto close
-```
+## Motion
+- The pipeline runs **once** on load (about 4 seconds: stages go running → done, connectors fill, environments light up, badge goes Running → Passed). It never loops.
+- Hover lifts buttons by 1px. Nothing else moves.
+- `prefers-reduced-motion`: the pipeline renders finished immediately, and transitions are disabled.
 
-Eight sections and eight different layout families. One eyebrow on the page (limit 3): the hero's availability pill. Its mint dot shows a real state, which taste-skill allows.
+## Copy rules
+- No em or en dashes. Date ranges are written `Jan 2025 - Present`.
+- At most one `·` per line.
+- One CTA label per intent: "Email me", "Download resume".
+- Every claim traces to the resume. Design labels (v1.0, Live, diagram arrows) must not read as claims.
 
-**Hero framing (v2.3):**
-- **From 1024px up:** the nav, hero and logo strip fill exactly one screen (`min-h: 100dvh - nav - strip`), and the hero content is vertically centred.
-- **Below 1024px:** the hero stacks. The fact cards form a row of 4 at tablet width and a 2×2 grid on phones.
-- **Hero text:** availability pill, headline, subtext that starts with her name, then two CTAs.
-- **Phone number:** in the contact block and the footer, not the hero (taste-skill hero stack discipline).
-
-## Principles
-1. **Boldness lives in the hero:** the giant "Build. Automate. Scale." stack next to the tilted colour fact cards.
-2. **The background is professional and quiet:** monochrome, with colour only on the content.
-3. **Real data only.** Every number comes from the resume. No count-up animations or invented precision.
-4. **Motion is motivated.**
-   - One orchestrated hero load sequence: text rises, fact cards drop in and tilt (hierarchy). Cards straighten on hover (feedback).
-   - The tool marquee (breadth), paused on hover and under reduced motion.
-   - Accordion expand (feedback).
-   - Nothing fades in on every section.
-5. **One label per intent.** "Email me" (contact) and "Download resume" (resume) are used identically everywhere.
-6. **Copy:** plain verbs, outcome first. No em dashes, at most one middle dot per line.
-
-## Generic-default review (frontend-design pass 2)
-- *v1 used near-black + acid green + monospace eyebrows + a fake terminal.* That's frontend-design defaults #2 and #5 and taste-skill's #1 tell. All of it is retired.
-- *Big-number hero:* rejected. The hero leads with a sentence; the numbers move to the Impact bento with context.
-- *Cool grey + cobalt:* this is taste-skill's "monochrome + single saturated pop" family, chosen to read precise and engineered. It avoids the cream, terracotta and purple defaults.
-- *Three equal cards:* not used anywhere. Projects are accordion rows; impact is an uneven bento.
-
-## Images
-- **No photo, at the owner's request.** The hero visual is four colour fact cards built from real data. Real content, not a fake screenshot or a decorative illustration.
-- **Tool logos:** real marks from the `simple-icons` package, in brand colour. AWS and Azure aren't among them because Simple Icons removed those marks for trademark reasons; they still appear in the skills list.
+## Accessibility
+- One h1 and no skipped heading levels. Every section is a labelled landmark, and there is a skip link.
+- The pipeline is `aria-hidden` and described by a screen-reader figcaption. Diagrams are `aria-hidden`, and their visible captions carry the meaning.
+- Focus ring: 2px `run` outline everywhere. External links announce "(opens in a new tab)".
+- Verified with axe (zero violations, both themes) and the `.qa/e2e.mjs` suite.

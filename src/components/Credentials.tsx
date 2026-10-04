@@ -1,34 +1,36 @@
 import { Certificate, GraduationCap } from '@phosphor-icons/react'
-import { certifications, education } from '../data/portfolio'
+import { certifications, education, sections } from '../data/portfolio'
+import { Section } from './Section'
 
 export function Credentials() {
   const cert = certifications[0]
   return (
-    <section aria-label="Certification and education" className="mx-auto max-w-[1200px] px-4 md:px-6">
-      <div className="grid gap-4 md:grid-cols-[3fr_2fr]">
-        <div className="flex items-start gap-5 rounded-tile p-7 tint-tangerine">
-          <span className="grid size-12 shrink-0 place-items-center rounded-full bg-tangerine text-on-hue">
-            <Certificate size={26} weight="bold" />
+    <Section id="credentials" title={sections.credentials.title}>
+      <div className="grid gap-4 min-[800px]:grid-cols-2">
+        <article className="grid grid-cols-[48px_minmax(0,1fr)] gap-[18px] rounded-tile border border-line bg-surface p-[22px]">
+          <span aria-hidden="true" className="grid size-12 place-items-center rounded-xl bg-ok-wash text-ok">
+            <Certificate size={24} />
           </span>
           <div>
-            <p className="font-display text-[21px] font-semibold tracking-tight">{cert.name}</p>
-            <p className="mt-1 text-[15px] text-graphite">
-              {cert.issuer}, {cert.year}
+            <h3 className="text-lg leading-snug font-semibold tracking-[-0.015em]">{cert.name}</h3>
+            <p className="mt-1 text-muted">{cert.issuer}</p>
+            <p className="mt-3 inline-flex items-center gap-2 text-[13px] text-soft">
+              <span aria-hidden="true" className="status-dot" />
+              Certified {cert.year}
             </p>
           </div>
-        </div>
-        <div className="flex items-start gap-5 rounded-tile p-7 tint-violet">
-          <span className="grid size-12 shrink-0 place-items-center rounded-full bg-violet text-on-hue">
-            <GraduationCap size={26} weight="bold" />
+        </article>
+        <article className="grid grid-cols-[48px_minmax(0,1fr)] gap-[18px] rounded-tile border border-line bg-surface p-[22px]">
+          <span aria-hidden="true" className="grid size-12 place-items-center rounded-xl border border-line bg-surface-2 text-soft">
+            <GraduationCap size={24} />
           </span>
           <div>
-            <p className="font-display text-[21px] font-semibold tracking-tight">{education.degree}</p>
-            <p className="mt-1 text-[15px] text-graphite">
-              {education.school}, {education.period}
-            </p>
+            <h3 className="text-lg leading-snug font-semibold tracking-[-0.015em]">{education.degree}</h3>
+            <p className="mt-1 text-muted">{education.school}</p>
+            <p className="mt-3 text-[13px] whitespace-nowrap text-soft">{education.period}</p>
           </div>
-        </div>
+        </article>
       </div>
-    </section>
+    </Section>
   )
 }

@@ -1,124 +1,131 @@
 @import 'tailwindcss';
 
-/* Tokens: see design-system/sanjana-purbia-portfolio/MASTER.md.
-   Components use these through Tailwind utilities (bg-paper, text-ink...), never raw hex. */
+/* Tokens: see design-system/sanjana-purbia-portfolio/MASTER.md ("Pipeline" design).
+   Components use these through Tailwind utilities (bg-surface, text-muted...), never raw hex.
+   Graphite neutrals; green only ever means success, blue only means running or focus. */
 :root {
-  --paper: #f4f5fa;
-  --raised: #fbfbfe;
-  --ink: #15161d;
-  --graphite: #555867;
-  --rule: #dfe1ea;
-  --link: #2a40c9;
-  /* Large display text only (≥3:1, WCAG large-text minimum): the grey word in the manifesto. */
-  --hush: #888b97;
-  /* Closing contact panel: deep ink in light mode, a lifted night tone in dark mode. */
-  --inkwell: #15161d;
+  --page: #f4f5f7;
+  --sunken: #eceef1;
+  --surface: #ffffff;
+  --surface-2: #f6f7f9;
+  --line: #e1e4e8;
+  --line-strong: #cbd0d6;
+  --ink: #14171a;
+  --muted: #555d67;
+  --soft: #343a41;
+  --ok: #157f4c;
+  --on-ok: #ffffff;
+  --ok-wash: rgb(21 127 76 / 0.1);
+  --run: #2563d4;
+  --run-wash: rgb(37 99 212 / 0.1);
+  --edge: #8a929b;
+  --grid-dot: rgb(20 23 26 / 0.07);
+  --btn: #14171a;
+  --on-btn: #ffffff;
+  --panel-shadow: 0 1px 2px rgb(20 23 26 / 0.04), 0 20px 50px -30px rgb(20 23 26 / 0.25);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --paper: #0f1017;
-    --raised: #181a23;
-    --ink: #eeeff5;
-    --graphite: #a4a7b5;
-    --rule: #272a36;
-    --link: #9aaaff;
-    --hush: #5e616d;
-    --inkwell: #1a1c27;
+    --page: #0d0f12;
+    --sunken: #0a0c0e;
+    --surface: #14171b;
+    --surface-2: #1a1e23;
+    --line: #23282e;
+    --line-strong: #323840;
+    --ink: #e8ebee;
+    --muted: #9ba3ac;
+    --soft: #c3c9d0;
+    --ok: #4cc38a;
+    --on-ok: #062615;
+    --ok-wash: rgb(76 195 138 / 0.12);
+    --run: #79aefc;
+    --run-wash: rgb(121 174 252 / 0.14);
+    --edge: #5d6670;
+    --grid-dot: rgb(255 255 255 / 0.055);
+    --btn: #e8ebee;
+    --on-btn: #0d0f12;
+    --panel-shadow: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 24px 60px -30px rgb(0 0 0 / 0.7);
     color-scheme: dark;
   }
 }
 
 :root[data-theme='dark'] {
-  --paper: #0f1017;
-  --raised: #181a23;
-  --ink: #eeeff5;
-  --graphite: #a4a7b5;
-  --rule: #272a36;
-  --link: #9aaaff;
-  --hush: #5e616d;
-  --inkwell: #1a1c27;
+  --page: #0d0f12;
+  --sunken: #0a0c0e;
+  --surface: #14171b;
+  --surface-2: #1a1e23;
+  --line: #23282e;
+  --line-strong: #323840;
+  --ink: #e8ebee;
+  --muted: #9ba3ac;
+  --soft: #c3c9d0;
+  --ok: #4cc38a;
+  --on-ok: #062615;
+  --ok-wash: rgb(76 195 138 / 0.12);
+  --run: #79aefc;
+  --run-wash: rgb(121 174 252 / 0.14);
+  --edge: #5d6670;
+  --grid-dot: rgb(255 255 255 / 0.055);
+  --btn: #e8ebee;
+  --on-btn: #0d0f12;
+  --panel-shadow: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 24px 60px -30px rgb(0 0 0 / 0.7);
   color-scheme: dark;
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-raised: var(--raised);
+  --color-page: var(--page);
+  --color-sunken: var(--sunken);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-ink: var(--ink);
-  --color-graphite: var(--graphite);
-  --color-rule: var(--rule);
-  --color-link: var(--link);
-  --color-hush: var(--hush);
-  --color-inkwell: var(--inkwell);
-  --color-on-inkwell: #eeeff5;
+  --color-muted: var(--muted);
+  --color-soft: var(--soft);
+  --color-ok: var(--ok);
+  --color-on-ok: var(--on-ok);
+  --color-ok-wash: var(--ok-wash);
+  --color-run: var(--run);
+  --color-run-wash: var(--run-wash);
+  --color-edge: var(--edge);
+  --color-btn: var(--btn);
+  --color-on-btn: var(--on-btn);
 
-  /* Status-board hues: identical in both themes. Text on them is fixed, not theme-flipped:
-     cobalt takes light text, every other hue takes dark ink (all ≥4.8:1). */
-  --color-cobalt: #3651f0;
-  --color-tangerine: #ff7a2f;
-  --color-mint: #1fc79a;
-  --color-sun: #ffcb2e;
-  --color-rose: #ff5c8d;
-  --color-violet: #8b6cff;
-  --color-on-cobalt: #fbfbfe;
-  --color-on-hue: #15161d;
-  /* Logo chips stay light in both themes so every brand colour keeps its contrast. */
-  --color-chip: #fbfbfe;
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  /* Small technical labels only: version tags, counts, diagram labels. */
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --font-display: 'Outfit Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'Work Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  /* Shape rule: interactive elements and labels are pills; cards are tiles; big frames are panels. */
+  --radius-tile: 16px;
+  --radius-panel: 20px;
 
-  /* Shape rule: interactive = pill, containers = tile. */
-  --radius-tile: 24px;
-}
-
-/* Soft tints: the hue mixed into the page colour, so they go light in light mode and
-   deep in dark mode while --ink / --graphite text stays readable (≥5:1). */
-@utility tint-cobalt {
-  background-color: color-mix(in oklab, var(--color-cobalt) 16%, var(--paper));
-}
-@utility tint-tangerine {
-  background-color: color-mix(in oklab, var(--color-tangerine) 16%, var(--paper));
-}
-@utility tint-mint {
-  background-color: color-mix(in oklab, var(--color-mint) 16%, var(--paper));
-}
-@utility tint-sun {
-  background-color: color-mix(in oklab, var(--color-sun) 16%, var(--paper));
-}
-@utility tint-rose {
-  background-color: color-mix(in oklab, var(--color-rose) 16%, var(--paper));
-}
-@utility tint-violet {
-  background-color: color-mix(in oklab, var(--color-violet) 16%, var(--paper));
+  --shadow-panel: var(--panel-shadow);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 88px;
+    scroll-padding-top: 24px;
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-paper text-ink font-sans antialiased;
-    font-size: 17px;
+    @apply bg-page text-ink font-sans antialiased;
+    font-size: 16px;
     line-height: 1.6;
+    text-rendering: optimizeLegibility;
   }
   h1,
   h2,
   h3 {
-    @apply font-display text-balance;
+    text-wrap: balance;
   }
   p {
     text-wrap: pretty;
   }
-  ::selection {
-    background: var(--color-sun);
-    color: var(--color-on-hue);
-  }
   :focus-visible {
-    outline: 2px solid var(--link);
+    outline: 2px solid var(--run);
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -126,56 +133,142 @@
 
 @layer components {
   .btn {
-    @apply inline-flex min-h-11 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full px-5 text-[15px] font-medium transition-[transform,background-color,border-color] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.98];
+    @apply inline-flex h-[46px] cursor-pointer items-center gap-2.5 rounded-full border border-transparent px-5 text-[15px] font-medium whitespace-nowrap transition-[transform,border-color,background-color] duration-200 hover:-translate-y-px;
   }
   .btn-primary {
-    @apply bg-cobalt text-on-cobalt hover:brightness-110;
+    @apply bg-btn text-on-btn;
   }
-  .btn-quiet {
-    @apply border border-rule text-ink hover:border-graphite;
+  .btn-ghost {
+    @apply border-line-strong bg-surface text-ink hover:border-edge;
+  }
+  /* Small outlined label: stack items, toolchain items, environments. */
+  .chip {
+    @apply inline-flex h-[26px] items-center rounded-full border border-line-strong px-2.5 text-[12.5px] text-soft;
+  }
+  .status-dot {
+    @apply size-2 shrink-0 rounded-full bg-ok shadow-[0_0_0_3px_var(--ok-wash)];
   }
 }
 
-/* Contact panel: two quiet glows from the palette on the ink surface. Text stays ≥5.3:1. */
-@utility inkwell-glow {
-  background:
-    radial-gradient(60% 85% at 100% 0%, color-mix(in oklab, var(--color-cobalt) 38%, transparent), transparent 70%),
-    radial-gradient(45% 60% at 0% 100%, color-mix(in oklab, var(--color-violet) 16%, transparent), transparent 70%),
-    var(--inkwell);
+/* Faint dot grid behind the hero, faded out with a mask. A texture, not decoration. */
+@utility dot-grid {
+  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 20%, transparent 75%);
 }
 
-/* Text that sits directly on the cluster field gets a soft page-colour halo, which clears
-   nearby nodes so contrast stays at the token values (ui-ux-pro-max: contrast first). */
-@utility halo {
-  text-shadow:
-    0 0 2px var(--paper),
-    0 0 8px var(--paper),
-    0 0 16px var(--paper);
+/* Pipeline stage states, driven by data attributes so the run-once animation is pure CSS. */
+.stage-node {
+  transition:
+    background-color 0.35s,
+    border-color 0.35s,
+    color 0.35s;
 }
-
-/* The one marquee on the page. */
-@keyframes marquee {
+.stage[data-state='done'] .stage-node {
+  background: var(--ok);
+  border-color: var(--ok);
+  color: var(--on-ok);
+}
+.stage[data-state='running'] .stage-node {
+  border-color: var(--run-wash);
+}
+.stage-ring {
+  display: none;
+  animation: spin 0.8s linear infinite;
+}
+.stage[data-state='running'] .stage-ring {
+  display: block;
+}
+.stage-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ok);
+  transform-origin: left center;
+  transition: transform 0.5s ease;
+}
+.stage[data-link='off'] .stage-link::after {
+  transform: scaleX(0);
+}
+.stage:not([data-state='done']) .job-check {
+  opacity: 0.25;
+  color: var(--muted);
+}
+@media (max-width: 719px) {
+  .stage-link::after {
+    transform-origin: center top;
+  }
+  .stage[data-link='off'] .stage-link::after {
+    transform: scaleY(0);
+  }
+}
+@keyframes spin {
   to {
-    transform: translateX(-50%);
+    transform: rotate(360deg);
   }
 }
-.marquee-track {
-  animation: marquee 40s linear infinite;
+
+/* Architecture diagrams (src/components/Diagram.tsx). */
+.d-group {
+  fill: var(--surface-2);
+  fill-opacity: 0.55;
+  stroke: var(--line-strong);
+  stroke-dasharray: 4 4;
 }
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
+.d-glabel,
+.d-sub,
+.d-elabel {
+  fill: var(--muted);
+  font-family: var(--font-mono);
+}
+.d-glabel {
+  font-size: 11px;
+}
+.d-sub {
+  font-size: 10.5px;
+}
+.d-elabel {
+  font-size: 10px;
+}
+.d-node rect {
+  fill: var(--surface);
+  stroke: var(--line-strong);
+}
+.d-node.ctl rect {
+  stroke-dasharray: 3 3;
+}
+.d-node.ext rect {
+  fill: var(--surface-2);
+}
+.d-label {
+  fill: var(--ink);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+.d-edge {
+  fill: none;
+  stroke: var(--edge);
+  stroke-width: 1.5;
+}
+.d-edge.dash {
+  stroke-dasharray: 4 4;
+}
+.d-arrow {
+  fill: var(--edge);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .marquee-track {
-    animation: none;
-  }
   *,
   *::before,
   *::after {
-    transition-duration: 0.01ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .btn:hover {
+    transform: none;
   }
 }

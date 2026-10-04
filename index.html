@@ -9,18 +9,43 @@
       content="Sanjana Purbia is a DevOps engineer and AWS Certified Cloud Practitioner. She automates AWS infrastructure with Terraform and builds CI/CD with Jenkins, GitHub Actions, Docker and ArgoCD."
     />
     <meta name="author" content="Sanjana Purbia" />
-    <meta name="theme-color" content="#f4f5fa" />
+    <!-- One per scheme so the toolbar matches before JS; useTheme keeps them in step after. -->
+    <meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sanjana Purbia" />
     <meta property="og:title" content="Sanjana Purbia, DevOps Engineer" />
     <meta property="og:description" content="Build. Automate. Scale. DevOps engineer working with AWS, Terraform, CI/CD, Docker and Kubernetes." />
-    <meta name="twitter:card" content="summary" />
+    <!-- og:image, og:url and canonical are added at build time (vite.config.ts, SITE_URL). -->
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sanjana Purbia, DevOps Engineer. Build. Automate. Scale." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sanjana Purbia, DevOps Engineer" />
+    <meta name="twitter:description" content="Build. Automate. Scale. DevOps engineer working with AWS, Terraform, CI/CD, Docker and Kubernetes." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <!-- External so a strict CSP can block inline scripts; prevents a theme flash. -->
     <script src="/theme-init.js"></script>
   </head>
   <body>
     <div id="root"></div>
-    <noscript>Sanjana Purbia, DevOps Engineer. Email: sanjanapurbia3112@gmail.com</noscript>
+    <noscript>
+      <main style="max-width: 640px; margin: 0 auto; padding: 48px 16px">
+        <h1>Sanjana Purbia, DevOps Engineer</h1>
+        <p>
+          AWS Certified Cloud Practitioner. I automate AWS infrastructure with Terraform and build CI/CD with Jenkins,
+          GitHub Actions, Docker and ArgoCD, cutting manual deployment time by 70%.
+        </p>
+        <ul>
+          <li><a href="mailto:sanjanapurbia3112@gmail.com">Email me</a></li>
+          <li><a href="tel:+919521618221">+91 95216 18221</a></li>
+          <li><a href="https://www.linkedin.com/in/sanjana-purbia/">LinkedIn</a></li>
+          <li><a href="https://github.com/SanjanaPurbia">GitHub</a></li>
+          <li><a href="/SanjanaPurbia_Resume.pdf" download>Download resume</a></li>
+        </ul>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -3,7 +3,7 @@
 Portfolio site for **Sanjana Purbia**, DevOps Engineer and AWS Certified Cloud Practitioner.
 
 ## Stack
-React 19 · TypeScript · Vite · Tailwind CSS v4 · Motion · Phosphor icons · Simple Icons · self-hosted Outfit + Work Sans
+React 19, TypeScript, Vite, Tailwind CSS v4, Phosphor icons, self-hosted Geist and JetBrains Mono
 
 ## Run it
 ```bash
@@ -25,7 +25,8 @@ design-system/           the design system (MASTER.md): palette, type, layout, r
 
 ## Common edits
 - **Content:** edit `src/data/portfolio.ts`, or run `/update-content` in Claude Code.
-- **Hero fact cards:** edit `heroFacts` in `src/data/portfolio.ts`. Each card takes one of the six hues.
+- **Hero facts and pipeline:** edit `heroFacts` and `pipeline` in `src/data/portfolio.ts`.
+- **Project diagrams:** each project's `diagram` in `src/data/portfolio.ts` (boxes, groups and arrows in SVG coordinates).
 - **Resume:** replace `public/SanjanaPurbia_Resume.pdf` and keep the same filename.
 
 ## How it was designed

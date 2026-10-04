@@ -2,6 +2,74 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [3.0.0] - 2026-10-04
+### Changed
+- **Redesign: "Pipeline".** The owner chose this design out of seven prototypes, and the site was rebuilt around her craft:
+  - The hero has a "How I ship" CI/CD pipeline (Build, Test, Deploy, Monitor across dev, staging and production). It runs once on load to "Passed".
+  - The results section is now a status board with before/after bars.
+  - Experience is a release log (v2.0 Live, v1.0 Completed).
+  - Each project is an architecture card with an SVG illustration drawn only from its listed stack.
+  - Skills are a toolchain grid, followed by a split contact panel with Email, Phone, LinkedIn and GitHub.
+- **Look:** graphite neutrals with green for success and blue for running/focus, set in Geist with JetBrains Mono for small labels. Dark first, with a mirrored light theme.
+- **Brand assets:** a new favicon and Apple touch icon (a passing-build dot), and a new share image from the hero.
+- **Docs and tooling:** design docs (MASTER.md, CLAUDE.md, README, skills) rewritten for the new system. `.qa/e2e.mjs` is now the one regression suite.
+
+### Removed
+- The cluster-field background, tool logo marquee, tilted fact cards, colour-hue system, animation pause button and copy-email button.
+- Dependencies: `motion`, `simple-icons`, Outfit and Work Sans. JS dropped from about 141 kB to 90 kB gzipped.
+- The template prototypes in `design-system/templates/`.
+
+## [2.11.0] - 2026-10-03
+### Changed
+- **One-scroll page:** removed the header's section links (Experience, Work, Skills, Contact) and the phone menu, at the owner's request. The header keeps the name and the theme toggle; every detail is reached by scrolling.
+
+### Added
+- **GitHub** (github.com/SanjanaPurbia) in the contact panel, next to LinkedIn in a new "Profiles" cell, plus the footer and the no-JS fallback.
+
+## [2.10.0] - 2026-10-03
+### Added
+- **Pause animations button** at the end of the logo strip. It stops the marquee, the status ping and the background rollouts, and the choice is remembered (WCAG 2.2.2).
+- **Social sharing:** a 1200x630 `og-image.png`, `summary_large_image` Twitter card, an Apple touch icon, and font preloads. Canonical, `og:url` and an absolute image URL are emitted when the site is built with `SITE_URL=https://... npm run build`.
+- **No-JS fallback** with name, role, summary and links to email, phone, LinkedIn and the resume.
+- **GitHub link** in the footer, shown once `socials.github` is filled in.
+
+### Fixed
+- **Layout:**
+  - The tool marquee now sits on the first screen at laptop sizes from 1024 to 1366 wide; the headline is capped by screen height.
+  - The page no longer scrolls sideways under the WCAG text-spacing override.
+  - Date ranges no longer break at the hyphen.
+- **Interaction:**
+  - Nav order matches the page (Experience, Work, Skills, Contact).
+  - The theme follows the OS live until the visitor picks one.
+  - The browser toolbar colour is correct in dark mode before JS loads.
+  - A second "copy email" no longer clears the confirmation early, and the timer is cleaned up.
+- **Background:** the canvas stays sharp when the window moves to a screen with a different pixel density.
+- **Accessibility:**
+  - Focus ring is readable on the contact panel in light mode.
+  - Valid `<dl>` markup in the contact details.
+  - Project buttons read "50% faster deployments" with a space.
+  - The credentials section has a heading.
+  - The LinkedIn link announces that it opens a new tab.
+  - The nav logo badge no longer picks up the text halo.
+- **Content:**
+  - All visible copy now lives in `src/data/portfolio.ts`.
+  - The 70% tile no longer attaches "5+ client projects".
+  - "ArgoCD" and "GCP" are spelled as in the resume.
+  - "client projects automated" replaces "shipped".
+  - "Shell scripting" replaces "Bash" in the two project tech lists.
+  - "Production" is dropped from the work intro.
+
+### Changed
+- CLAUDE.md and MASTER.md now name the owner-approved `inkwell-glow` as the one decorative gradient, and require looping motion to honour the pause button.
+
+## [2.9.1] - 2026-10-03
+### Fixed
+Top four bugs from a full QA pass:
+- **Shared section links** such as `/#contact` now open at that section. Before, they stayed at the top, because the page renders after the browser's own jump (new `useHashScroll` hook).
+- **Background CPU when idle:** the cluster field only draws during a rollout, a pointer move, a resize or a theme change. It used to redraw an unchanged grid 60 times a second, using about 5% CPU while idle.
+- **Landscape phones:** the hero headline is capped at 18svh, so all three words fit on a short screen such as 844x390.
+- **Mobile menu focus:** Escape now returns focus to the menu button instead of leaving it on a hidden link.
+
 ## [2.9.0] - 2026-10-02
 ### Changed
 - **Contact section** redesigned as an elegant closing panel (owner disliked the card pattern):

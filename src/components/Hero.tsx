@@ -1,71 +1,46 @@
 import { DownloadSimple, EnvelopeSimple } from '@phosphor-icons/react'
-import { motion, useReducedMotion } from 'motion/react'
-import { profile } from '../data/portfolio'
-import { HeroCards } from './HeroCards'
+import { heroFacts, profile } from '../data/portfolio'
+import { Pipeline } from './Pipeline'
 
-// The three words rise in one by one, then subtext and CTAs; the fact cards drop in beside them.
+// Intro on the left, the "How I ship" pipeline on the right. On phones the pipeline sits
+// between the intro and the facts so it shows near the fold.
 export function Hero() {
-  const reduce = useReducedMotion()
-  const enter = (delay: number) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, y: 24 },
-          animate: { opacity: 1, y: 0 },
-          transition: { type: 'spring' as const, stiffness: 100, damping: 20, delay },
-        }
-
   return (
-    // From 1024px the nav, hero and logo strip fill exactly one screen; below that the hero stacks.
-    <section
-      id="top"
-      className="mx-auto flex max-w-[1200px] items-center px-4 pt-8 pb-14 md:px-6 md:py-16 lg:min-h-[calc(100dvh-72px-112px)] lg:py-12"
-    >
-      <div className="grid w-full items-center gap-10 lg:grid-cols-12 lg:gap-12">
-        {/* Container query: the headline is sized to this column, so "Automate." always fills it exactly. */}
-        <div className="@container lg:col-span-7">
-          <motion.p
-            {...enter(0)}
-            className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-rule bg-raised px-4 py-1.5 text-[14px] font-medium"
-          >
-            {/* Real state, not decoration: she is available. */}
-            <span className="relative flex size-2.5" aria-hidden="true">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-mint opacity-60 motion-reduce:animate-none" />
-              <span className="relative inline-flex size-2.5 rounded-full bg-mint" />
-            </span>
+    <section id="top" aria-labelledby="hero-title" className="relative isolate pt-[clamp(32px,6vw,72px)] pb-[clamp(48px,6vw,80px)]">
+      <div aria-hidden="true" className="dot-grid pointer-events-none absolute inset-0 -top-[72px] -z-10" />
+      <div className="mx-auto grid max-w-[1200px] items-center gap-[clamp(40px,5vw,64px)] px-[clamp(16px,4vw,40px)] lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-y-10">
+        <div className="lg:col-start-1 lg:row-start-1 lg:self-end">
+          <p className="inline-flex items-center gap-2.5 rounded-full border border-line-strong bg-surface py-1.5 pr-3.5 pl-2.5 text-sm text-soft">
+            <span aria-hidden="true" className="status-dot" />
             {profile.availability}
-          </motion.p>
-          <h1
-            aria-label={profile.headline.join(' ')}
-            className="halo text-[min(21.5cqw,236px)] leading-[0.86] font-semibold tracking-[-0.05em]"
-          >
-            {profile.headline.map((word, i) => (
-              <motion.span
-                key={word}
-                aria-hidden="true"
-                {...enter(0.06 + i * 0.1)}
-                // Owner's reference: dark, grey, dark. --hush meets WCAG's large-text contrast.
-                className={`block ${i === 1 ? 'text-hush' : 'text-ink'}`}
-              >
-                {word}
-              </motion.span>
-            ))}
+          </p>
+          <h1 id="hero-title" className="mt-7 text-[clamp(2.6rem,6.4vw,4.6rem)] leading-[1.02] font-semibold tracking-[-0.04em]">
+            {profile.name}
           </h1>
-          <motion.p {...enter(0.36)} className="halo mt-7 max-w-[34ch] text-[19px] leading-relaxed text-graphite md:text-[21px]">
-            {profile.subtext}
-          </motion.p>
-          <motion.div {...enter(0.44)} className="mt-8 flex flex-wrap gap-3">
+          <p className="mt-3.5 text-[clamp(1.125rem,2vw,1.375rem)] font-medium tracking-[-0.01em] text-soft">
+            {profile.role} at {profile.company}
+          </p>
+          <p className="mt-[18px] max-w-[46ch] text-[17px] text-muted">{profile.subtext}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
             <a href={`mailto:${profile.email}`} className="btn btn-primary">
-              <EnvelopeSimple size={18} weight="bold" /> Email me
+              <EnvelopeSimple size={18} /> Email me
             </a>
-            <a href={profile.resumeUrl} download className="btn btn-quiet">
-              <DownloadSimple size={18} weight="bold" /> Download resume
+            <a href={profile.resumeUrl} download className="btn btn-ghost">
+              <DownloadSimple size={18} /> Download resume
             </a>
-          </motion.div>
+          </div>
         </div>
-        <div className="mx-auto w-full max-w-[460px] md:max-w-none lg:col-span-5">
-          <HeroCards />
-        </div>
+
+        <Pipeline className="lg:col-start-2 lg:row-span-2 lg:row-start-1" />
+
+        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-[14px] border border-line bg-line lg:col-start-1 lg:row-start-2 lg:self-start">
+          {heroFacts.map((f) => (
+            <div key={f.label} className="bg-page px-4 py-3.5">
+              <dt className="text-xl font-semibold tracking-[-0.02em]">{f.value}</dt>
+              <dd className="mt-0.5 text-sm leading-snug text-muted">{f.label}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   )

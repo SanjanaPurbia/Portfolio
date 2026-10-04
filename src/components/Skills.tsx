@@ -1,19 +1,30 @@
-import { skills } from '../data/portfolio'
-import { fill } from '../lib/hue'
+import { sections, skills } from '../data/portfolio'
+import { Section } from './Section'
 
-// Colour-coded definition list: each group's colour is its label; tools follow as plain text.
+// Toolchain: one cell per skill group, divided by hairlines.
 export function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-[1200px] px-4 py-20 md:px-6 md:py-28">
-      <h2 className="halo text-[clamp(32px,4.4vw,52px)] leading-[1.05] font-semibold tracking-[-0.03em]">Skills</h2>
-      <dl className="mt-12 grid gap-x-12 gap-y-9 md:grid-cols-2">
+    <Section id="skills" title={sections.skills.title} intro={sections.skills.intro}>
+      <div className="grid gap-px overflow-hidden rounded-[18px] border border-line bg-line min-[640px]:grid-cols-2 min-[1000px]:grid-cols-3">
         {skills.map((g) => (
-          <div key={g.title} className="flex flex-col items-start gap-3">
-            <dt className={`rounded-full px-4 py-1.5 font-display text-[16px] font-semibold ${fill[g.hue]}`}>{g.title}</dt>
-            <dd className="halo text-[17px] text-graphite">{g.items.join(', ')}</dd>
+          <div key={g.title} className="bg-surface p-[22px]">
+            <h3 className="flex items-baseline justify-between font-semibold tracking-[-0.01em]">
+              {g.title}
+              <span className="font-mono text-xs font-normal text-muted">
+                {g.items.length}
+                <span className="sr-only"> tools</span>
+              </span>
+            </h3>
+            <ul className="mt-3.5 flex flex-wrap gap-1.5">
+              {g.items.map((s) => (
+                <li key={s} className="chip">
+                  {s}
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
-      </dl>
-    </section>
+      </div>
+    </Section>
   )
 }

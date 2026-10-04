@@ -8,20 +8,32 @@ Status keys: `[ ]` todo · `[~]` in progress · `[x]` done · `[!]` needs input 
 2. A distinct, non-template design. Rules live in `design-system/sanjana-purbia-portfolio/MASTER.md`.
 3. Content edits touch one file: `src/data/portfolio.ts`.
 
-## Information architecture
+## Information architecture (v3, "Pipeline")
 | Section | Component | Layout family |
 |---|---|---|
-| Hero | `Hero.tsx` + `HeroCards.tsx` | asymmetric split, 7/5: giant "Build. Automate. Scale." stack + tilted colour fact cards |
-| Tools | `ToolMarquee.tsx` | logo marquee (the only one) |
-| Impact | `Impact.tsx` | 4-cell bento |
-| Experience | `Experience.tsx` | sticky heading + sequence |
-| Work (`#work`) | `Projects.tsx` | accordion rows |
-| Skills | `Skills.tsx` | definition list |
-| Credentials | `Credentials.tsx` | inline two-tile strip |
-| Contact | `Contact.tsx` | elegant ink panel: light headline + hairline details strip |
-| (page background) | `ClusterField.tsx` | fixed canvas behind all sections |
+| Header | `Nav.tsx` | brand mark, name and theme toggle; no section links (one scroll) |
+| Hero (`#top`) | `Hero.tsx` + `Pipeline.tsx` | 5/7 split: intro + facts grid, and the "How I ship" pipeline panel that runs once |
+| Impact (`#impact`) | `Impact.tsx` | status board, 4 tiles with before/after bars |
+| Experience (`#experience`) | `Experience.tsx` | release log (version tag, state, date, then the role card) |
+| Work (`#work`) | `Projects.tsx` + `Diagram.tsx` | architecture cards with SVG illustrations |
+| Skills (`#skills`) | `Skills.tsx` | toolchain hairline grid |
+| Credentials (`#credentials`) | `Credentials.tsx` | two cards |
+| Contact (`#contact`) | `Contact.tsx` | split panel: ask + CTAs, contact rows |
+| (shared) | `Section.tsx` | section frame: h2, intro, optional aside |
 
 ## Done
+### v3.0.0 (2026-10-04): Pipeline redesign
+- [x] Owner picked the "Pipeline" prototype out of seven; the site was rebuilt in it and the prototypes were deleted. Verified by `.qa/e2e.mjs` (51 checks, axe clean in both themes)
+
+### v2.11.0 (2026-10-03): one-scroll page, GitHub
+- [x] Header section links and phone menu removed (owner); GitHub added to contact Profiles cell, footer and noscript; checked 390 to 1440, axe clean
+
+### v2.10.0 (2026-10-03): QA fixes 5 to 30
+- [x] Pause control, OG image and tags, no-JS fallback, laptop fold, copy moved to data, a11y and content fixes; verified by `.qa/verify-all.mjs` (28 checks) and axe with no violations in both themes
+
+### v2.9.1 (2026-10-03): QA fixes 1 to 4
+- [x] Hash deep links, idle canvas redraws, landscape hero fit, Escape focus in the mobile menu; verified in Chrome at 390 and 1280 (hash), 844x390 and 640x400 (hero), draw counts over 21s (canvas)
+
 ### v2.9.0 (2026-10-02): step 5b, elegant last page
 - [x] Contact rebuilt as a calm ink panel with a light headline and hairline details strip (owner rejected the cards); wrapping verified 360-1440
 
@@ -72,13 +84,14 @@ The owner is sharing changes **one at a time**. Finish each step, verify it, com
 
 ## Backlog
 ### Needs input from Sanjana
-- [!] **GitHub URL:** set `profile.socials.github`.
+- [x] **GitHub URL:** github.com/SanjanaPurbia (v2.11.0)
 - [!] **Credly badge URL** for the AWS certification.
 - [!] **Hosting:** choose where to host it (Vercel, Netlify or GitHub Pages all work with `npm run build`).
 
 ### Enhancements
-- [ ] OG share image (1200×630) and `og:image`
-- [ ] Code-split Motion or lazy-load below-the-fold sections (JS is about 141 kB gzipped)
+- [x] OG share image (1200×630) and `og:image` (v2.10.0)
+- [ ] Set `SITE_URL` in the deploy build once hosting is chosen (enables canonical, og:url, absolute og:image) and add a `Sitemap:` line to robots.txt
+- [x] Smaller bundle: Motion and Simple Icons removed in v3.0.0 (JS is about 90 kB gzipped)
 - [ ] Lighthouse pass (target perf ≥ 95, a11y 100)
 - [ ] Case-study pages per project, if write-ups become available
 
@@ -97,3 +110,7 @@ The owner is sharing changes **one at a time**. Finish each step, verify it, com
 - 2026-10-02: v2.0.0 removed DevOps infra; redesigned with frontend-design, taste-skill and ui-ux-pro-max (src/, design-system/, .claude/skills/).
 - 2026-10-02: v1.0.1 agent review pass (copy accuracy, accessibility, infra hardening).
 - 2026-10-02: v1.0.0 initial build.
+- 2026-10-03: v2.9.1 QA fixes 1 to 4 (hooks/useHashScroll.ts, App.tsx, ClusterField.tsx, Hero.tsx, Nav.tsx).
+- 2026-10-03: v2.10.0 QA fixes 5 to 30 (index.html, vite.config.ts, public/, hooks/useMotionPause.ts, hooks/useTheme.ts, components/*, data/portfolio.ts, index.css, CLAUDE.md, MASTER.md).
+- 2026-10-03: v2.11.0 one-scroll header, GitHub link (Nav.tsx, Contact.tsx, data/portfolio.ts, index.html, MASTER.md).
+- 2026-10-04: v3.0.0 Pipeline redesign (src/**, index.css, public icons and OG image, MASTER.md, CLAUDE.md, README, skills, .qa); templates deleted.

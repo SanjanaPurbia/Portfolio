@@ -1,87 +1,76 @@
-import { useState } from 'react'
-import { Plus } from '@phosphor-icons/react'
-import { projects } from '../data/portfolio'
-import { fill, tint } from '../lib/hue'
+import { Check, RocketLaunch, ShieldCheck } from '@phosphor-icons/react'
+import { projects, sections } from '../data/portfolio'
+import { Diagram } from './Diagram'
+import { Section } from './Section'
 
-// Accordion rows, each project colour-coded. The row shows client and result; opening it shows how.
+const icons = { rocket: RocketLaunch, shield: ShieldCheck }
+
+// Architecture cards: client, result, what I did, stack, and an illustration of the setup.
 export function Projects() {
-  const [open, setOpen] = useState<string | null>(projects.find((p) => p.featured)?.id ?? null)
-
   return (
-    <section id="work" className="mx-auto max-w-[1200px] px-4 py-20 md:px-6 md:py-28">
-      <h2 className="halo text-[clamp(32px,4.4vw,52px)] leading-[1.05] font-semibold tracking-[-0.03em]">Selected work</h2>
-      <p className="halo mt-4 max-w-[52ch] text-graphite">
-        Production platforms for EV charging, AgriTech and eCommerce clients.
-      </p>
-
-      <ul className="mt-12 space-y-3">
+    <Section id="work" title={sections.work.title} intro={sections.work.intro}>
+      <div className="grid gap-6">
         {projects.map((p) => {
-          const isOpen = open === p.id
-          const panelId = `project-${p.id}`
+          const Icon = icons[p.impact.icon]
           return (
-            <li key={p.id} className={`rounded-tile px-5 transition-colors duration-300 md:px-8 ${isOpen ? tint[p.hue] : 'bg-raised'}`}>
-              <h3>
-                <button
-                  type="button"
-                  aria-expanded={isOpen}
-                  aria-controls={panelId}
-                  onClick={() => setOpen(isOpen ? null : p.id)}
-                  className="group grid w-full cursor-pointer grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 py-7 text-left md:grid-cols-[minmax(0,5fr)_minmax(0,4fr)_auto] md:py-9"
-                >
-                  <span>
-                    <span className="block font-display text-[clamp(26px,3.2vw,38px)] leading-tight font-semibold tracking-[-0.025em] transition-colors ">
-                      {p.client}
+            <article key={p.id} id={`project-${p.id}`} aria-labelledby={`p-${p.id}`} className="overflow-hidden rounded-panel border border-line bg-surface">
+              <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-4 px-[18px] pt-5 sm:px-[clamp(20px,3vw,32px)] sm:pt-[clamp(20px,3vw,28px)]">
+                <div>
+                  <h3 id={`p-${p.id}`} className="text-[clamp(1.5rem,2.6vw,1.875rem)] leading-[1.15] font-semibold tracking-[-0.03em]">
+                    {p.client}
+                  </h3>
+                  <p className="mt-1 text-muted">{p.name}</p>
+                  <div className="mt-3.5 flex flex-wrap gap-2">
+                    {[p.domain, p.year].map((x) => (
+                      <span key={x} className="inline-flex h-[26px] items-center rounded-full border border-line bg-surface-2 px-[11px] text-[13px] text-soft">
+                        {x}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 rounded-[14px] bg-ok-wash py-2.5 pr-4 pl-3">
+                  <Icon size={20} aria-hidden="true" className="text-ok" />
+                  <strong className="text-2xl leading-none font-semibold tracking-[-0.03em] tabular-nums">{p.impact.value}</strong>{' '}
+                  <span className="max-w-[22ch] text-sm leading-tight text-soft">{p.impact.label}</span>
+                </div>
+              </div>
+
+              <div className="grid gap-6 px-3.5 pt-[18px] pb-3.5 sm:px-[clamp(20px,3vw,32px)] sm:pt-5 sm:pb-[clamp(20px,3vw,32px)] min-[1000px]:grid-cols-[minmax(0,1fr)_minmax(0,440px)] min-[1000px]:gap-10">
+                <div className="px-1 sm:px-0">
+                  <p className="max-w-[62ch] text-[17px] text-soft">{p.summary}</p>
+                  <ul className="mt-[18px] grid gap-2.5">
+                    {p.highlights.map((h) => (
+                      <li key={h} className="grid grid-cols-[18px_minmax(0,1fr)] gap-3 text-muted">
+                        <Check size={15} weight="bold" aria-hidden="true" className="mt-1 text-ok" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-[22px] flex flex-wrap items-center gap-1.5">
+                    <span aria-hidden="true" className="mr-1.5 text-[13px] text-muted">
+                      Stack
                     </span>
-                    <span className="mt-1 block text-[15px] font-normal text-graphite">
-                      {p.name}, {p.year}
-                    </span>
-                  </span>
-                  <span className="col-span-2 row-start-2 font-sans text-[17px] font-normal text-graphite md:col-span-1 md:row-start-auto">
-                    <span className={`mr-2 inline-block rounded-full px-3 py-0.5 font-display text-[21px] font-semibold tracking-tight ${fill[p.hue]}`}>
-                      {p.impact.value}
-                    </span>
-                    {p.impact.label}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className={`col-start-2 row-start-1 grid size-11 place-items-center rounded-full transition-transform duration-300 md:col-start-3 ${fill[p.hue]} ${isOpen ? 'rotate-45' : ''}`}
-                  >
-                    <Plus size={18} weight="bold" />
-                  </span>
-                </button>
-              </h3>
-              <div
-                id={panelId}
-                role="region"
-                aria-label={`${p.client} details`}
-                className={`grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
-              >
-                <div className="overflow-hidden" inert={!isOpen}>
-                  <div className="grid gap-8 pb-10 md:grid-cols-[minmax(0,5fr)_minmax(0,4fr)_44px] md:gap-6">
-                    <div>
-                      <p className="max-w-[52ch] text-[19px] leading-relaxed">{p.summary}</p>
-                      <ul className="mt-6 flex flex-wrap gap-2" aria-label="Stack">
-                        {p.stack.map((s) => (
-                          <li key={s} className="rounded-full bg-paper px-3 py-1 text-[14px]">
-                            {s}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <ul className="space-y-3">
-                      {p.highlights.map((h) => (
-                        <li key={h} className="relative pl-5 text-[15px] before:absolute before:top-[0.7em] before:left-0 before:h-0.5 before:w-2.5 before:rounded-full before:bg-ink">
-                          {h}
+                    <ul aria-label="Stack" className="flex flex-wrap gap-1.5">
+                      {p.stack.map((s) => (
+                        <li key={s} className="chip">
+                          {s}
                         </li>
                       ))}
                     </ul>
                   </div>
                 </div>
+                <figure className="relative self-start rounded-tile border border-line bg-sunken px-1.5 pt-2.5 pb-3 sm:p-[clamp(12px,2.4vw,20px)]">
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[inherit] bg-[radial-gradient(var(--grid-dot)_1px,transparent_1.2px)] bg-[length:16px_16px]" />
+                  <Diagram id={p.id} spec={p.diagram} />
+                  <figcaption className="relative mx-2 mt-3.5 border-t border-line pt-3 text-[13.5px] leading-normal text-muted sm:mx-0">
+                    {p.diagram.caption}
+                  </figcaption>
+                </figure>
               </div>
-            </li>
+            </article>
           )
         })}
-      </ul>
-    </section>
+      </div>
+    </Section>
   )
 }
