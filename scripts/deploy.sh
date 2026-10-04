@@ -6,13 +6,16 @@ set -e
 cd "$(dirname "$0")/.."
 REMOTE="$(git remote get-url origin)"
 SOURCE="$(git rev-parse --short HEAD)"
+# Commit as this repo's identity (git config user.name/email), not the global one.
+NAME="$(git config user.name)"
+EMAIL="$(git config user.email)"
 BASE_PATH=/Portfolio/ SITE_URL=https://sanjanapurbia.github.io/Portfolio npm run build
 touch dist/.nojekyll
 cd dist
 rm -rf .git
 git init -q -b gh-pages
 git add -A
-git commit -q -m "Deploy $SOURCE"
+git -c user.name="$NAME" -c user.email="$EMAIL" commit -q -m "Deploy $SOURCE"
 git push -q -f "$REMOTE" gh-pages
 rm -rf .git
 echo "Deployed $SOURCE to https://sanjanapurbia.github.io/Portfolio/"
