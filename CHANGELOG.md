@@ -2,6 +2,13 @@
 
 All notable changes to this portfolio. Format: [Keep a Changelog](https://keepachangelog.com/); versioning: SemVer.
 
+## [3.0.1] - 2026-10-04
+### Added
+- **Hosting on GitHub Pages:** `npm run deploy` (`scripts/deploy.sh`) builds under the `/Portfolio/` base path with `SITE_URL` set, so canonical, og:url and an absolute og:image are emitted. It then publishes `dist/` to the `gh-pages` branch. Live at https://sanjanapurbia.github.io/Portfolio/.
+
+### Changed
+- The base path is configurable (`BASE_PATH`, default `/`). The resume link and font preloads follow it.
+
 ## [3.0.0] - 2026-10-04
 ### Changed
 - **Redesign: "Pipeline".** The owner chose this design out of seven prototypes, and the site was rebuilt around her craft:

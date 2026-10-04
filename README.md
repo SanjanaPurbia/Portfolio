@@ -11,6 +11,7 @@ npm install
 npm run dev      # http://localhost:5173
 npm run build    # typecheck + production build to dist/
 npm run lint     # oxlint
+npm run deploy   # publish to https://sanjanapurbia.github.io/Portfolio/ (gh-pages branch)
 ```
 
 ## Where things live

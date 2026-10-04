@@ -86,11 +86,12 @@ The owner is sharing changes **one at a time**. Finish each step, verify it, com
 ### Needs input from Sanjana
 - [x] **GitHub URL:** github.com/SanjanaPurbia (v2.11.0)
 - [!] **Credly badge URL** for the AWS certification.
-- [!] **Hosting:** choose where to host it (Vercel, Netlify or GitHub Pages all work with `npm run build`).
+- [x] **Hosting:** GitHub Pages at https://sanjanapurbia.github.io/Portfolio/ via `npm run deploy` (v3.0.1)
 
 ### Enhancements
 - [x] OG share image (1200×630) and `og:image` (v2.10.0)
-- [ ] Set `SITE_URL` in the deploy build once hosting is chosen (enables canonical, og:url, absolute og:image) and add a `Sitemap:` line to robots.txt
+- [x] `SITE_URL` set in the deploy build (v3.0.1)
+- [ ] Add a `Sitemap:` line to robots.txt
 - [x] Smaller bundle: Motion and Simple Icons removed in v3.0.0 (JS is about 90 kB gzipped)
 - [ ] Lighthouse pass (target perf ≥ 95, a11y 100)
 - [ ] Case-study pages per project, if write-ups become available
@@ -114,3 +115,4 @@ The owner is sharing changes **one at a time**. Finish each step, verify it, com
 - 2026-10-03: v2.10.0 QA fixes 5 to 30 (index.html, vite.config.ts, public/, hooks/useMotionPause.ts, hooks/useTheme.ts, components/*, data/portfolio.ts, index.css, CLAUDE.md, MASTER.md).
 - 2026-10-03: v2.11.0 one-scroll header, GitHub link (Nav.tsx, Contact.tsx, data/portfolio.ts, index.html, MASTER.md).
 - 2026-10-04: v3.0.0 Pipeline redesign (src/**, index.css, public icons and OG image, MASTER.md, CLAUDE.md, README, skills, .qa); templates deleted.
+- 2026-10-04: v3.0.1 GitHub Pages hosting (vite.config.ts base path, scripts/deploy.sh, portfolio.ts resumeUrl).

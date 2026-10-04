@@ -3,7 +3,7 @@
 Portfolio for Sanjana Purbia (DevOps Engineer). React 19 + TypeScript + Vite + Tailwind v4 + Motion.
 
 ## Commands
-- `npm run dev` · `npm run build` (runs `tsc -b` first) · `npm run lint` (oxlint)
+- `npm run dev` · `npm run build` (runs `tsc -b` first) · `npm run lint` (oxlint) · `npm run deploy` (GitHub Pages at https://sanjanapurbia.github.io/Portfolio/, via `scripts/deploy.sh`; builds with `BASE_PATH=/Portfolio/` and `SITE_URL`)
 - Visual QA: `npx vite preview --port 4173`, then `node .qa/e2e.mjs` (full regression suite: layout at 10 sizes in both themes, copy rules, links, pipeline run, theme, deep links, keyboard, no-JS, axe), plus `node .qa/shot.mjs`, `node .qa/interact.mjs`, `node .qa/preflight.mjs` and `node .qa/emailwrap.mjs`. These are local and gitignored; reinstall with `cd .qa && npm i puppeteer-core`.
 - A change is done only when lint shows zero warnings, the build passes, and `.qa/e2e.mjs` reports "All checks passed".
 

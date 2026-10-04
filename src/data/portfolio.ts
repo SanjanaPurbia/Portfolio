@@ -11,7 +11,8 @@ export const profile = {
   availability: 'Open to DevOps and cloud roles',
   email: 'sanjanapurbia3112@gmail.com',
   phone: { display: '+91 95216 18221', tel: '+919521618221' },
-  resumeUrl: '/SanjanaPurbia_Resume.pdf',
+  // Respects the deploy base path (GitHub Pages serves the site under /Portfolio/).
+  resumeUrl: `${import.meta.env.BASE_URL}SanjanaPurbia_Resume.pdf`,
   socials: {
     linkedin: { url: 'https://www.linkedin.com/in/sanjana-purbia/', handle: 'in/sanjana-purbia' },
     github: { url: 'https://github.com/SanjanaPurbia', handle: 'SanjanaPurbia' },

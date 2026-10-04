@@ -1,14 +1,15 @@
 {
   "name": "sanjana-portfolio",
   "private": true,
-  "version": "3.0.0",
+  "version": "3.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "typecheck": "tsc -b",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "sh scripts/deploy.sh"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
